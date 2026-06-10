@@ -173,8 +173,8 @@ main section{overflow-x:clip}
 .btn{
   display:inline-flex;align-items:center;gap:.55em;
   font-family:var(--font-display);font-weight:700;
-  font-size:clamp(.88rem,1vw,1.25rem);
-  padding:.72em 1.6em;border-radius:var(--radius-pill);
+  font-size:clamp(.9rem,.85vw,1.02rem);
+  padding:.72em 1.5em;border-radius:var(--radius-pill);
   position:relative;overflow:hidden;
   transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
   will-change:transform;
@@ -656,6 +656,12 @@ h1 .w i{display:inline-block;font-style:normal}
 .step-card .body h3{font-size:clamp(1.12rem,1.5vw,1.3rem)}
 .step-card .body h3 b{color:var(--accent-bright)}
 .step-card .body p{margin-top:8px;font-weight:600;color:#6b3f93;font-size:clamp(.95rem,1.05vw,1.02rem);line-height:1.5}
+/* desktop: reserve a uniform 3-line block for each step's title and
+   body so the three cards align row-for-row regardless of copy length */
+@media (min-width:981px){
+  .step-card .body h3{min-height:3.5em;display:flex;align-items:center;justify-content:center}
+  .step-card .body p{min-height:4.5em}
+}
 
 /* ============================ CTA ============================ */
 /* V4: clean white band, ink heading, soft purple button */
@@ -710,7 +716,13 @@ h1 .w i{display:inline-block;font-style:normal}
 .js.ok-motion .page-hero .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
 /* copy on the RIGHT (how-it-works) */
 .hero-copy-right{position:relative;z-index:3;max-width:clamp(340px,26vw,460px);margin-left:auto}
-@media (max-width:860px){.hero-copy-right{margin-left:0;max-width:none}}
+/* tablet and below: the inner heroes stack like the homepage one,
+   copy at the top in clear space, photo framing the bottom, so the
+   headline never overlaps the device */
+@media (max-width:960px){
+  .page-hero{align-items:flex-start;min-height:max(640px,100svh)}
+  .hero-copy-right{margin-left:0;max-width:none}
+}
 .store-badges{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
 .store-badges img{height:40px;width:auto;border-radius:8px}
 .store-badges .btn{flex-shrink:0}
@@ -918,7 +930,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .photo-cta{
   position:relative;overflow:hidden;
   padding:clamp(60px,8vw,110px) 0;
-  background:url('../nellie/images/pricing-cta.jpg') 70% center/cover no-repeat;
+  background:url('../nellie/images/pricing-hero.jpg') 72% center/cover no-repeat;
 }
 .photo-cta::before{
   content:'';position:absolute;inset:0;
