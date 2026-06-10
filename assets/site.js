@@ -187,12 +187,22 @@
   if(slidesBox){
   var slides = Array.prototype.slice.call(slidesBox.querySelectorAll('.slide'));
   var dotsBox = document.getElementById('slider-dots');
+  var sliderNav = dotsBox.parentElement;
   var N = slides.length, cur = 0, userTouched = false;
+  if(!reduceMotion) sliderNav.classList.add('auto');
+  // first manual interaction: stop autoplay and freeze the progress
+  // pill solid (the .manual style)
+  function takeOver(){
+    if(userTouched) return;
+    userTouched = true;
+    sliderNav.classList.remove('auto');
+    sliderNav.classList.add('manual');
+  }
 
   slides.forEach(function(s, i){
     var b = document.createElement('button');
     b.setAttribute('aria-label', 'Go to feature ' + (i + 1));
-    b.addEventListener('click', function(){ userTouched = true; go(i); });
+    b.addEventListener('click', function(){ takeOver(); go(i); });
     dotsBox.appendChild(b);
   });
   var dots = Array.prototype.slice.call(dotsBox.children);
@@ -206,14 +216,14 @@
     dots.forEach(function(d, j){ d.classList.toggle('on', j === cur); });
   }
 
-  document.getElementById('slider-prev').addEventListener('click', function(){ userTouched = true; go(cur - 1); });
-  document.getElementById('slider-next').addEventListener('click', function(){ userTouched = true; go(cur + 1); });
+  document.getElementById('slider-prev').addEventListener('click', function(){ takeOver(); go(cur - 1); });
+  document.getElementById('slider-next').addEventListener('click', function(){ takeOver(); go(cur + 1); });
   document.addEventListener('keydown', function(e){
     // only steer the slider while it's on screen
     var r = slidesBox.getBoundingClientRect();
     if(r.bottom < 0 || r.top > window.innerHeight) return;
-    if(e.key === 'ArrowLeft'){ userTouched = true; go(cur - 1); }
-    if(e.key === 'ArrowRight'){ userTouched = true; go(cur + 1); }
+    if(e.key === 'ArrowLeft'){ takeOver(); go(cur - 1); }
+    if(e.key === 'ArrowRight'){ takeOver(); go(cur + 1); }
   });
 
   // touch swipe
@@ -222,7 +232,7 @@
   slidesBox.addEventListener('touchend', function(e){
     if(sx === null) return;
     var dx = e.changedTouches[0].clientX - sx;
-    if(Math.abs(dx) > 40){ userTouched = true; go(cur + (dx < 0 ? 1 : -1)); }
+    if(Math.abs(dx) > 40){ takeOver(); go(cur + (dx < 0 ? 1 : -1)); }
     sx = null;
   }, {passive: true});
 
