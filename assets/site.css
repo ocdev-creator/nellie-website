@@ -216,7 +216,7 @@ main section{overflow-x:clip}
   /* the hero plus the straddling features bar own the first screen:
      the subtraction is the bar's below-photo share, so the whole
      composition (copy, photo, bar) fits one viewport */
-  min-height:max(580px,calc(100svh - 44px));
+  min-height:max(580px,calc(100svh - 56px));
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
@@ -315,9 +315,10 @@ h1 .w i{display:inline-block;font-style:normal}
    V4: one fully-rounded white pill pulled up over the photo's bottom
    edge, four items with hairline dividers, filled lavender icon
    circles, and the small gradient pill perched on its top-left. */
-.features-band{background:var(--lav-0);padding:0 0 clamp(40px,5.6vw,64px)}
+.features-band{background:var(--lav-0);padding:0 0 clamp(28px,3.6vw,44px)}
+.features-dock{transform:translateY(-50%)}
 .features-bar{
-  position:relative;margin-top:calc(clamp(70px,7vw,104px) * -0.58);
+  position:relative;
   background:#fff;border-radius:clamp(28px,4vw,52px);
   box-shadow:var(--card-shadow);
   display:grid;grid-template-columns:repeat(4,1fr);
