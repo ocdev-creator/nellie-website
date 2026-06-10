@@ -26,18 +26,35 @@
 
   /* ---------- Hero headline: split into rising words ---------- */
   var title = document.getElementById('hero-title');
-  // skip headlines carrying inline markup (e.g. the pricing page's
-  // two-tone em), textContent would flatten it away
-  if(title && !reduceMotion && !title.firstElementChild){
-    var words = title.textContent.trim().split(/\s+/);
+  // Walk the headline's child nodes so it animates even when it carries
+  // inline markup (the pricing page's two-tone <em> + <br>). Each word
+  // becomes a rising span; the <em> wrapper and its colour are kept by
+  // splitting INTO a clone of it, and <br> is preserved. wi runs across
+  // the whole headline so the stagger is continuous. The old version
+  // bailed on any child element, which left the pricing h1 static.
+  if(title && !reduceMotion){
+    var wi = 0;
+    var splitInto = function(target, text){
+      text.split(/(\s+)/).forEach(function(tok){
+        if(tok === '') return;
+        if(/^\s+$/.test(tok)){ target.appendChild(document.createTextNode(' ')); return; }
+        var outer = document.createElement('span'); outer.className = 'w';
+        var inner = document.createElement('i'); inner.textContent = tok;
+        inner.style.setProperty('--d', (0.08 * wi++) + 's');
+        outer.appendChild(inner);
+        target.appendChild(outer);
+      });
+    };
+    var nodes = Array.prototype.slice.call(title.childNodes);
     title.textContent = '';
-    words.forEach(function(w, i){
-      var outer = document.createElement('span'); outer.className = 'w';
-      var inner = document.createElement('i'); inner.textContent = w;
-      inner.style.setProperty('--d', (0.08 * i) + 's');
-      outer.appendChild(inner);
-      title.appendChild(outer);
-      if(i < words.length - 1) title.appendChild(document.createTextNode(' '));
+    nodes.forEach(function(node){
+      if(node.nodeType === 3){ splitInto(title, node.textContent); }
+      else if(node.nodeType === 1 && node.tagName === 'BR'){ title.appendChild(document.createElement('br')); }
+      else if(node.nodeType === 1){
+        var clone = node.cloneNode(false);   // keep the tag (em) + its styling, drop the text
+        splitInto(clone, node.textContent);
+        title.appendChild(clone);
+      }
     });
   }
 
