@@ -467,14 +467,17 @@ h1 .w i{display:inline-block;font-style:normal}
   background:linear-gradient(90deg,rgba(251,238,254,.92),rgba(251,238,254,.6) 36%,rgba(251,238,254,0) 58%);
 }
 @media (max-width:900px){
-  /* stacked: copy on a solid wash, the photo full-width and fully
-     clear at the section's foot */
+  /* stacked: copy on a solid wash, the photo as a clear band at the
+     section's foot. The source frame is wide with the people on the
+     right third and empty cafe on the left, so a full-width squeeze
+     left half the band blank. Zoom and anchor right to crop the empty
+     side and bring the woman, man and tablet into the band. */
   .who{
-    background-size:100% auto;background-position:center bottom;
-    padding-bottom:calc(48vw + 48px);
+    background-size:168% auto;background-position:right bottom;
+    padding-bottom:calc(52vw + 44px);
   }
   .who::before{
-    top:0;left:0;right:0;bottom:auto;height:calc(100% - 44vw);
+    top:0;left:0;right:0;bottom:auto;height:calc(100% - 46vw);
     background:linear-gradient(180deg,#fbeefe,#fbeefe 78%,rgba(251,238,254,0));
   }
 }
@@ -1001,4 +1004,36 @@ h1 .w i{display:inline-block;font-style:normal}
   .features-dock{transform:translateY(-26px)}
   /* stacked hero: copy sits at the top, not biased above centre */
   .hero .wrap{margin-top:4svh}
+}
+
+/* ---------- phones: stack the hero so buttons never sit on the photo ----------
+   The desktop hero floats the copy over a bottom-pinned background
+   image, masking the top half so the words read. On a short phone that
+   masked-in image rose under the stacked CTAs and the "how it works"
+   button sat on the tablet. Here the phone hero becomes a TRUE vertical
+   stack: copy in fully clear space, then the device photo as its own
+   full-bleed band directly below. A real block can never overlap the
+   copy whatever the viewport height, and the product reads as part of
+   the section rather than a wash behind the text. Appended at the end so
+   it wins over the earlier ≤1020 wrap rule. */
+@media (max-width:760px){
+  .hero{
+    flex-direction:column;align-items:stretch;
+    min-height:0;overflow:visible;
+    padding:calc(var(--header-h) + 20px) 0 0;
+  }
+  .hero .wrap{order:1;margin-top:0}
+  .hero-content{max-width:none}
+  .hero-ctas{margin-bottom:30px}
+  .hero-photo,
+  .js.ok-motion .hero-photo{
+    order:2;position:relative;inset:auto;
+    width:100%;height:auto;aspect-ratio:5/4;
+    background-size:cover;background-position:center bottom;
+    -webkit-mask-image:none;mask-image:none;
+    animation:none;transform:none;
+  }
+  .hero-tint{display:none}
+  /* keep the framed product clean, the chip sat on the device screen */
+  .note-1{display:none}
 }
