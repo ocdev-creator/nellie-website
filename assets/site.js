@@ -85,9 +85,17 @@
   var lastY = 0;
   window.addEventListener('scroll', function(){
     var y = window.scrollY;
-    if(y > 240 && y > lastY) header.classList.add('hidden-up');
-    else header.classList.remove('hidden-up');
-    lastY = y;
+    var dy = y - lastY;
+    // ignore sub-6px jitter so the bar doesn't flicker; never hide
+    // while the mobile menu is open or near the top of the page
+    if(Math.abs(dy) > 6){
+      if(dy > 0 && y > 160 && !document.body.classList.contains('menu-open')){
+        header.classList.add('hidden-up');
+      } else if(dy < 0){
+        header.classList.remove('hidden-up');
+      }
+      lastY = y;
+    }
   }, {passive: true});
 
   /* ---------- Scrollspy: tint the nav link for the section in view ---------- */
