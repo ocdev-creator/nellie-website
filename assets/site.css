@@ -94,6 +94,10 @@ main section{overflow-x:clip}
 .js.ok-motion .reveal.r-left{transform:translateX(clamp(-44px,-4vw,-20px))}
 .js.ok-motion .reveal.r-right{transform:translateX(clamp(20px,4vw,44px))}
 .js.ok-motion .reveal.r-pop{transform:scale(.86)}
+/* r-drop: a slower, softer fall from above that settles with a gentle
+   landing (used by the step cards so they drop in one at a time) */
+.reveal.r-drop{transition:opacity 1s ease,transform 1.05s cubic-bezier(.18,.7,.24,1.05)}
+.js.ok-motion .reveal.r-drop{opacity:0;transform:translateY(-42px) scale(.96)}
 .js.ok-motion .reveal.in{opacity:1;transform:none}
 
 /* ============================ HEADER ============================ */
@@ -240,8 +244,10 @@ main section{overflow-x:clip}
      wall edge into the section gradient without touching the
      product colours. */
   background:url('../nellie/images/hero-v4.jpg') center bottom/100% auto no-repeat;
-  -webkit-mask-image:linear-gradient(180deg,transparent 64px,#000 240px);
-  mask-image:linear-gradient(180deg,transparent 64px,#000 240px);
+  /* short fade right at the photo's top edge only: blends the wall
+     into the wash but stays clear of the devices below */
+  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px);
+  mask-image:linear-gradient(180deg,transparent 76px,#000 165px);
   transform-origin:right bottom;
   will-change:transform;
 }

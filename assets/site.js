@@ -236,9 +236,8 @@
   var dotsBox = document.getElementById('slider-dots');
   var sliderNav = dotsBox.parentElement;
   var N = slides.length, cur = 0, userTouched = false;
-  if(!reduceMotion) sliderNav.classList.add('auto');
-  // first manual interaction: stop autoplay and freeze the progress
-  // pill solid (the .manual style)
+  sliderNav.classList.add('manual');
+  // kept for API symmetry with the dots/arrows handlers
   function takeOver(){
     if(userTouched) return;
     userTouched = true;
@@ -300,14 +299,8 @@
     slidesCard.addEventListener('mouseleave', function(){ slidesCard.style.transform = ''; });
   }
 
-  // gentle auto-advance until the user takes over
-  if(!reduceMotion){
-    var autoTimer = setInterval(function(){
-      if(userTouched){ clearInterval(autoTimer); return; }
-      var r = slidesBox.getBoundingClientRect();
-      if(r.bottom > 0 && r.top < window.innerHeight) go(cur + 1);
-    }, 5200);
-  }
+  // carousel is manual only (no autoplay): the active dot shows as a
+  // solid pill rather than a sweeping progress fill
   go(0);
   } // end slider guard
 
