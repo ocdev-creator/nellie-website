@@ -112,26 +112,6 @@
     }
   }, {passive: true});
 
-  /* ---------- Scrollspy: tint the nav link for the section in view ---------- */
-  // only same-page hash links take part; page links keep their
-  // hardcoded .active state
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#nav-desktop a')).filter(function(a){
-    return (a.getAttribute('href') || '').charAt(0) === '#';
-  });
-  var spyTargets = navLinks.map(function(a){
-    return document.querySelector(a.getAttribute('href'));
-  });
-  if('IntersectionObserver' in window){
-    var spy = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) return;
-        var idx = spyTargets.indexOf(e.target);
-        navLinks.forEach(function(a, i){ a.classList.toggle('active', i === idx); });
-      });
-    }, {rootMargin: '-40% 0px -55% 0px'});
-    spyTargets.forEach(function(t){ if(t) spy.observe(t); });
-  }
-
   /* ---------- Scroll parallax (hero photo, why circle) ----------
      Elements with data-parallax shift by factor * distance-from-
      viewport-centre. rAF-throttled, transform only. */
