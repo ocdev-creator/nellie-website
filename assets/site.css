@@ -230,7 +230,7 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 /* gentle left wash so the copy always reads */
 .hero-tint{
   position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,rgba(255,240,255,.85),rgba(255,240,255,.55) 32%,rgba(255,240,255,0) 55%);
+  background:linear-gradient(90deg,rgba(255,240,255,.96),rgba(255,240,255,.88) 34%,rgba(255,240,255,.42) 56%,rgba(255,240,255,0) 76%);
 }
 @media (max-width:1020px){
   .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.97),rgba(255,240,255,.9) 44%,rgba(255,240,255,.5) 70%,rgba(255,240,255,.1))}
