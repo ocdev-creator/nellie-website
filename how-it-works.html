@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=37">
+<link rel="stylesheet" href="assets/site.css?v=39">
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
@@ -175,13 +175,21 @@
           <h2 class="reveal">keeping loved ones present in everyday life</h2>
           <p class="simple-sub reveal" data-delay="100">family and friends can all share messages, memories and updates, helping your loved one feel connected every day.</p>
         </div>
-        <div class="collage reveal r-right">
-          <div class="circles">
-            <div class="c"><img src="nellie/images/hiw-circle-1.jpg" alt="" loading="lazy"></div>
-            <div class="c"><img src="nellie/images/hiw-circle-2.jpg" alt="" loading="lazy"></div>
-            <div class="c"><img src="nellie/images/hiw-circle-3.jpg" alt="" loading="lazy"></div>
+        <div class="collage">
+          <div class="big reveal r-rise"><img src="nellie/images/hiw-family-big.jpg" alt="An older lady enjoying photos on her nellie tablet" loading="lazy"></div>
+          <!-- the family, everywhere, each sending something to Nana -->
+          <div class="c s1 reveal r-pop" data-delay="350" style="--dur:5.6s;--fd:0s">
+            <img src="nellie/images/hiw-circle-1.jpg" alt="A grandmother sending a photo from the city" loading="lazy">
+            <span class="c-badge"><img src="nellie/icons/photos.svg" alt=""></span>
           </div>
-          <div class="big"><img src="nellie/images/hiw-family-big.jpg" alt="An older lady enjoying photos on her nellie tablet" loading="lazy"></div>
+          <div class="c s2 reveal r-pop" data-delay="550" style="--dur:6.8s;--fd:1.1s">
+            <img src="nellie/images/hiw-circle-2.jpg" alt="A son sending a message from his desk" loading="lazy">
+            <span class="c-badge"><img src="nellie/icons/messages.svg" alt=""></span>
+          </div>
+          <div class="c s3 reveal r-pop" data-delay="750" style="--dur:6.1s;--fd:2s">
+            <img src="nellie/images/hiw-circle-3.jpg" alt="A daughter sharing music from her travels" loading="lazy">
+            <span class="c-badge"><img src="nellie/icons/music.svg" alt=""></span>
+          </div>
         </div>
       </div>
     </div>
@@ -266,6 +274,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 </body>
 </html>

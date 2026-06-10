@@ -784,29 +784,52 @@ h1 .w i{display:inline-block;font-style:normal}
 .family{background:var(--lav-0);padding:clamp(44px,6vw,80px) 0}
 .family-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,3.6vw,48px);align-items:center}
 @media (max-width:900px){.family-grid{grid-template-columns:1fr}}
-.collage{position:relative;display:flex;align-items:center;justify-content:flex-end}
+/* the story: family everywhere, each sending something that arrives
+   with Nana. Senders orbit the big photo at different depths, gently
+   drifting, each with a badge for what they're sending. */
+/* the photo is inset on all sides so senders can orbit AROUND it (top,
+   right and bottom), not just line up one edge. The padding is the orbit
+   gutter, so an overhanging circle stays inside the column and never gets
+   clipped at the viewport edge. */
+.collage{position:relative;padding:clamp(34px,4vw,56px) clamp(34px,4.4vw,62px) clamp(48px,5vw,72px)}
 .collage .big{
   border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--card-shadow);
-  width:min(78%,520px);height:clamp(340px,34vw,480px);
+  height:clamp(360px,36vw,500px);
 }
 .collage .big img{width:100%;height:100%;object-fit:cover}
-/* large circles half-overlapping the photo's left edge, per the
-   reference comp */
-.collage .circles{
-  display:flex;flex-direction:column;gap:clamp(14px,1.8vw,22px);
-  position:relative;z-index:2;
-  margin-right:calc(clamp(110px,10.5vw,150px) / -2);
+.collage .c{
+  position:absolute;z-index:2;aspect-ratio:1;
+  filter:drop-shadow(0 16px 32px rgba(67,16,111,.3));
 }
-.collage .circles .c{
-  width:clamp(110px,10.5vw,150px);aspect-ratio:1;border-radius:50%;
-  overflow:hidden;box-shadow:0 16px 40px rgba(67,16,111,.25);
-  border:4px solid #fff;
+.collage .c > img{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:50%;border:4px solid #fff;
 }
-.collage .circles .c img{width:100%;height:100%;object-fit:cover}
+/* three senders orbiting three sides: top-left corner, right edge,
+   bottom centre, each a different size so it reads as a real crowd.
+   Keyed off explicit s1/s2/s3 classes, NOT :nth-of-type: the .big photo
+   is the first div child, so :nth-of-type(1) skips it and shifts every
+   rule (a sender ended up with no width and sprawled to 460px). */
+.collage .c.s1{width:clamp(104px,9.6vw,138px);top:-1%;left:-1%}
+.collage .c.s2{width:clamp(88px,8.2vw,116px);top:30%;right:-2%}
+.collage .c.s3{width:clamp(118px,10.8vw,158px);bottom:-3%;left:22%}
+/* what each is sending */
+.c-badge{
+  position:absolute;right:-2%;bottom:2%;width:36%;aspect-ratio:1;
+  border-radius:50%;background:var(--icon-grad);
+  border:3px solid #fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.c-badge img{width:50%;height:50%}
+/* gentle drift once revealed (the animation owns transform, so it
+   starts after the pop-in's opacity fade) */
+@keyframes senderdrift{from{transform:translateY(-7px)}to{transform:translateY(9px)}}
+.js.ok-motion .collage .c.in{animation:senderdrift var(--dur,6s) ease-in-out infinite alternate;animation-delay:var(--fd,0s)}
 @media (max-width:900px){
-  .collage{justify-content:center}
-  .collage .circles{margin-right:calc(clamp(90px,12vw,120px) / -2)}
-  .collage .circles .c{width:clamp(90px,12vw,120px)}
+  .collage{padding:clamp(30px,7vw,48px) clamp(30px,7vw,48px) clamp(40px,8vw,56px)}
+  .collage .c.s1{width:clamp(86px,17vw,116px)}
+  .collage .c.s2{width:clamp(74px,14vw,98px)}
+  .collage .c.s3{width:clamp(98px,19vw,128px)}
 }
 
 /* ---------- gentle insights (quote bubbles over photo) ---------- */
