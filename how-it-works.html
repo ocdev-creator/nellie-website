@@ -13,15 +13,15 @@
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
-  background:url('nellie/images/hiw-hero.jpg') left bottom/auto 100% no-repeat;
+  background:url('nellie/images/hiw-hero.jpg') center bottom/100% auto no-repeat;
   background-color:#fbf3f9;
-  -webkit-mask-image:linear-gradient(270deg,transparent,#000 14%);
-  mask-image:linear-gradient(270deg,transparent,#000 14%);
-  transform-origin:left bottom;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);
+  mask-image:linear-gradient(180deg,transparent,#000 26%);
+  transform-origin:center bottom;
 }
 .hiw-hero .hero-tint{background:linear-gradient(270deg,rgba(255,240,255,.85),rgba(255,240,255,.5) 34%,rgba(255,240,255,0) 58%)}
 @media (max-width:860px){
-  .hiw-hero .hero-photo{background-position:30% bottom}
+  .hiw-hero .hero-photo{background-size:auto 56%;background-position:30% bottom}
   .hiw-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.95) 52%,rgba(255,240,255,.6) 80%,rgba(255,240,255,.3))}
 }
 /* simple text badges standing in for the store badges (no packaged

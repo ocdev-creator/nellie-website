@@ -202,7 +202,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
    tablet and phone right of centre, copy on the pale left. Height
    tracks the image aspect so nothing important crops away. */
 .hero{
-  min-height:clamp(460px,38vw,580px);
+  /* the hero owns the first screen: full viewport height, photo
+     pinned to the bottom edge, copy centred in the space above */
+  min-height:max(620px,100svh);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
@@ -210,14 +212,14 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 .hero-photo{
   position:absolute;inset:-4% 0;z-index:0;
-  /* aspect-true: the photo renders at its natural ratio (auto 100%)
-     anchored to the device side, so nothing crops at any window width;
-     the matching background colour plus a mask fade fill the rest */
-  background:url('../nellie/images/hero-v4.jpg') right bottom/auto 100% no-repeat;
+  /* aspect-true: the photo renders at its natural ratio (100% auto),
+     pinned to the viewport's bottom edge so it frames the fold; the
+     matching background fills above, blended by a top mask fade */
+  background:url('../nellie/images/hero-v4.jpg') center bottom/100% auto no-repeat;
   background-color:#fef0ff;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);
-  mask-image:linear-gradient(90deg,transparent,#000 14%);
-  transform-origin:right bottom;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);
+  mask-image:linear-gradient(180deg,transparent,#000 26%);
+  transform-origin:center bottom;
   will-change:transform;
 }
 .js.ok-motion .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
@@ -232,19 +234,19 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 @media (max-width:1020px){
   .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.97),rgba(255,240,255,.9) 44%,rgba(255,240,255,.5) 70%,rgba(255,240,255,.1))}
-  .hero-photo{background-position:72% bottom}
+  .hero-photo{background-size:auto 56%;background-position:72% bottom}
 }
 @media (max-width:760px){
-  .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.96) 52%,rgba(255,240,255,.66) 78%,rgba(255,240,255,.3))}
-  .hero-photo{background-position:62% bottom}
-  .hero{min-height:max(540px,84svh)}
+  .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.96) 48%,rgba(255,240,255,.7) 74%,rgba(255,240,255,.35))}
+  .hero-photo{background-size:auto 60%;background-position:62% bottom}
 }
 /* narrow column: the V4 photo's phone sits at ~34% of the frame, so
    the copy must hold to the pale strip left of it */
 /* the hero is a flex container, so without an explicit width the
    wrap shrink-wraps and auto-margins centre it; force full width so
-   the copy sits at the container's left edge */
-.hero .wrap{width:100%}
+   the copy sits at the container's left edge. The slight upward bias
+   reads better than true centre against the bottom-framed photo. */
+.hero .wrap,.page-hero .wrap{width:100%;margin-top:-5svh}
 .hero-content{position:relative;z-index:3;max-width:330px}
 @media (max-width:760px){.hero-content{max-width:none}}
 /* Headline words rise in one by one (spans injected by JS). */
@@ -639,7 +641,7 @@ h1 .w i{display:inline-block;font-style:normal}
 
 /* ---------- inner-page hero (photo right, copy left or right) ---------- */
 .page-hero{
-  min-height:clamp(460px,38vw,580px);
+  min-height:max(620px,100svh);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(56px,6vw,88px);
   overflow:hidden;
