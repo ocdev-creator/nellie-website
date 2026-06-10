@@ -13,12 +13,14 @@
 <style>
 /* page-local: hero photo has its pale zone on the LEFT */
 .pricing-hero .hero-photo{
-  background:url('nellie/images/pricing-hero.jpg') 70% bottom/cover no-repeat;
-  transform-origin:center bottom;
+  background:url('nellie/images/pricing-hero.jpg') right bottom/min(100%,calc(100svh * 1.96)) auto no-repeat;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%);
+  mask-image:linear-gradient(180deg,transparent,#000 9%);
+  transform-origin:right bottom;
 }
 .pricing-hero .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.92),rgba(255,240,255,.6) 36%,rgba(255,240,255,0) 60%)}
 @media (max-width:860px){
-  .pricing-hero .hero-photo{background-position:70% bottom}
+  .pricing-hero .hero-photo{background-size:auto 56%;background-position:70% bottom}
   .pricing-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.95) 52%,rgba(255,240,255,.6) 80%,rgba(255,240,255,.3))}
 }
 .pricing-hero .hero-content{max-width:460px}
@@ -87,12 +89,6 @@
             <li><img src="nellie/icons/tick-dark.svg" alt="">6 month buy-back scheme*</li>
           </ul>
           <a class="btn btn-primary" href="#"><img src="nellie/icons/get-started.svg" alt="">buy tablet</a>
-          <div class="product"><img src="nellie/images/product-tablet.png" alt="The nellie tablet in its purple easy-hold case" loading="lazy"></div>
-          <div class="perks">
-            <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">free tracked UK delivery</span>
-            <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">12 month warranty</span>
-            <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">no technical setup required</span>
-          </div>
         </div>
 
         <div class="purchase-arrow" aria-hidden="true">&raquo;</div>
@@ -109,14 +105,30 @@
             <li><img src="nellie/icons/tick-dark.svg" alt="">Invite unlimited family &amp; friends</li>
           </ul>
           <a class="btn btn-primary" href="#"><img src="nellie/icons/get-started.svg" alt="">get nellie connect</a>
-          <div class="product"><img src="nellie/images/product-phone.png" alt="The nellie connect app on a phone" loading="lazy"></div>
-          <div class="perks">
-            <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">cancel any time</span>
-            <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">2 months for free</span>
-            <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">invite unlimited family</span>
-          </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== PRODUCT BAND ====================== -->
+  <section class="products-band" aria-label="What you get">
+    <div class="pb-grid">
+      <div class="pb-item reveal">
+        <img src="nellie/images/product-tablet.png" alt="The nellie tablet in its purple easy-hold case on a desk" loading="lazy">
+        <div class="perks">
+          <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">free tracked UK delivery</span>
+          <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">12 month warranty</span>
+          <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">no technical setup required</span>
+        </div>
+      </div>
+      <div class="pb-item reveal" data-delay="120">
+        <img src="nellie/images/product-phone.png" alt="The nellie connect welcome screen on a phone" loading="lazy">
+        <div class="perks">
+          <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">cancel any time</span>
+          <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">2 months for free</span>
+          <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">invite unlimited family</span>
+        </div>
       </div>
     </div>
   </section>
@@ -184,7 +196,7 @@
           </div>
           <div class="faq-item">
             <button class="faq-q">Can the subscription be cancelled?</button>
-            <div class="faq-a"><p>Yes, you can cancel at any time. The tablet keeps working, but new messages, photos and insights pause until you restart the subscription.</p></div>
+            <div class="faq-a"><p>Yes, your nellie connect subscription can be cancelled at any time. If you decide to cancel, the nellie tablet will still work, but family connection features such as messages, photo uploads and activity insights will no longer update through the app.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q">Does nellie work in care homes?</button>

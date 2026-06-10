@@ -64,6 +64,8 @@ h3{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:800}
 section{position:relative}
 /* anchored jumps (#faqs, #about...) land clear of the fixed header */
 section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
+/* horizontal overflow from animation pre-states stays contained */
+main section{overflow-x:clip}
 ::selection{background:#caa0e8;color:#2c0a4d}
 :focus-visible{outline:3px solid var(--accent-bright);outline-offset:2px;border-radius:6px}
 
@@ -83,8 +85,10 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
    simply visible: the base state only applies under .js + ok-motion. */
 .reveal{transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .js.ok-motion .reveal{opacity:0;transform:translateY(34px)}
-.js.ok-motion .reveal.r-left{transform:translateX(-44px)}
-.js.ok-motion .reveal.r-right{transform:translateX(44px)}
+/* capped sideways offsets so pre-reveal states never widen the
+   document's paintable canvas on small screens */
+.js.ok-motion .reveal.r-left{transform:translateX(clamp(-44px,-4vw,-20px))}
+.js.ok-motion .reveal.r-right{transform:translateX(clamp(20px,4vw,44px))}
 .js.ok-motion .reveal.r-pop{transform:scale(.86)}
 .js.ok-motion .reveal.in{opacity:1;transform:none}
 
@@ -207,22 +211,28 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#fdf0fd 60%);
 }
 .hero{
-  /* the hero plus the overlapping features bar own the first screen:
-     the subtraction is the bar's below-fold remainder, so the whole
+  /* the hero plus the straddling features bar own the first screen:
+     the subtraction is the bar's below-photo share, so the whole
      composition (copy, photo, bar) fits one viewport */
-  min-height:max(600px,calc(100svh - 30px));
+  min-height:max(580px,calc(100svh - 56px));
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
   perspective:1100px;
 }
 .hero-photo{
-  position:absolute;inset:-4% 0;z-index:0;
-  /* cover: the photo scales up with the viewport (no washed gaps,
-     no top chop at normal aspects), anchored so the devices stay
-     framed; no mask, the product shows in full colour */
-  background:url('../nellie/images/hero-v4.jpg') 68% bottom/cover no-repeat;
-  transform-origin:center bottom;
+  position:absolute;inset:0;z-index:0;
+  /* natural aspect, pinned to the photo's bottom edge: at normal
+     windows the image spans the full width and grows with it; on
+     short-wide (letterbox) windows min() scales it down to fit the
+     height instead, so the scene never chops. Any gap falls on the
+     pale left, under the copy wash. The faint top mask blends the
+     wall edge into the section gradient without touching the
+     product colours. */
+  background:url('../nellie/images/hero-v4.jpg') right bottom/min(100%,calc((100svh - 56px) * 2.16)) auto no-repeat;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%);
+  mask-image:linear-gradient(180deg,transparent,#000 9%);
+  transform-origin:right bottom;
   will-change:transform;
 }
 .js.ok-motion .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
@@ -237,11 +247,11 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 @media (max-width:1020px){
   .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.97),rgba(255,240,255,.9) 44%,rgba(255,240,255,.5) 70%,rgba(255,240,255,.1))}
-  .hero-photo{background-position:72% bottom}
+  .hero-photo{background-size:auto 56%;background-position:72% bottom}
 }
 @media (max-width:760px){
   .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.96) 48%,rgba(255,240,255,.7) 74%,rgba(255,240,255,.35))}
-  .hero-photo{background-position:65% bottom}
+  .hero-photo{background-size:auto 62%;background-position:82% bottom}
 }
 /* narrow column: the V4 photo's phone sits at ~34% of the frame, so
    the copy must hold to the pale strip left of it */
@@ -305,7 +315,7 @@ h1 .w i{display:inline-block;font-style:normal}
    circles, and the small gradient pill perched on its top-left. */
 .features-band{background:var(--lav-0);padding:0 0 clamp(40px,5.6vw,64px)}
 .features-bar{
-  position:relative;margin-top:calc(clamp(70px,7vw,104px) * -0.8);
+  position:relative;margin-top:calc(clamp(70px,7vw,104px) * -0.4);
   background:#fff;border-radius:clamp(28px,4vw,52px);
   box-shadow:var(--card-shadow);
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -496,12 +506,10 @@ h1 .w i{display:inline-block;font-style:normal}
   .cap-left .slide-cap{left:14px}
   .cap-right .slide-cap{right:14px}
 }
-/* nav overlaid on the photo bottom, per V4: purple circle arrows
-   (CSS chevrons, the packaged arrow asset is the inverse colourway)
-   and white dots */
+/* nav beneath the image on the white band, per the reference */
 .slider-nav{
-  position:absolute;left:0;right:0;bottom:clamp(14px,2.6vw,30px);z-index:5;
   display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:clamp(18px,2.6vw,30px) 0 clamp(8px,1.2vw,14px);
 }
 .slider-btn{
   width:40px;height:40px;border-radius:50%;position:relative;
@@ -519,13 +527,13 @@ h1 .w i{display:inline-block;font-style:normal}
 .slider-dots{display:flex;gap:9px}
 .slider-dots button{
   position:relative;width:8px;height:8px;border-radius:6px;overflow:hidden;
-  background:rgba(255,255,255,.55);
+  background:#e2c6f3;
   transition:width .35s cubic-bezier(.22,1,.36,1),background .3s;
-  box-shadow:0 2px 8px rgba(44,10,77,.25);
 }
-.slider-dots button.on{width:34px;background:rgba(255,255,255,.4)}
+.slider-dots button.on{width:34px;background:#ecd8f8}
 .slider-dots button.on::after{
-  content:'';position:absolute;inset:0;border-radius:6px;background:#fff;
+  content:'';position:absolute;inset:0;border-radius:6px;
+  background:linear-gradient(90deg,#9a4ae0,#7b2ec6);
   transform:translateX(-101%);
 }
 /* autoplay: the fill sweeps across over the advance interval */
@@ -559,7 +567,7 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .helps-col{padding:0 clamp(0px,4vw,56px)}
 .helps-col + .helps-col{border-left:1px solid #ddb9ef}
-.helps-col h3{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:16px}
+.helps-col h3{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:16px;color:var(--accent)}
 .ticks li{
   display:flex;gap:11px;align-items:flex-start;
   padding:5px 0;font-weight:700;font-size:clamp(.85rem,1.05vw,.92rem);
@@ -671,18 +679,25 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 @media (max-width:980px){.app-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.app-grid{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
+/* horizontal lozenge cards per the reference: copy left, phone right */
 .app-card{
-  text-align:center;
-  transition:transform .35s ease;
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border-radius:26px;
+  box-shadow:var(--card-shadow);
+  padding:14px 14px 14px clamp(16px,1.8vw,24px);
+  text-align:left;
+  transition:transform .35s ease,box-shadow .35s ease;
 }
-.app-card:hover{transform:translateY(-6px)}
+.app-card:hover{transform:translateY(-5px);box-shadow:var(--card-shadow-hover)}
+.app-card .copy{flex:1;min-width:0}
 .app-card .screen{
-  border-radius:24px;overflow:hidden;margin:0 auto 16px;
-  max-width:200px;border:6px solid #1c0a2e;
-  box-shadow:0 18px 40px rgba(44,10,77,.3);
+  width:clamp(86px,7.6vw,104px);height:clamp(124px,11vw,150px);flex-shrink:0;
+  border-radius:14px;overflow:hidden;
+  box-shadow:0 10px 24px rgba(44,10,77,.22);
 }
-.app-card h3{font-size:clamp(.98rem,1.35vw,1.1rem)}
-.app-card p{margin-top:5px;font-weight:600;color:#6b3f93;font-size:.84rem;max-width:24em;margin-left:auto;margin-right:auto}
+.app-card .screen img{width:100%;height:100%;object-fit:cover;object-position:top}
+.app-card h3{font-size:clamp(.9rem,1.15vw,1rem)}
+.app-card p{margin-top:3px;font-weight:600;color:#6b3f93;font-size:.78rem;line-height:1.45}
 
 /* ---------- family connection collage ---------- */
 .family{background:var(--lav-0);padding:clamp(44px,6vw,80px) 0}
@@ -691,7 +706,12 @@ h1 .w i{display:inline-block;font-style:normal}
 .collage{position:relative;display:grid;grid-template-columns:1fr 2.2fr;gap:clamp(12px,1.6vw,20px);align-items:center}
 .collage .big{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--card-shadow)}
 .collage .big img{width:100%;height:100%;object-fit:cover}
-.collage .circles{display:flex;flex-direction:column;gap:clamp(12px,1.6vw,20px)}
+.collage .circles{
+  display:flex;flex-direction:column;gap:clamp(12px,1.6vw,20px);
+  position:relative;z-index:2;
+  /* circles ride over the big photo's left edge, per the reference */
+  margin-right:calc(clamp(28px,3vw,44px) * -1);
+}
 .collage .circles .c{
   width:clamp(86px,9vw,124px);aspect-ratio:1;border-radius:50%;
   overflow:hidden;box-shadow:var(--card-shadow);
@@ -768,6 +788,17 @@ h1 .w i{display:inline-block;font-style:normal}
 .plan .ticks{margin-bottom:22px}
 .plan .product{margin-top:26px}
 .plan .product img{max-height:240px;width:auto;margin:0 auto}
+.products-band{
+  background:var(--lav-0);padding:0 0 clamp(44px,5vw,64px);
+}
+.pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media (max-width:760px){.pb-grid{grid-template-columns:1fr;gap:48px}}
+.pb-item{position:relative;height:clamp(220px,28vw,400px)}
+.pb-item img{width:100%;height:100%;object-fit:cover}
+.pb-item .perks{
+  position:absolute;left:50%;bottom:0;transform:translate(-50%,45%);
+  margin-top:0;width:max-content;max-width:96%;
+}
 .perks{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
 .perk{
   display:inline-flex;align-items:center;gap:8px;

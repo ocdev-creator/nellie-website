@@ -13,12 +13,14 @@
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
-  background:url('nellie/images/hiw-hero.jpg') 32% bottom/cover no-repeat;
-  transform-origin:center bottom;
+  background:url('nellie/images/hiw-hero.jpg') left bottom/min(100%,calc(100svh * 2.22)) auto no-repeat;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%);
+  mask-image:linear-gradient(180deg,transparent,#000 9%);
+  transform-origin:left bottom;
 }
 .hiw-hero .hero-tint{background:linear-gradient(270deg,rgba(255,240,255,.85),rgba(255,240,255,.5) 34%,rgba(255,240,255,0) 58%)}
 @media (max-width:860px){
-  .hiw-hero .hero-photo{background-position:30% bottom}
+  .hiw-hero .hero-photo{background-size:auto 56%;background-position:30% bottom}
   .hiw-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.95) 52%,rgba(255,240,255,.6) 80%,rgba(255,240,255,.3))}
 }
 /* simple text badges standing in for the store badges (no packaged
@@ -89,34 +91,46 @@
       <h2 class="reveal" style="text-align:center">personalise nellie and stay connected</h2>
       <div class="app-grid">
         <div class="app-card reveal" data-delay="0">
+          <div class="copy">
+            <h3>send messages</h3>
+            <p>share updates and moments throughout the day</p>
+          </div>
           <div class="screen"><img src="nellie/images/app-1.png" alt="The nellie connect posts screen" loading="lazy"></div>
-          <h3>send messages</h3>
-          <p>share updates and moments throughout the day</p>
         </div>
         <div class="app-card reveal" data-delay="100">
+          <div class="copy">
+            <h3>upload family photos</h3>
+            <p>keep familiar faces and special memories close by</p>
+          </div>
           <div class="screen"><img src="nellie/images/app-2.png" alt="The nellie connect photo upload screen" loading="lazy"></div>
-          <h3>upload family photos</h3>
-          <p>keep familiar faces and special memories close by</p>
         </div>
         <div class="app-card reveal" data-delay="200">
+          <div class="copy">
+            <h3>add gentle reminders</h3>
+            <p>add upcoming visits, birthdays and important moments</p>
+          </div>
           <div class="screen"><img src="nellie/images/app-3.png" alt="The nellie connect reminders screen" loading="lazy"></div>
-          <h3>add gentle reminders</h3>
-          <p>add upcoming visits, birthdays and important moments</p>
         </div>
         <div class="app-card reveal" data-delay="300">
+          <div class="copy">
+            <h3>invite family members</h3>
+            <p>let everyone stay connected through shared memories</p>
+          </div>
           <div class="screen"><img src="nellie/images/app-4.png" alt="The nellie connect family invite screen" loading="lazy"></div>
-          <h3>invite family members</h3>
-          <p>let everyone stay connected through shared memories</p>
         </div>
         <div class="app-card reveal" data-delay="400">
+          <div class="copy">
+            <h3>view activity insights</h3>
+            <p>see how your loved one is engaging with their tablet</p>
+          </div>
           <div class="screen"><img src="nellie/images/app-5.png" alt="The nellie connect activity insights screen" loading="lazy"></div>
-          <h3>view activity insights</h3>
-          <p>see how your loved one is engaging with their tablet</p>
         </div>
         <div class="app-card reveal" data-delay="500">
+          <div class="copy">
+            <h3>make it personal</h3>
+            <p>choose music, memories and moments that feel familiar</p>
+          </div>
           <div class="screen"><img src="nellie/images/app-6.png" alt="The nellie connect personalisation screen" loading="lazy"></div>
-          <h3>make it personal</h3>
-          <p>choose music, memories and moments that feel familiar</p>
         </div>
       </div>
     </div>
