@@ -210,7 +210,7 @@ section{position:relative}
      left that the matching pale background fills, invisible against
      the photo's own pale edge), keeping the phone clear of the copy,
      exactly how the V4 comp frames it */
-  background:url('/nellie/images/hero-v4.jpg') clamp(60px,10vw,150px) 32%/cover no-repeat;
+  background:url('../nellie/images/hero-v4.jpg') clamp(60px,10vw,150px) 32%/cover no-repeat;
   background-color:#f3e7f4;
   will-change:transform;
 }
@@ -391,7 +391,7 @@ h1 .w i{display:inline-block;font-style:normal}
    the image's own pale left side over a soft wash. */
 .who{
   padding:clamp(64px,9vw,120px) 0;
-  background:url('/nellie/images/who-is-nellie-for.jpg') right center/cover no-repeat;
+  background:url('../nellie/images/who-is-nellie-for.jpg') right center/cover no-repeat;
   background-color:var(--lav-3);
   overflow:hidden;
 }
@@ -782,7 +782,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .photo-cta{
   position:relative;overflow:hidden;
   padding:clamp(72px,10vw,140px) 0;
-  background:url('/nellie/images/pricing-cta.jpg') 70% center/cover no-repeat;
+  background:url('../nellie/images/pricing-cta.jpg') 70% center/cover no-repeat;
 }
 .photo-cta::before{
   content:'';position:absolute;inset:0;
