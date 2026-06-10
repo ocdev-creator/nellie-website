@@ -80,6 +80,7 @@ main section{overflow-x:clip}
   border-bottom:1.5px solid var(--accent-soft);padding-bottom:5px;
 }
 .t-center{text-align:center}
+.nowrap{white-space:nowrap}
 
 /* ---------- Reveal-on-scroll primitives ----------
    Elements start shifted and transparent; the .in class (added by
@@ -659,7 +660,9 @@ h1 .w i{display:inline-block;font-style:normal}
 /* desktop: reserve a uniform 3-line block for each step's title and
    body so the three cards align row-for-row regardless of copy length */
 @media (min-width:981px){
-  .step-card .body h3{min-height:3.5em;display:flex;align-items:center;justify-content:center}
+  /* reserve a uniform block so the bodies align row-for-row; no flex
+     here (it would split the inline "nellieconnect" lockup) */
+  .step-card .body h3{min-height:2.6em}
   .step-card .body p{min-height:4.5em}
 }
 
