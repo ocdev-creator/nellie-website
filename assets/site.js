@@ -164,7 +164,15 @@
      The hero chips cycle through little nellie moments with a soft
      flip: content swaps on the inner wrapper so it never fights the
      parallax transform on the chip itself. Pauses off-screen. */
-  var noteMoments = [
+  // the connect page tells the app side of the story
+  var noteMoments = document.querySelector('.hiw-hero') ? [
+    {emoji: '\uD83D\uDCF7', main: 'Sophie uploaded 3 photos', sub: 'to the family album'},
+    {emoji: '\uD83D\uDD14', main: 'Reminder added: bingo', sub: 'Thursday afternoon'},
+    {emoji: '\uD83D\uDC9C', main: 'Tommy sent a message', sub: 'just now'},
+    {emoji: '\uD83D\uDC40', main: 'Nana viewed your post', sub: 'read 4 times'},
+    {emoji: '\uD83C\uDFB5', main: 'Playlist updated', sub: 'Vera Lynn added'},
+    {emoji: '\uD83D\uDCC5', main: 'Visit scheduled: Dave', sub: 'Saturday at 11:00'}
+  ] : [
     {emoji: '\uD83D\uDCF7', main: 'New photo from Cheryl', sub: '2 minutes ago'},
     {emoji: '\uD83D\uDC9C', main: '\u201CHope you\u2019re having a lovely day, Nana x\u201D', sub: 'message from Emily'},
     {emoji: '\uD83D\uDD14', main: 'Dave dropping in at 12:00', sub: 'today\u2019s visits'},

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=20">
+<link rel="stylesheet" href="assets/site.css?v=21">
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
@@ -33,6 +33,17 @@
 }
 .badge-dark small{font-size:.6rem;font-weight:600;opacity:.85}
 .badge-dark b{font-size:.95rem;font-weight:700}
+/* chip positions for this hero: devices sit left, so chips hover
+   around them, clear of both screens */
+.hiw-hero .note-1{top:18%;left:3%;right:auto}
+.hiw-hero .note-2{bottom:14%;left:30%;right:auto}
+@media (max-width:1020px){
+  .hiw-hero .note-2{display:none}
+  .hiw-hero .note-1{top:14%;left:5%}
+}
+@media (max-width:760px){
+  .hiw-hero .note-1{top:auto;bottom:12%;left:5%}
+}
 </style>
 </head>
 <body>
@@ -67,6 +78,20 @@
   <section class="page-hero hiw-hero" id="hero">
     <div class="hero-photo" data-parallax="0.08" aria-hidden="true"></div>
     <div class="hero-tint" aria-hidden="true"></div>
+    <div class="float-layer" aria-hidden="true">
+      <div class="note note-1" data-depth="30" style="--fd:0s">
+        <div class="note-inner">
+          <span class="emoji">📷</span>
+          <span>Sophie uploaded 3 photos<small>to the family album</small></span>
+        </div>
+      </div>
+      <div class="note note-2" data-depth="16" style="--fd:1.4s">
+        <div class="note-inner">
+          <span class="emoji">🔔</span>
+          <span>Reminder added: bingo<small>Thursday afternoon</small></span>
+        </div>
+      </div>
+    </div>
     <div class="wrap">
       <div class="hero-copy-right">
         <span class="kicker reveal">nellie connect</span>
@@ -165,10 +190,10 @@
       <p class="insights-sub reveal" data-delay="100">see how your loved one is engaging with nellie, from listening to music to viewing family photos</p>
     </div>
     <div class="quotes">
-      <div class="quote reveal r-pop" data-delay="0"><span class="q-ico"><img src="nellie/icons/messages.svg" alt=""></span>&ldquo;Mum spent 3 hours today reading messages from family&rdquo;</div>
-      <div class="quote reveal r-pop" data-delay="120"><span class="q-ico"><img src="nellie/icons/music.svg" alt=""></span>&ldquo;Nana Norma listened to 2 hours of music yesterday&rdquo;</div>
-      <div class="quote reveal r-pop" data-delay="240"><span class="q-ico"><img src="nellie/icons/calendar-events.svg" alt=""></span>&ldquo;Mum has had 3 visits and received a birthday reminder this week&rdquo;</div>
-      <div class="quote reveal r-pop" data-delay="360"><span class="q-ico"><img src="nellie/icons/photos.svg" alt=""></span>&ldquo;Norma has watched 5 photo slideshows since yesterday&rdquo;</div>
+      <div data-parallax="0.07"><div class="quote reveal r-pop" data-delay="0"><span class="q-ico"><img src="nellie/icons/messages.svg" alt=""></span>&ldquo;Mum spent 3 hours today reading messages from family&rdquo;</div></div>
+      <div data-parallax="-0.05"><div class="quote reveal r-pop" data-delay="120"><span class="q-ico"><img src="nellie/icons/music.svg" alt=""></span>&ldquo;Nana Norma listened to 2 hours of music yesterday&rdquo;</div></div>
+      <div data-parallax="0.09"><div class="quote reveal r-pop" data-delay="240"><span class="q-ico"><img src="nellie/icons/calendar-events.svg" alt=""></span>&ldquo;Mum has had 3 visits and received a birthday reminder this week&rdquo;</div></div>
+      <div data-parallax="-0.06"><div class="quote reveal r-pop" data-delay="360"><span class="q-ico"><img src="nellie/icons/photos.svg" alt=""></span>&ldquo;Norma has watched 5 photo slideshows since yesterday&rdquo;</div></div>
     </div>
     <div class="insights-photo">
       <img src="nellie/images/hiw-insights.jpg" alt="A nellie tablet showing a family photo slideshow in a sunny conservatory" loading="lazy">
@@ -236,6 +261,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=20"></script>
+<script src="assets/site.js?v=21"></script>
 </body>
 </html>
