@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=40">
+<link rel="stylesheet" href="assets/site.css?v=41">
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
@@ -47,7 +47,15 @@
   .hiw-hero .note-1{top:14%;left:5%}
 }
 @media (max-width:760px){
-  .hiw-hero .note-1{top:auto;bottom:12%;left:5%}
+  /* phones: photo becomes a full-bleed band below the copy (shared
+     stack lives in site.css). Cover, no mask, favouring the devices
+     which sit on the left of this frame. Chips off for a clean band. */
+  .hiw-hero .hero-photo{
+    background:url('nellie/images/hiw-hero.jpg') 35% bottom/cover no-repeat;
+    -webkit-mask-image:none;mask-image:none;
+  }
+  .hiw-hero .hero-tint{display:none}
+  .hiw-hero .note-1,.hiw-hero .note-2{display:none}
 }
 </style>
 </head>
@@ -274,6 +282,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=40"></script>
+<script src="assets/site.js?v=41"></script>
 </body>
 </html>

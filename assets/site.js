@@ -136,6 +136,16 @@
   var plxTicking = false;
   function parallax(){
     plxTicking = false;
+    // No scroll parallax on phones. The inline transform would promote
+    // the hero photo to its own compositor layer, which mobile browsers
+    // can paint OVER the following content (the "with nellie..." pill
+    // showed then vanished behind the image on real phones), and it
+    // would also shift the now in-flow stacked photo band. Clear any
+    // transform so the CSS stack holds.
+    if(window.innerWidth <= 760){
+      plxEls.forEach(function(el){ if(el.style.transform) el.style.transform = ''; });
+      return;
+    }
     var vh = window.innerHeight;
     plxEls.forEach(function(el){
       var f = parseFloat(el.getAttribute('data-parallax'));
