@@ -740,9 +740,19 @@ h1 .w i{display:inline-block;font-style:normal}
   .page-hero{align-items:flex-start;min-height:max(640px,100svh)}
   .hero-copy-right{margin-left:0;max-width:none}
 }
-.store-badges{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
-.store-badges img{height:40px;width:auto;border-radius:8px}
-.store-badges .btn{flex-shrink:0}
+/* get started leads on its own row, the two app-store badges sit
+   together on the row beneath, both phone and desktop, so the set reads
+   as one tidy block at matched heights */
+.store-badges{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:18px}
+.store-badges .btn{flex-shrink:0;height:54px;padding-top:0;padding-bottom:0}
+.store-badges .btn img{height:1.25em;width:auto}
+.badge-row{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:760px){
+  .store-badges{align-items:stretch}
+  .store-badges .btn{justify-content:center}
+  .badge-row{flex-wrap:nowrap}
+  .badge-row .badge-dark{flex:1 1 0;justify-content:center;padding:0 12px}
+}
 /* nellieconnect lockup */
 .nc-lockup{display:flex;align-items:center;gap:10px;margin:18px 0 6px;font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--ink)}
 .nc-lockup img{height:34px;width:auto}
@@ -999,70 +1009,67 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero .wrap{margin-top:4svh}
 }
 
-/* ---------- phones: stack the hero so buttons never sit on the photo ----------
-   The desktop hero floats the copy over a bottom-pinned background
-   image, masking the top half so the words read. On a short phone that
-   masked-in image rose under the stacked CTAs and the "how it works"
-   button sat on the tablet. Here the phone hero becomes a TRUE vertical
-   stack: copy in fully clear space, then the device photo as its own
-   full-bleed band directly below. A real block can never overlap the
-   copy whatever the viewport height, and the product reads as part of
-   the section rather than a wash behind the text. Appended at the end so
-   it wins over the earlier ≤1020 wrap rule. */
+/* ---------- phones: the hero is an integrated OVERLAY (copy over photo) ----------
+   Copy sits over the photo like the desktop, NOT a separate band. The
+   trick that keeps the buttons off the devices on any screen height: the
+   device zone is reserved at the foot with padding-bottom (--band), and
+   the copy is ordinary flow content above it, so it physically cannot
+   reach the devices, the hero just grows taller if the copy needs more
+   room. The photo is pinned into that foot zone (devices clear, no fade
+   on the product); only its top edge fades into the wash behind the
+   words. will-change/transform are cleared (with parallax off on phones
+   in site.js) so the photo never becomes a compositor layer that paints
+   over the "with nellie..." pill. Appended last so it wins the cascade. */
 @media (max-width:760px){
   .hero{
-    flex-direction:column;align-items:stretch;
-    min-height:0;overflow:visible;
-    padding:calc(var(--header-h) + 20px) 0 0;
+    --band:clamp(250px,62vw,420px);
+    align-items:flex-start;
+    min-height:0;
+    padding:calc(var(--header-h) + 18px) 0 var(--band);
+    overflow:hidden;
   }
-  .hero .wrap{order:1;margin-top:0}
+  .hero .wrap{margin-top:0}
   .hero-content{max-width:none}
-  /* CTAs side by side on phones: equal-width so the longer label still
-     fits the row, with trimmed padding so two fit even at 360px */
-  .hero-ctas{
-    flex-wrap:nowrap;width:auto;max-width:none;gap:12px;margin-bottom:30px;
-  }
+  /* CTAs side by side: equal-width, trimmed padding so two fit at 360px.
+     Side by side also keeps the copy short, leaving room for the photo. */
+  .hero-ctas{flex-wrap:nowrap;width:auto;max-width:none;gap:12px}
   .hero-ctas .btn{flex:1 1 0;justify-content:center;padding-left:.9em;padding-right:.9em}
-  .hero-photo,
-  .js.ok-motion .hero-photo{
-    order:2;position:relative;inset:auto;z-index:auto;
-    width:100%;height:auto;aspect-ratio:3/2;
-    background-size:cover;background-position:center bottom;
-    -webkit-mask-image:none;mask-image:none;
-    /* drop the compositor layer: will-change:transform promoted the
-       photo to its own GPU layer, which mobile Safari painted OVER the
-       following "with nellie..." features pill during scroll (it showed
-       then vanished behind the image). A plain in-flow block paints in
-       document order, so the pill below always sits on top. */
+  .hero-photo{
+    inset:0;
+    background-size:auto var(--band);background-position:center bottom;
+    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
+    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
     animation:none;transform:none;will-change:auto;
   }
+  .js.ok-motion .hero-photo{animation:none;transform:none;will-change:auto}
   .hero-tint{display:none}
-  /* keep the framed product clean, the chip sat on the device screen */
   .note-1{display:none}
-  /* lift the value-props above the hero and drop the straddle pull, so
-     the "with nellie..." pill sits cleanly below the photo, never behind
-     it. Belt and braces with the will-change fix above. */
+  /* the value-props sit above the hero so the "with nellie..." pill is
+     never painted behind the photo */
   .features-band{position:relative;z-index:2}
-  .features-dock{transform:none;margin-top:clamp(18px,5vw,30px)}
+  .features-dock{transform:none;margin-top:clamp(16px,4vw,26px)}
 }
 
-/* phones: the inner-page heroes (how it works, pricing) stack the same
-   way, so the headline and CTAs never sit on the device image. Shared
-   layout only here; each page's <style> sets its own photo background
-   (url, framing) for the band, since those rules out-specify site.css. */
+/* phones: the inner-page heroes (how it works, pricing) use the same
+   integrated overlay. Shared reservation + mask here; each page's
+   <style> sets its own photo url, size and framing for the foot zone,
+   since those rules out-specify site.css. */
 @media (max-width:760px){
   .page-hero{
-    flex-direction:column;align-items:stretch;
-    min-height:0;overflow:visible;
-    padding:calc(var(--header-h) + 20px) 0 0;
+    --band:clamp(250px,60vw,410px);
+    align-items:flex-start;
+    min-height:0;
+    padding:calc(var(--header-h) + 18px) 0 var(--band);
+    overflow:hidden;
   }
-  .page-hero .wrap{order:1;margin-top:0;padding-bottom:clamp(18px,5vw,28px)}
+  .page-hero .wrap{margin-top:0}
   .page-hero .hero-copy-right,
   .page-hero .hero-content{margin-left:0;max-width:none}
-  .page-hero .hero-photo,
-  .js.ok-motion .page-hero .hero-photo{
-    order:2;position:relative;inset:auto;z-index:auto;
-    width:100%;height:auto;aspect-ratio:3/2;
+  .page-hero .hero-photo{
+    inset:0;
+    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
+    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
     animation:none;transform:none;will-change:auto;
   }
+  .js.ok-motion .page-hero .hero-photo{animation:none;transform:none;will-change:auto}
 }

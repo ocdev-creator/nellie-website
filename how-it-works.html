@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=41">
+<link rel="stylesheet" href="assets/site.css?v=42">
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
@@ -28,16 +28,21 @@
   /* opaque pale over the whole copy zone, photo revealed only at the foot */
   .hiw-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,1) 0%,rgba(255,240,255,1) 46%,rgba(255,240,255,.45) 55%,rgba(255,240,255,0) 62%)}
 }
-/* simple text badges standing in for the store badges (no packaged
-   badge assets; swap for the official SVGs when supplied) */
+/* app-store style badges (brand glyph + label). Swap for the official
+   Apple / Google packaged artwork if/when supplied. Height is locked to
+   the get-started button so the row reads as one consistent set. */
 .badge-dark{
-  display:inline-flex;flex-direction:column;justify-content:center;
-  background:#000;color:#fff;border-radius:9px;
-  padding:6px 16px;line-height:1.15;
-  font-family:var(--font-body);
+  display:inline-flex;flex-direction:row;align-items:center;gap:10px;
+  height:54px;padding:0 18px;
+  background:#000;color:#fff;border-radius:12px;
+  font-family:var(--font-body);text-decoration:none;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
 }
-.badge-dark small{font-size:.6rem;font-weight:600;opacity:.85}
-.badge-dark b{font-size:.95rem;font-weight:700}
+.badge-dark:hover{transform:translateY(-3px)}
+.badge-dark .badge-glyph{width:26px;height:26px;flex-shrink:0;display:block}
+.badge-dark .badge-txt{display:flex;flex-direction:column;justify-content:center;line-height:1.12;text-align:left}
+.badge-dark small{font-size:.62rem;font-weight:600;opacity:.9;letter-spacing:.02em}
+.badge-dark b{font-size:1.05rem;font-weight:700}
 /* chip positions for this hero: devices sit left, so chips hover
    around them, clear of both screens */
 .hiw-hero .note-1{top:18%;left:3%;right:auto}
@@ -47,12 +52,14 @@
   .hiw-hero .note-1{top:14%;left:5%}
 }
 @media (max-width:760px){
-  /* phones: photo becomes a full-bleed band below the copy (shared
-     stack lives in site.css). Cover, no mask, favouring the devices
-     which sit on the left of this frame. Chips off for a clean band. */
+  /* phones: integrated overlay (copy over photo). Devices sit in the
+     reserved foot zone (--band, set in site.css), favouring the left of
+     this frame; only the top edge fades into the wash. Chips off. */
   .hiw-hero .hero-photo{
-    background:url('nellie/images/hiw-hero.jpg') 35% bottom/cover no-repeat;
-    -webkit-mask-image:none;mask-image:none;
+    background:url('nellie/images/hiw-hero.jpg') 36% bottom no-repeat;
+    background-size:auto var(--band);
+    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
+    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
   }
   .hiw-hero .hero-tint{display:none}
   .hiw-hero .note-1,.hiw-hero .note-2{display:none}
@@ -115,8 +122,23 @@
         </div>
         <div class="store-badges reveal" style="transition-delay:.6s">
           <a class="btn btn-primary" href="pricing.html"><img src="nellie/icons/get-started.svg" alt="">get started</a>
-          <a class="badge-dark" href="#" aria-label="Get it on Google Play"><small>GET IT ON</small><b>Google Play</b></a>
-          <a class="badge-dark" href="#" aria-label="Download on the App Store"><small>Download on the</small><b>App Store</b></a>
+          <div class="badge-row">
+            <a class="badge-dark" href="#" aria-label="Get it on Google Play">
+              <svg class="badge-glyph" viewBox="0 0 30 32" aria-hidden="true">
+                <polygon points="4,3 18.5,9.5 4,16" fill="#00d2ff"/>
+                <polygon points="4,16 18.5,22.5 4,29" fill="#00e676"/>
+                <polygon points="4,16 18.5,9.5 27,16" fill="#ffce00"/>
+                <polygon points="4,16 27,16 18.5,22.5" fill="#ff424b"/>
+              </svg>
+              <span class="badge-txt"><small>GET IT ON</small><b>Google Play</b></span>
+            </a>
+            <a class="badge-dark" href="#" aria-label="Download on the App Store">
+              <svg class="badge-glyph" viewBox="0 0 384 512" aria-hidden="true">
+                <path fill="#fff" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+              </svg>
+              <span class="badge-txt"><small>Download on the</small><b>App Store</b></span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -282,6 +304,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=41"></script>
+<script src="assets/site.js?v=42"></script>
 </body>
 </html>
