@@ -399,9 +399,14 @@ h1 .w i{display:inline-block;font-style:normal}
   .fb-item:nth-child(4){border-left:1px solid var(--hairline)}
 }
 @media (max-width:560px){
-  .features-bar{grid-template-columns:1fr;margin-top:-40px}
-  .fb-item{border-left:0 !important}
-  .fb-item + .fb-item{border-top:1px solid var(--hairline);padding-top:16px}
+  /* compact single-column card so all four benefits land on the first
+     screen under the hero, the "with nellie..." pill on top */
+  .features-bar{grid-template-columns:1fr;margin-top:-26px;padding:16px clamp(16px,4vw,22px) 18px;border-radius:24px}
+  .fb-item{border-left:0 !important;padding:10px 0;gap:14px}
+  .fb-item + .fb-item{border-top:1px solid var(--hairline)}
+  .fb-ico{width:42px;height:42px}
+  .fb-item > span:last-child{font-size:.94rem;line-height:1.3}
+  .fb-pill{font-size:.88rem;padding:.5em 1.3em}
 }
 
 /* ============================ WHY NELLIE ============================ */
@@ -1027,31 +1032,27 @@ h1 .w i{display:inline-block;font-style:normal}
    over the "with nellie..." pill. Appended last so it wins the cascade. */
 @media (max-width:760px){
   .hero{
-    --band:clamp(250px,62vw,420px);
+    --band:clamp(212px,50vw,300px);
     align-items:flex-start;
     min-height:0;
-    padding:calc(var(--header-h) + 18px) 0 var(--band);
+    padding:calc(var(--header-h) + 14px) 0 var(--band);
     overflow:hidden;
   }
   .hero .wrap{margin-top:0}
   .hero-content{max-width:none}
-  /* CTAs side by side: equal-width, trimmed padding so two fit at 360px.
-     Side by side also keeps the copy short, leaving room for the photo. */
-  /* one primary CTA on phones: the secondary "how it works" button is
-     dropped so nothing sits over the device image (applies to the about
-     and pricing heroes, which both carry a .btn-deep). Desktop keeps
-     both. The single button then runs full width as the clear action. */
-  .hero-ctas{flex-wrap:nowrap;width:auto;max-width:none;gap:12px}
+  /* the about hero has no buttons now (removed for a tighter first
+     screen). Trim the sub spacing so the device image and the value
+     props ride up. */
+  .hero .hero-sub{margin:12px 0 0}
+  /* the secondary "how it works" button stays hidden on the pricing
+     hero, which still carries a .btn-deep */
   .hero-ctas .btn-deep{display:none}
-  .hero-ctas .btn{flex:1 1 0;justify-content:center;padding-left:.9em;padding-right:.9em}
   .hero-photo{
     inset:0;
     /* the photo is zoomed a touch past the device zone so the devices sit
-       higher (just under the CTAs) and a thin strip of the scene above
-       them fades up into the copy, the text flowing into the image. The
-       devices themselves stay anchored in the clear --band zone the copy
-       never reaches (band is the reserved padding-bottom), so they are
-       never overlaid. */
+       higher (just under the copy) and a thin strip of the scene above
+       them fades up into the words. The devices stay anchored in the
+       clear --band zone the copy never reaches, never overlaid. */
     background-size:auto calc(var(--band) * 1.28);background-position:center bottom;
     -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
     mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
@@ -1061,9 +1062,10 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero-tint{display:none}
   .note-1{display:none}
   /* the value-props sit above the hero so the "with nellie..." pill is
-     never painted behind the photo */
-  .features-band{position:relative;z-index:2}
-  .features-dock{transform:none;margin-top:clamp(16px,4vw,26px)}
+     never painted behind the photo, and ride up tight under it so all
+     the benefits land on the first screen */
+  .features-band{position:relative;z-index:2;padding-bottom:clamp(32px,6vw,52px)}
+  .features-dock{transform:none;margin-top:clamp(10px,3vw,18px)}
 }
 
 /* phones: the inner-page heroes (how it works, pricing) use the same
@@ -1081,10 +1083,11 @@ h1 .w i{display:inline-block;font-style:normal}
   .page-hero .wrap{margin-top:0}
   .page-hero .hero-copy-right,
   .page-hero .hero-content{margin-left:0;max-width:none}
-  /* single primary CTA, full width (the secondary button is hidden by
-     the shared .hero-ctas .btn-deep rule above) */
-  .page-hero .hero-ctas{flex-wrap:nowrap;width:auto;max-width:none;gap:12px}
-  .page-hero .hero-ctas .btn{flex:1 1 0;justify-content:center;padding-left:.9em;padding-right:.9em}
+  /* single primary CTA, kept to its natural width and left aligned (not
+     a full-width lozenge); the secondary button is hidden by the shared
+     .hero-ctas .btn-deep rule above */
+  .page-hero .hero-ctas{flex-wrap:wrap;width:auto;max-width:none;gap:12px;justify-content:flex-start}
+  .page-hero .hero-ctas .btn{flex:0 0 auto}
   .page-hero .hero-photo{
     inset:0;
     /* same lift as the home hero: the subject rises just under the copy
