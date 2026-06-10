@@ -170,21 +170,27 @@ main section{overflow-x:clip}
 
 /* ============================ BUTTONS ============================ */
 .btn{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:var(--font-display);font-weight:800;font-size:.88rem;
-  padding:9px 20px;border-radius:var(--radius-pill);
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(.88rem,1vw,1.25rem);
+  padding:.72em 1.6em;border-radius:var(--radius-pill);
   position:relative;overflow:hidden;
   transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
   will-change:transform;
 }
-.btn img{width:17px;height:17px}
+.btn img{width:1.25em;height:1.25em}
 .btn:hover{transform:translateY(-3px) scale(1.03)}
 .btn:active{transform:translateY(0) scale(.98)}
 .btn-primary{
-  color:#fff;background:linear-gradient(120deg,#9a4ae0,#7b2ec6);
-  box-shadow:0 12px 30px rgba(123,46,198,.4);
+  color:#fff;background:linear-gradient(120deg,#c692ec,#b06ce0);
+  box-shadow:0 10px 24px rgba(150,80,200,.32);
 }
-.btn-primary:hover{box-shadow:0 18px 40px rgba(123,46,198,.5)}
+.btn-primary:hover{box-shadow:0 16px 34px rgba(150,80,200,.42)}
+/* deep solid secondary, per the comp's "how it works" */
+.btn-deep{
+  color:#fff;background:linear-gradient(120deg,#9c4fe0,#7f2fd0);
+  box-shadow:0 10px 26px rgba(110,30,180,.35);
+}
 /* V4 secondary: solid white pill, ink text */
 .btn-ghost{
   color:var(--ink);background:#fff;
@@ -262,7 +268,13 @@ main section{overflow-x:clip}
    the copy sits at the container's left edge. The slight upward bias
    reads better than true centre against the bottom-framed photo. */
 .hero .wrap,.page-hero .wrap{width:100%;margin-top:-5svh}
-.hero-content{position:relative;z-index:3;max-width:330px}
+.hero-content{position:relative;z-index:3;max-width:clamp(330px,26vw,520px)}
+.hero h1{
+  font-size:clamp(2.1rem,3.2vw,4rem);font-weight:700;
+  color:#5b2c86;line-height:1.16;
+  /* measure tuned so the headline breaks after "way", per the comp */
+  max-width:6.2em;
+}
 @media (max-width:760px){.hero-content{max-width:none}}
 /* Headline words rise in one by one (spans injected by JS). */
 h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
@@ -270,10 +282,11 @@ h1 .w i{display:inline-block;font-style:normal}
 .js.ok-motion h1 .w i{transform:translateY(110%);animation:wordup .9s cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--d,0s)}
 @keyframes wordup{to{transform:translateY(0)}}
 .hero-sub{
-  font-size:clamp(.9rem,1.15vw,.98rem);max-width:22em;margin:13px 0 22px;
-  font-weight:600;color:#5a2d86;
+  font-size:clamp(1rem,1.3vw,1.6rem);max-width:23em;
+  margin:clamp(18px,3vh,40px) 0 clamp(20px,3.2vh,42px);
+  font-weight:500;color:#71449e;line-height:1.62;
 }
-.hero-sub strong{font-weight:800;color:var(--ink)}
+.hero-sub strong{font-weight:800;color:#52187f}
 /* allowed to run wider than the copy column, per the comp */
 .hero-ctas{display:flex;flex-wrap:wrap;gap:13px;width:max-content;max-width:60vw}
 
@@ -322,34 +335,35 @@ h1 .w i{display:inline-block;font-style:normal}
   background:#fff;border-radius:clamp(28px,4vw,52px);
   box-shadow:var(--card-shadow);
   display:grid;grid-template-columns:repeat(4,1fr);
-  padding:clamp(18px,2.1vw,26px) clamp(14px,2vw,28px);
+  padding:clamp(20px,2.3vw,34px) clamp(14px,2vw,30px);
   z-index:5;
 }
 .fb-pill{
   position:absolute;left:clamp(16px,3vw,34px);top:0;transform:translateY(-50%);
-  background:linear-gradient(120deg,#efd3fa,#dfb3f3);
-  color:var(--ink);font-family:var(--font-display);font-weight:800;
-  font-size:clamp(.78rem,1.3vw,.88rem);
-  padding:8px 18px;border-radius:var(--radius-pill);
+  background:#cf9bf0;
+  color:var(--ink-deep);font-family:var(--font-display);font-weight:700;
+  font-size:clamp(.85rem,.95vw,1.12rem);
+  padding:.6em 1.5em;border-radius:var(--radius-pill);
   box-shadow:0 12px 28px rgba(123,46,198,.25);
   white-space:nowrap;
 }
 .fb-item{
   display:flex;align-items:center;gap:13px;
   padding:4px clamp(10px,1.6vw,20px);
-  font-weight:800;font-size:clamp(.76rem,1.1vw,.85rem);line-height:1.35;
+  font-weight:700;font-size:clamp(.8rem,.95vw,1.12rem);line-height:1.4;color:var(--ink);
 }
 .fb-item + .fb-item{border-left:1px solid var(--hairline)}
 .fb-ico{
-  width:46px;height:46px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#f6e4fc,#ecccf7);
+  width:clamp(46px,3.2vw,62px);height:clamp(46px,3.2vw,62px);border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#d9a7f1,#a763de);
   display:flex;align-items:center;justify-content:center;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
 }
-/* the icon set ships white (drawn for purple fills); this filter
-   chain repaints white to the brand purple for light backgrounds */
-.fb-ico img,.cap-ico img{filter:brightness(0) saturate(100%) invert(26%) sepia(72%) saturate(3624%) hue-rotate(264deg) brightness(87%) contrast(94%)}
-.fb-ico img{width:23px;height:23px}
+/* the icon set ships white (drawn for purple fills); the caption
+   icons repaint to brand purple, the bar icons stay white on their
+   gradient circles per the comp */
+.cap-ico img{filter:brightness(0) saturate(100%) invert(26%) sepia(72%) saturate(3624%) hue-rotate(264deg) brightness(87%) contrast(94%)}
+.fb-ico img{width:46%;height:46%}
 .fb-item:hover .fb-ico{transform:translateY(-4px) scale(1.08);box-shadow:0 10px 22px rgba(123,46,198,.25)}
 @media (max-width:980px){
   .features-bar{grid-template-columns:1fr 1fr;row-gap:18px}
