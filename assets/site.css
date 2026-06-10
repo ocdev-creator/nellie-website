@@ -23,6 +23,7 @@
   --accent:#842fd1;
   --accent-soft:#b06ce0;
   --accent-bright:#c95dea;
+  --icon-grad:linear-gradient(135deg,#9a4ae0,#7b2ec6);
   --muted:#8d58a3;
   --lav-0:#fff6ff;
   --lav-1:#fff0ff;
@@ -74,7 +75,7 @@ main section{overflow-x:clip}
 /* V4 kicker: small caps ink with a short underline beneath */
 .kicker{
   display:inline-block;
-  font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  font-size:.92rem;letter-spacing:.18em;text-transform:uppercase;
   font-weight:700;color:var(--ink);margin-bottom:12px;
   border-bottom:1.5px solid var(--accent-soft);padding-bottom:5px;
 }
@@ -370,14 +371,14 @@ h1 .w i{display:inline-block;font-style:normal}
 .fb-item + .fb-item{border-left:1px solid var(--hairline)}
 .fb-ico{
   width:clamp(46px,3.2vw,62px);height:clamp(46px,3.2vw,62px);border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#d9a7f1,#a763de);
+  background:var(--icon-grad);
   display:flex;align-items:center;justify-content:center;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
 }
 /* the icon set ships white (drawn for purple fills); the caption
    icons repaint to brand purple, the bar icons stay white on their
    gradient circles per the comp */
-.cap-ico img{filter:brightness(0) saturate(100%) invert(26%) sepia(72%) saturate(3624%) hue-rotate(264deg) brightness(87%) contrast(94%)}
+.cap-ico img{filter:brightness(0) invert(1)}
 .fb-ico img{width:46%;height:46%}
 .fb-item:hover .fb-ico{transform:translateY(-4px) scale(1.08);box-shadow:0 10px 22px rgba(123,46,198,.25)}
 @media (max-width:980px){
@@ -423,7 +424,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .why-item:hover{background:rgba(255,255,255,.55);transform:translateX(6px)}
 .why-item .ico{
   width:38px;height:38px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#b06ce0,#842fd1);
+  background:var(--icon-grad);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 10px 22px rgba(123,46,198,.3);
 }
@@ -436,7 +437,7 @@ h1 .w i{display:inline-block;font-style:normal}
   padding:clamp(16px,2.4vw,24px) clamp(28px,5vw,56px);
   text-align:center;box-shadow:var(--card-shadow);
   font-family:var(--font-display);font-weight:900;
-  font-size:clamp(1.05rem,2vw,1.68rem);color:var(--ink);
+  font-size:clamp(1.05rem,2vw,1.68rem);color:#5b2c86;
 }
 
 /* ============================ WHO FOR ============================
@@ -510,7 +511,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .slide-cap{
   position:absolute;top:50%;transform:translateY(-50%);
   max-width:min(26ch,40%);
-  font-family:var(--font-display);font-weight:700;color:var(--accent);
+  font-family:var(--font-display);font-weight:700;color:#5b2c86;
   font-size:clamp(1rem,1.9vw,1.6rem);line-height:1.35;
   background:rgba(255,246,255,.78);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
@@ -521,7 +522,7 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .slide-cap .cap-ico{
   width:52px;height:52px;border-radius:50%;margin-bottom:14px;
-  background:linear-gradient(135deg,#e9c4f6,#d49aef);
+  background:var(--icon-grad);
   display:flex;align-items:center;justify-content:center;
 }
 .js.ok-motion .slide.on .cap-ico{animation:capfloat 4.5s ease-in-out infinite alternate}
@@ -708,7 +709,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .page-hero .hero-photo{animation:none}
 .js.ok-motion .page-hero .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
 /* copy on the RIGHT (how-it-works) */
-.hero-copy-right{position:relative;z-index:3;max-width:clamp(380px,30vw,560px);margin-left:auto}
+.hero-copy-right{position:relative;z-index:3;max-width:clamp(340px,26vw,460px);margin-left:auto}
 @media (max-width:860px){.hero-copy-right{margin-left:0;max-width:none}}
 .store-badges{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
 .store-badges img{height:40px;width:auto;border-radius:8px}
@@ -800,7 +801,7 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .quote .q-ico{
   width:clamp(30px,2.4vw,40px);height:clamp(30px,2.4vw,40px);border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#d9a7f1,#a763de);
+  background:var(--icon-grad);
   display:flex;align-items:center;justify-content:center;
 }
 .quote .q-ico img{width:50%;height:50%}
