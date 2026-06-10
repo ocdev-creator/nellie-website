@@ -160,6 +160,43 @@
     })();
   }
 
+  /* ---------- Living notification chips ----------
+     The hero chips cycle through little nellie moments with a soft
+     flip: content swaps on the inner wrapper so it never fights the
+     parallax transform on the chip itself. Pauses off-screen. */
+  var noteMoments = [
+    {emoji: '\uD83D\uDCF7', main: 'New photo from Cheryl', sub: '2 minutes ago'},
+    {emoji: '\uD83D\uDC9C', main: '\u201CHope you\u2019re having a lovely day, Nana x\u201D', sub: 'message from Emily'},
+    {emoji: '\uD83D\uDD14', main: 'Dave dropping in at 12:00', sub: 'today\u2019s visits'},
+    {emoji: '\uD83C\uDFB5', main: 'Nellie Radio: The Everly Brothers', sub: 'listening now'},
+    {emoji: '\uD83D\uDDBC\uFE0F', main: 'Slideshow: the wedding day, 1952', sub: 'playing on nellie'},
+    {emoji: '\uD83D\uDCEC', main: 'Zo\u00EB read your message', sub: 'viewed 4 times'}
+  ];
+  var noteEls = Array.prototype.slice.call(document.querySelectorAll('#hero .note'));
+  if(!reduceMotion && noteEls.length){
+    var nmIndex = noteEls.length;
+    var nmSlot = 0;
+    setInterval(function(){
+      var heroBox = document.getElementById('hero').getBoundingClientRect();
+      if(heroBox.bottom < 0 || heroBox.top > window.innerHeight) return;
+      var el = noteEls[nmSlot];
+      nmSlot = (nmSlot + 1) % noteEls.length;
+      var m = noteMoments[nmIndex % noteMoments.length];
+      nmIndex++;
+      el.classList.add('swapping');
+      setTimeout(function(){
+        el.querySelector('.emoji').textContent = m.emoji;
+        var span = el.querySelector('.note-inner > span:last-child');
+        span.innerHTML = '';
+        span.appendChild(document.createTextNode(m.main));
+        var small = document.createElement('small');
+        small.textContent = m.sub;
+        span.appendChild(small);
+        el.classList.remove('swapping');
+      }, 380);
+    }, 4200);
+  }
+
   /* ---------- 3D tilt cards (steps) ---------- */
   if(!reduceMotion && fine){
     document.querySelectorAll('.tilt-card').forEach(function(card){
@@ -237,6 +274,23 @@
     if(Math.abs(dx) > 40){ takeOver(); go(cur + (dx < 0 ? 1 : -1)); }
     sx = null;
   }, {passive: true});
+
+  // a whisper of 3D on the carousel card itself
+  if(!reduceMotion && fine){
+    var slidesCard = slidesBox;
+    var tiltRaf = null;
+    slidesCard.addEventListener('mousemove', function(e){
+      if(tiltRaf) return;
+      tiltRaf = requestAnimationFrame(function(){
+        tiltRaf = null;
+        var r = slidesCard.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        slidesCard.style.transform = 'perspective(1400px) rotateX(' + ((0.5 - py) * 2.2).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 2.8).toFixed(2) + 'deg)';
+      });
+    });
+    slidesCard.addEventListener('mouseleave', function(){ slidesCard.style.transform = ''; });
+  }
 
   // gentle auto-advance until the user takes over
   if(!reduceMotion){
