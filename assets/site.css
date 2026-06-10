@@ -1036,9 +1036,15 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero-ctas .btn{flex:1 1 0;justify-content:center;padding-left:.9em;padding-right:.9em}
   .hero-photo{
     inset:0;
-    background-size:auto var(--band);background-position:center bottom;
-    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
-    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)),#000 calc(100% - var(--band) + 46px));
+    /* the photo is zoomed a touch past the device zone so the devices sit
+       higher (just under the CTAs) and a thin strip of the scene above
+       them fades up into the copy, the text flowing into the image. The
+       devices themselves stay anchored in the clear --band zone the copy
+       never reaches (band is the reserved padding-bottom), so they are
+       never overlaid. */
+    background-size:auto calc(var(--band) * 1.28);background-position:center bottom;
+    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
+    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
     animation:none;transform:none;will-change:auto;
   }
   .js.ok-motion .hero-photo{animation:none;transform:none;will-change:auto}
