@@ -59,7 +59,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 /* Fluid type. V4 keeps every heading in ink. */
 h1,h2,h3{font-family:var(--font-display);line-height:1.16;color:var(--ink)}
 h1{font-size:clamp(1.9rem,3.3vw,2.85rem);font-weight:900}
-h2{font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:900}
+h2{font-size:clamp(1.6rem,2.8vw,2.6rem);font-weight:700;color:#5b2c86}
 h3{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:800}
 
 .wrap{max-width:1152px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
@@ -269,12 +269,12 @@ main section{overflow-x:clip}
    reads better than true centre against the bottom-framed photo. */
 .hero .wrap,.page-hero .wrap{width:100%;margin-top:-5svh}
 .hero-content{position:relative;z-index:3;max-width:clamp(330px,26vw,520px)}
-.hero h1{
+.hero h1,.page-hero h1{
   font-size:clamp(2.1rem,3.2vw,4rem);font-weight:700;
   color:#5b2c86;line-height:1.16;
-  /* measure tuned so the headline breaks after "way", per the comp */
-  max-width:6.2em;
 }
+/* measure tuned so the homepage headline breaks after "way" */
+.hero h1{max-width:6.2em;}
 @media (max-width:760px){.hero-content{max-width:none}}
 /* Headline words rise in one by one (spans injected by JS). */
 h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
@@ -584,7 +584,7 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .helps-col{padding:0 clamp(0px,4vw,56px)}
 .helps-col + .helps-col{border-left:1px solid #ddb9ef}
-.helps-col h3{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:16px;color:var(--accent)}
+.helps-col h3{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:16px;color:#5b2c86;font-weight:700}
 .ticks li{
   display:flex;gap:11px;align-items:flex-start;
   padding:5px 0;font-weight:700;font-size:clamp(.85rem,1.05vw,.92rem);
@@ -678,7 +678,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .page-hero .hero-photo{animation:none}
 .js.ok-motion .page-hero .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
 /* copy on the RIGHT (how-it-works) */
-.hero-copy-right{position:relative;z-index:3;max-width:430px;margin-left:auto}
+.hero-copy-right{position:relative;z-index:3;max-width:clamp(380px,30vw,560px);margin-left:auto}
 @media (max-width:860px){.hero-copy-right{margin-left:0;max-width:none}}
 .store-badges{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
 .store-badges img{height:40px;width:auto;border-radius:8px}
@@ -699,7 +699,7 @@ h1 .w i{display:inline-block;font-style:normal}
 /* horizontal lozenge cards per the reference: copy left, phone right */
 .app-card{
   display:flex;align-items:center;gap:14px;
-  background:#fff;border-radius:26px;
+  background:#fff;border-radius:clamp(26px,2.6vw,40px);
   box-shadow:var(--card-shadow);
   padding:14px 14px 14px clamp(16px,1.8vw,24px);
   text-align:left;
@@ -761,13 +761,19 @@ h1 .w i{display:inline-block;font-style:normal}
 @media (max-width:860px){.quotes{grid-template-columns:1fr 1fr;margin-bottom:-40px}}
 .quote{
   background:#fff;border-radius:50%;aspect-ratio:1;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
   padding:clamp(18px,2.6vw,34px);
   box-shadow:var(--card-shadow);
-  font-family:var(--font-display);font-weight:800;
-  font-size:clamp(.72rem,1.15vw,.95rem);line-height:1.4;color:var(--ink);
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(.72rem,1.05vw,.92rem);line-height:1.45;color:var(--ink);
   text-align:center;
 }
+.quote .q-ico{
+  width:clamp(30px,2.4vw,40px);height:clamp(30px,2.4vw,40px);border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#d9a7f1,#a763de);
+  display:flex;align-items:center;justify-content:center;
+}
+.quote .q-ico img{width:50%;height:50%}
 @media (max-width:560px){
   .quotes{grid-template-columns:1fr 1fr;gap:10px}
   .quote{border-radius:24px;aspect-ratio:auto;padding:14px}
