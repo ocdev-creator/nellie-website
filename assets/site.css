@@ -402,7 +402,7 @@ h1 .w i{display:inline-block;font-style:normal}
   /* compact single-column card so all four benefits land on the first
      screen under the hero, the "with nellie..." pill on top */
   .features-bar{grid-template-columns:1fr;margin-top:-26px;padding:16px clamp(16px,4vw,22px) 18px;border-radius:24px}
-  .fb-item{border-left:0 !important;padding:10px 0;gap:14px}
+  .fb-item{border-left:0 !important;padding:8px 0;gap:13px}
   .fb-item + .fb-item{border-top:1px solid var(--hairline)}
   .fb-ico{width:42px;height:42px}
   .fb-item > span:last-child{font-size:.94rem;line-height:1.3}
@@ -1031,71 +1031,65 @@ h1 .w i{display:inline-block;font-style:normal}
    in site.js) so the photo never becomes a compositor layer that paints
    over the "with nellie..." pill. Appended last so it wins the cascade. */
 @media (max-width:760px){
+  /* CLEAN STACK on phones: copy, then the photo as a real in-flow block.
+     No absolute positioning, no mask, no zoom-crop, no compositor layer,
+     so the phone renders exactly like the preview (the masked overlay
+     was painting the device image over the value-props pill on real
+     Safari). The block's aspect shows the full scene with only a sliver
+     trimmed off the sides, so nothing key is cropped away. */
   .hero{
-    --band:clamp(212px,50vw,300px);
-    align-items:flex-start;
-    min-height:0;
-    padding:calc(var(--header-h) + 14px) 0 var(--band);
-    overflow:hidden;
+    display:flex;flex-direction:column;align-items:stretch;
+    min-height:0;overflow:visible;
+    padding:calc(var(--header-h) + 14px) 0 0;
   }
-  .hero .wrap{margin-top:0}
+  .hero .wrap{order:1;margin-top:0;width:100%}
   .hero-content{max-width:none}
-  /* the about hero has no buttons now (removed for a tighter first
-     screen). Trim the sub spacing so the device image and the value
-     props ride up. */
   .hero .hero-sub{margin:12px 0 0}
   /* the secondary "how it works" button stays hidden on the pricing
      hero, which still carries a .btn-deep */
   .hero-ctas .btn-deep{display:none}
-  .hero-photo{
-    inset:0;
-    /* the photo is zoomed a touch past the device zone so the devices sit
-       higher (just under the copy) and a thin strip of the scene above
-       them fades up into the words. The devices stay anchored in the
-       clear --band zone the copy never reaches, never overlaid. */
-    background-size:auto calc(var(--band) * 1.28);background-position:center bottom;
-    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
-    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
+  .hero-photo,
+  .js.ok-motion .hero-photo{
+    order:2;position:relative;inset:auto;
+    width:100%;height:auto;aspect-ratio:1.98;
+    background-size:cover;background-position:center bottom;
+    -webkit-mask-image:none;mask-image:none;
+    margin-top:14px;
     animation:none;transform:none;will-change:auto;
   }
-  .js.ok-motion .hero-photo{animation:none;transform:none;will-change:auto}
   .hero-tint{display:none}
   .note-1{display:none}
-  /* the value-props sit above the hero so the "with nellie..." pill is
-     never painted behind the photo, and ride up tight under it so all
-     the benefits land on the first screen */
-  .features-band{position:relative;z-index:2;padding-bottom:clamp(32px,6vw,52px)}
-  .features-dock{transform:none;margin-top:clamp(10px,3vw,18px)}
+  /* value-props ride up tight under the photo so all the benefits land on
+     the first screen; lifted above the hero so the pill always sits on top */
+  .features-band{position:relative;z-index:2;padding-bottom:clamp(30px,5vw,48px)}
+  .features-dock{transform:none;margin-top:clamp(8px,2vw,14px)}
+  .features-bar{margin-top:0}
 }
 
 /* phones: the inner-page heroes (how it works, pricing) use the same
-   integrated overlay. Shared reservation + mask here; each page's
-   <style> sets its own photo url, size and framing for the foot zone,
-   since those rules out-specify site.css. */
+   clean in-flow stack as the home hero. Each page's <style> sets its own
+   photo url + framing for the block. */
 @media (max-width:760px){
   .page-hero{
-    --band:clamp(250px,60vw,410px);
-    align-items:flex-start;
-    min-height:0;
-    padding:calc(var(--header-h) + 18px) 0 var(--band);
-    overflow:hidden;
+    display:flex;flex-direction:column;align-items:stretch;
+    min-height:0;overflow:visible;
+    padding:calc(var(--header-h) + 14px) 0 0;
   }
-  .page-hero .wrap{margin-top:0}
+  .page-hero .wrap{order:1;margin-top:0;width:100%}
   .page-hero .hero-copy-right,
   .page-hero .hero-content{margin-left:0;max-width:none}
-  /* single primary CTA, kept to its natural width and left aligned (not
-     a full-width lozenge); the secondary button is hidden by the shared
-     .hero-ctas .btn-deep rule above */
+  /* single primary CTA, natural width, left aligned (not a full-width
+     lozenge); the secondary button is hidden by the shared rule above */
   .page-hero .hero-ctas{flex-wrap:wrap;width:auto;max-width:none;gap:12px;justify-content:flex-start}
   .page-hero .hero-ctas .btn{flex:0 0 auto}
-  .page-hero .hero-photo{
-    inset:0;
-    /* same lift as the home hero: the subject rises just under the copy
-       and a thin strip fades up into it, key parts staying in the clear
-       --band foot zone (per-page <style> sets the photo + framing) */
-    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
-    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
+  .page-hero .hero-photo,
+  .js.ok-motion .page-hero .hero-photo{
+    order:2;position:relative;inset:auto;
+    width:100%;height:auto;aspect-ratio:1.95;
+    background-size:cover;
+    -webkit-mask-image:none;mask-image:none;
+    margin-top:16px;
     animation:none;transform:none;will-change:auto;
   }
-  .js.ok-motion .page-hero .hero-photo{animation:none;transform:none;will-change:auto}
+  .page-hero .hero-tint{display:none}
 }

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=45">
+<link rel="stylesheet" href="assets/site.css?v=46">
 <style>
 /* page-local tweaks: the hero photo has its pale zone on the RIGHT */
 .hiw-hero .hero-photo{
@@ -51,18 +51,24 @@
   .hiw-hero .note-2{display:none}
   .hiw-hero .note-1{top:14%;left:5%}
 }
+/* phones only: the device image lives in-flow between the get started
+   button and the store badges (the section background photo is for
+   desktop) */
+.hiw-inline-photo{display:none}
 @media (max-width:760px){
-  /* phones: integrated overlay (copy over photo). Devices sit in the
-     reserved foot zone (--band, set in site.css), favouring the left of
-     this frame; only the top edge fades into the wash. Chips off. */
-  .hiw-hero .hero-photo{
-    background:url('nellie/images/hiw-hero.jpg') 36% bottom no-repeat;
-    background-size:auto calc(var(--band)*1.28);
-    -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
-    mask-image:linear-gradient(180deg,transparent calc(100% - var(--band)*1.28),#000 calc(100% - var(--band)*0.98));
+  /* hide the desktop background photo; use the inline block instead */
+  .hiw-hero .hero-photo{display:none}
+  .hiw-inline-photo{
+    display:block;width:100%;aspect-ratio:1.95;
+    background:url('nellie/images/hiw-hero.jpg') 32% center/cover no-repeat;
+    border-radius:16px;margin:8px 0 16px;
   }
-  .hiw-hero .hero-tint{display:none}
-  .hiw-hero .note-1,.hiw-hero .note-2{display:none}
+  .hiw-hero .hero-tint,.hiw-hero .note-1,.hiw-hero .note-2{display:none}
+  /* smaller black store badges sitting under the image */
+  .hiw-hero .badge-dark{height:46px;padding:0 13px;border-radius:10px;gap:8px}
+  .hiw-hero .badge-dark .badge-glyph{width:21px;height:21px}
+  .hiw-hero .badge-dark small{font-size:.54rem}
+  .hiw-hero .badge-dark b{font-size:.9rem}
 }
 </style>
 </head>
@@ -119,6 +125,9 @@
         <p class="hero-sub reveal" style="transition-delay:.4s">family and friends can all share messages, memories and updates, helping your loved one feel connected every day</p>
         <div class="store-badges reveal" style="transition-delay:.5s">
           <a class="btn btn-primary" href="pricing.html"><img src="nellie/icons/get-started.svg" alt="">get started</a>
+          <!-- phones only: the device image sits between the primary CTA
+               and the store badges, so the black badges land under it -->
+          <div class="hiw-inline-photo" aria-hidden="true"></div>
           <div class="badge-row">
             <a class="badge-dark" href="#" aria-label="Get it on Google Play">
               <svg class="badge-glyph" viewBox="0 0 30 32" aria-hidden="true">
@@ -301,6 +310,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=45"></script>
+<script src="assets/site.js?v=46"></script>
 </body>
 </html>
