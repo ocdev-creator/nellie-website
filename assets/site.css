@@ -40,7 +40,9 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+/* smooth scrolling is enabled by JS after load, so refreshes and
+   hash restores land instantly in the right place */
+html.smooth{scroll-behavior:smooth}
 html,body{overflow-x:clip}
 body{
   font-family:var(--font-body);

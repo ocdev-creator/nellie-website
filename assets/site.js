@@ -10,6 +10,20 @@
   document.documentElement.classList.add('js');
   if(!reduceMotion) document.documentElement.classList.add('ok-motion');
 
+  /* Refresh / direct-link correctness: the hero heights depend on the
+     viewport and the photos load late, so the browser's initial hash
+     anchor lands wrong. Once everything has loaded, re-anchor
+     instantly; only then enable smooth scrolling for user clicks. */
+  window.addEventListener('load', function(){
+    if(location.hash){
+      var target = document.querySelector(location.hash);
+      if(target) target.scrollIntoView({behavior: 'instant', block: 'start'});
+    }
+    requestAnimationFrame(function(){
+      document.documentElement.classList.add('smooth');
+    });
+  });
+
   /* ---------- Hero headline: split into rising words ---------- */
   var title = document.getElementById('hero-title');
   // skip headlines carrying inline markup (e.g. the pricing page's
