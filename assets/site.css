@@ -365,7 +365,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .fb-item{
   display:flex;align-items:center;gap:13px;
   padding:4px clamp(10px,1.6vw,20px);
-  font-weight:700;font-size:clamp(.92rem,1.05vw,1.15rem);line-height:1.4;color:var(--ink);
+  font-weight:700;font-size:clamp(.78rem,.88vw,.98rem);line-height:1.4;color:var(--ink);
 }
 .fb-item + .fb-item{border-left:1px solid var(--hairline)}
 .fb-ico{
