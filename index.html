@@ -8,7 +8,11 @@
 <link rel="icon" href="/nellie/images/nellie-logo-dark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- Both families are variable fonts on Google Fonts: requesting the
+     full 400..900 weight axis plus italics (and Nunito Sans's optical
+     size axis) means every weight/style the CSS asks for is the real
+     font, never a synthesised faux-bold or faux-italic. -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    Nellie homepage rework. Single file, no build step.
