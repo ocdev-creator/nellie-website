@@ -13,14 +13,12 @@
 <style>
 /* page-local: hero photo has its pale zone on the LEFT */
 .pricing-hero .hero-photo{
-  background:url('nellie/images/pricing-hero.jpg') center bottom/100% auto no-repeat;
-  -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);
-  mask-image:linear-gradient(180deg,transparent,#000 26%);
+  background:url('nellie/images/pricing-hero.jpg') 70% bottom/cover no-repeat;
   transform-origin:center bottom;
 }
 .pricing-hero .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.92),rgba(255,240,255,.6) 36%,rgba(255,240,255,0) 60%)}
 @media (max-width:860px){
-  .pricing-hero .hero-photo{background-size:auto 56%;background-position:70% bottom}
+  .pricing-hero .hero-photo{background-position:70% bottom}
   .pricing-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.95) 52%,rgba(255,240,255,.6) 80%,rgba(255,240,255,.3))}
 }
 .pricing-hero .hero-content{max-width:460px}

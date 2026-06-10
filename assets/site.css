@@ -207,9 +207,10 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
   background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#fdf0fd 60%);
 }
 .hero{
-  /* the hero owns the first screen: full viewport height, photo
-     pinned to the bottom edge, copy centred in the space above */
-  min-height:max(620px,100svh);
+  /* the hero plus the overlapping features bar own the first screen:
+     the subtraction is the bar's below-fold remainder, so the whole
+     composition (copy, photo, bar) fits one viewport */
+  min-height:max(600px,calc(100svh - 30px));
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
@@ -217,12 +218,10 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 }
 .hero-photo{
   position:absolute;inset:-4% 0;z-index:0;
-  /* aspect-true: the photo renders at its natural ratio (100% auto),
-     pinned to the viewport's bottom edge so it frames the fold; the
-     matching background fills above, blended by a top mask fade */
-  background:url('../nellie/images/hero-v4.jpg') center bottom/100% auto no-repeat;
-  -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);
-  mask-image:linear-gradient(180deg,transparent,#000 26%);
+  /* cover: the photo scales up with the viewport (no washed gaps,
+     no top chop at normal aspects), anchored so the devices stay
+     framed; no mask, the product shows in full colour */
+  background:url('../nellie/images/hero-v4.jpg') 68% bottom/cover no-repeat;
   transform-origin:center bottom;
   will-change:transform;
 }
@@ -234,15 +233,15 @@ section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
 /* gentle left wash so the copy always reads */
 .hero-tint{
   position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,rgba(255,240,255,.96),rgba(255,240,255,.88) 34%,rgba(255,240,255,.42) 56%,rgba(255,240,255,0) 76%);
+  background:linear-gradient(90deg,rgba(255,240,255,.96),rgba(255,240,255,.88) 34%,rgba(255,240,255,.35) 50%,rgba(255,240,255,0) 64%);
 }
 @media (max-width:1020px){
   .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.97),rgba(255,240,255,.9) 44%,rgba(255,240,255,.5) 70%,rgba(255,240,255,.1))}
-  .hero-photo{background-size:auto 56%;background-position:72% bottom}
+  .hero-photo{background-position:72% bottom}
 }
 @media (max-width:760px){
   .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.96) 48%,rgba(255,240,255,.7) 74%,rgba(255,240,255,.35))}
-  .hero-photo{background-size:auto 60%;background-position:62% bottom}
+  .hero-photo{background-position:65% bottom}
 }
 /* narrow column: the V4 photo's phone sits at ~34% of the frame, so
    the copy must hold to the pale strip left of it */
