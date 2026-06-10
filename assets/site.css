@@ -315,7 +315,7 @@ h1 .w i{display:inline-block;font-style:normal}
    V4: one fully-rounded white pill pulled up over the photo's bottom
    edge, four items with hairline dividers, filled lavender icon
    circles, and the small gradient pill perched on its top-left. */
-.features-band{background:var(--lav-0);padding:0 0 clamp(28px,3.6vw,44px)}
+.features-band{background:var(--lav-0);padding:0 0 clamp(56px,7vw,96px)}
 .features-dock{transform:translateY(-50%)}
 .features-bar{
   position:relative;
