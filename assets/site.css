@@ -238,8 +238,8 @@ main section{overflow-x:clip}
      wall edge into the section gradient without touching the
      product colours. */
   background:url('../nellie/images/hero-v4.jpg') center bottom/100% auto no-repeat;
-  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%);
-  mask-image:linear-gradient(180deg,transparent,#000 9%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 64px,#000 240px);
+  mask-image:linear-gradient(180deg,transparent 64px,#000 240px);
   transform-origin:right bottom;
   will-change:transform;
 }
@@ -255,11 +255,19 @@ main section{overflow-x:clip}
 }
 @media (max-width:1020px){
   .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.97),rgba(255,240,255,.9) 44%,rgba(255,240,255,.5) 70%,rgba(255,240,255,.1))}
-  .hero-photo{background-size:auto 56%;background-position:72% bottom}
+  .hero-photo{
+    background-size:auto 56%;background-position:72% bottom;
+    -webkit-mask-image:linear-gradient(180deg,transparent 40%,#000 52%);
+    mask-image:linear-gradient(180deg,transparent 40%,#000 52%);
+  }
 }
 @media (max-width:760px){
   .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,.99),rgba(255,240,255,.96) 48%,rgba(255,240,255,.7) 74%,rgba(255,240,255,.35))}
-  .hero-photo{background-size:auto 62%;background-position:82% bottom}
+  .hero-photo{
+    background-size:auto 62%;background-position:82% bottom;
+    -webkit-mask-image:linear-gradient(180deg,transparent 34%,#000 47%);
+    mask-image:linear-gradient(180deg,transparent 34%,#000 47%);
+  }
 }
 /* narrow column: the V4 photo's phone sits at ~34% of the frame, so
    the copy must hold to the pale strip left of it */
