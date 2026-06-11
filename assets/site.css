@@ -1073,9 +1073,9 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero .hero-photo,
   .js.ok-motion .hero .hero-photo{
     order:2;position:relative;inset:auto;
-    width:100%;height:auto;aspect-ratio:1.5;
+    width:100%;height:auto;aspect-ratio:1.28;
     background:
-      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 24%),
+      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 22%),
       url('../nellie/images/hero-v4.jpg') center 60%/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
     margin-top:-8px;
@@ -1083,10 +1083,12 @@ h1 .w i{display:inline-block;font-style:normal}
   }
   .hero-tint{display:none}
   .note-1{display:none}
-  /* value-props sit below the photo; lifted above the hero so the pill
-     is always on top and never covers the devices */
+  /* the value-props card rides UP to overlap the bottom of the photo
+     slightly. Safe now: the card is an opaque, in-flow block (z-index:2)
+     and the "with nellie" pill lives INSIDE it, so neither can be hidden
+     behind the photo on scroll. */
   .features-band{position:relative;z-index:2;padding-bottom:clamp(30px,5vw,48px)}
-  .features-dock{transform:none;margin-top:clamp(10px,3vw,18px)}
+  .features-dock{transform:none;margin-top:clamp(-30px,-5vw,-20px)}
   .features-bar{margin-top:0}
 }
 
