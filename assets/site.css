@@ -1106,6 +1106,11 @@ h1 .w i{display:inline-block;font-style:normal}
      negative margin-bottom pulls the next section up so there's no gap. */
   .features-dock{transform:translateY(-46px);margin-top:0;margin-bottom:-46px}
   .features-bar{margin-top:0}
+  /* keep the card always visible on phones (no reveal fade): the reveal
+     pattern flashes every element visible for a frame on load, then hides
+     it (opacity:0) until it scrolls into view, which on this prominent
+     overlapping card read as "hides on load, then again on scroll" */
+  .js.ok-motion .features-bar.reveal{opacity:1;transform:none;transition:none}
 }
 
 /* phones: the inner-page heroes (how it works, pricing) use the same
