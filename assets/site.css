@@ -1099,7 +1099,7 @@ h1 .w i{display:inline-block;font-style:normal}
      and the "with nellie" pill lives INSIDE it, so neither can be hidden
      behind the photo on scroll. */
   .features-band{position:relative;z-index:2;padding-bottom:clamp(30px,5vw,48px)}
-  .features-dock{transform:none;margin-top:clamp(-30px,-5vw,-20px)}
+  .features-dock{transform:none;margin-top:clamp(-56px,-11vw,-40px)}
   .features-bar{margin-top:0}
 }
 
