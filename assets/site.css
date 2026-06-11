@@ -1051,10 +1051,13 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero-photo,
   .js.ok-motion .hero-photo{
     order:2;position:relative;inset:auto;
-    width:100%;height:auto;aspect-ratio:1.98;
-    background-size:cover;background-position:center bottom;
+    height:auto;aspect-ratio:1.92;
+    background-size:cover;background-position:center;
     -webkit-mask-image:none;mask-image:none;
-    margin-top:14px;
+    /* inset rounded image card, aligned to the text margin, soft shadow,
+       matching the site's card language (and the benefits card below) */
+    margin:16px clamp(20px,4vw,32px) 0;
+    border-radius:22px;box-shadow:var(--card-shadow);overflow:hidden;
     animation:none;transform:none;will-change:auto;
   }
   .hero-tint{display:none}
@@ -1085,10 +1088,14 @@ h1 .w i{display:inline-block;font-style:normal}
   .page-hero .hero-photo,
   .js.ok-motion .page-hero .hero-photo{
     order:2;position:relative;inset:auto;
-    width:100%;height:auto;aspect-ratio:1.95;
+    height:auto;aspect-ratio:1.5;
     background-size:cover;
     -webkit-mask-image:none;mask-image:none;
-    margin-top:16px;
+    /* inset rounded image card. The phone uses a purpose-cropped mobile
+       photo (subject centred, desktop copy-zone removed), so the card
+       aspect matches that crop (~3:2). */
+    margin:16px clamp(20px,4vw,32px) 0;
+    border-radius:22px;box-shadow:var(--card-shadow);overflow:hidden;
     animation:none;transform:none;will-change:auto;
   }
   .page-hero .hero-tint{display:none}
