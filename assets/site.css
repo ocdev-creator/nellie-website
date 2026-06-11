@@ -399,14 +399,21 @@ h1 .w i{display:inline-block;font-style:normal}
   .fb-item:nth-child(4){border-left:1px solid var(--hairline)}
 }
 @media (max-width:560px){
-  /* compact single-column card so all four benefits land on the first
-     screen under the hero, the "with nellie..." pill on top */
-  .features-bar{grid-template-columns:1fr;margin-top:-26px;padding:16px clamp(16px,4vw,22px) 18px;border-radius:24px}
+  /* compact single-column card. The "with nellie..." pill becomes a
+     normal header INSIDE the card (not absolutely straddling the card
+     top), so it can never overlap the hero photo above it, and the photo
+     can never paint over it on scroll. This is the long-standing
+     "lozenge hides on scroll" fix. */
+  .features-bar{grid-template-columns:1fr;margin-top:0;padding:16px clamp(16px,4vw,22px) 18px;border-radius:24px}
+  .fb-pill{
+    position:static;transform:none;justify-self:start;
+    margin:0 0 8px;font-size:.86rem;padding:.5em 1.2em;
+    box-shadow:0 8px 20px rgba(123,46,198,.18);
+  }
   .fb-item{border-left:0 !important;padding:8px 0;gap:13px}
   .fb-item + .fb-item{border-top:1px solid var(--hairline)}
   .fb-ico{width:42px;height:42px}
   .fb-item > span:last-child{font-size:.94rem;line-height:1.3}
-  .fb-pill{font-size:.88rem;padding:.5em 1.3em}
 }
 
 /* ============================ WHY NELLIE ============================ */
@@ -702,7 +709,13 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
 @media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.footer-grid{grid-template-columns:1fr}}
+/* phones: brand on top, the three link columns stay side by side so the
+   footer is short instead of one tall stack */
+@media (max-width:520px){
+  .footer-grid{grid-template-columns:repeat(3,1fr);gap:20px 12px}
+  .footer-brand{grid-column:1 / -1}
+  .footer-col a{font-size:.82rem;padding:4px 0}
+}
 .footer-brand img.lg{height:52px;width:auto}
 .powered{margin-top:14px;display:inline-block;background:#fff6ff;border-radius:var(--radius-pill);padding:6px 14px}
 .powered img{height:20px;width:auto}
