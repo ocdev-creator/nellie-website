@@ -399,19 +399,27 @@ h1 .w i{display:inline-block;font-style:normal}
   .fb-item:nth-child(4){border-left:1px solid var(--hairline)}
 }
 @media (max-width:560px){
-  /* compact single-column card. The "with nellie..." pill becomes a
-     normal header INSIDE the card (not absolutely straddling the card
-     top), so it can never overlap the hero photo above it, and the photo
-     can never paint over it on scroll. This is the long-standing
-     "lozenge hides on scroll" fix. */
-  .features-bar{grid-template-columns:1fr;margin-top:0;padding:16px clamp(16px,4vw,22px) 18px;border-radius:24px}
+  /* SOFT FEATURE ROWS: the "with nellie..." line reads as a clean header
+     (in-flow, never overlapping the photo, so it can't hide on scroll),
+     and each benefit sits in its own soft lavender rounded row. */
+  .features-bar{
+    grid-template-columns:1fr;margin-top:0;gap:9px;
+    padding:18px clamp(13px,3.5vw,18px);border-radius:24px;
+  }
   .fb-pill{
     position:static;transform:none;justify-self:start;
-    margin:0 0 8px;font-size:.86rem;padding:.5em 1.2em;
-    box-shadow:0 8px 20px rgba(123,46,198,.18);
+    background:none;box-shadow:none;padding:0;
+    margin:2px 4px 9px;white-space:normal;
+    color:var(--display);font-family:var(--font-display);font-weight:800;
+    font-size:1.04rem;line-height:1.25;
   }
-  .fb-item{border-left:0 !important;padding:8px 0;gap:13px}
-  .fb-item + .fb-item{border-top:1px solid var(--hairline)}
+  .fb-pill b{color:var(--accent-bright)}
+  .fb-item{
+    border:0 !important;
+    background:var(--lav-2);border-radius:15px;
+    padding:12px 14px;gap:13px;align-items:center;
+  }
+  .fb-item + .fb-item{border-top:0}
   .fb-ico{width:42px;height:42px}
   .fb-item > span:last-child{font-size:.94rem;line-height:1.3}
 }
