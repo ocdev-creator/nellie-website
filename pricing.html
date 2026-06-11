@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=48">
+<link rel="stylesheet" href="assets/site.css?v=49">
 <style>
 /* page-local: hero photo has its pale zone on the LEFT */
 .pricing-hero .hero-photo{
@@ -27,12 +27,13 @@
   }
   .pricing-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,1) 0%,rgba(255,240,255,1) 46%,rgba(255,240,255,.45) 55%,rgba(255,240,255,0) 62%)}
 }
-/* phones: clean in-flow photo block under the copy (layout in site.css).
-   cover with only a sliver trimmed each side so the couple isn't cropped
-   off; centred low to keep the tablet and both faces. */
+/* phones: immersive overlay (layout in site.css). Full-bleed couple
+   photo, its top fading into the copy via a gradient layer (no mask). */
 @media (max-width:760px){
   .pricing-hero .hero-photo{
-    background:url('nellie/images/pricing-cta-mobile.jpg') center/cover no-repeat;
+    background:
+      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 24%),
+      url('nellie/images/pricing-cta-mobile.jpg') center/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
   }
   .pricing-hero .hero-tint{display:none}
@@ -275,6 +276,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=48"></script>
+<script src="assets/site.js?v=49"></script>
 </body>
 </html>
