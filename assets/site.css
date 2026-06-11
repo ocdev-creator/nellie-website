@@ -1099,7 +1099,12 @@ h1 .w i{display:inline-block;font-style:normal}
      and the "with nellie" pill lives INSIDE it, so neither can be hidden
      behind the photo on scroll. */
   .features-band{position:relative;z-index:2;padding-bottom:clamp(30px,5vw,48px)}
-  .features-dock{transform:none;margin-top:clamp(-56px,-11vw,-40px)}
+  /* lift the card with a TRANSFORM, not a negative top margin: the
+     margin approach relies on parent-child margin-collapse, which iOS
+     Safari resolved differently (the card snapped flush to the photo).
+     A transform moves it up identically everywhere; the matching
+     negative margin-bottom pulls the next section up so there's no gap. */
+  .features-dock{transform:translateY(-46px);margin-top:0;margin-bottom:-46px}
   .features-bar{margin-top:0}
 }
 
