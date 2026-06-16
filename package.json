@@ -1,0 +1,9 @@
+{
+  "name": "nellie-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nellie Connect marketing site + Stripe purchase flow (Netlify Functions). The static pages have no build step; this manifest exists so Netlify installs the Stripe SDK and bundles it into the functions.",
+  "dependencies": {
+    "stripe": "^17.5.0"
+  }
+}

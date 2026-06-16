@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started | Nellie</title>
+<meta name="description" content="Set up nellie for your loved one: buy the tablet and start nellie connect in a few simple steps.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="nellie/images/nellie-logo-dark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site-v2.css?v=4">
+<style>
+/* ---- checkout shell ---- */
+.co-main{min-height:100vh;background:linear-gradient(180deg,#e4b8f5,#fef0fe);padding:calc(var(--header-h,76px) + clamp(20px,3vw,42px)) 0 clamp(60px,8vw,96px)}
+.co-wrap{width:min(640px,92vw);margin:0 auto}
+.co-head{text-align:center;margin-bottom:clamp(18px,3vw,30px)}
+.co-head .kicker{justify-content:center}
+.co-head h1{font-size:clamp(1.7rem,3vw,2.4rem)}
+/* secure note in the header bar */
+.co-secure{display:inline-flex;align-items:center;gap:7px;color:#fff;font-family:var(--font-body);font-weight:700;font-size:.82rem;opacity:.92}
+.co-secure svg{width:15px;height:15px;fill:#fff}
+
+/* ---- stepper ---- */
+.co-steps{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 auto clamp(20px,3vw,30px);max-width:460px}
+.co-step{display:flex;align-items:center;gap:6px;flex:1;min-width:0}
+.co-step .dot{width:30px;height:30px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:800;font-size:.92rem;background:#fff;color:#b9a0d0;box-shadow:0 4px 12px rgba(67,16,111,.12)}
+.co-step .lbl{font-family:var(--font-display);font-weight:700;font-size:.78rem;color:#7a5ca0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co-step.on .dot{background:#c866e9;color:#fff}
+.co-step.done .dot{background:#7e37ca;color:#fff}
+.co-step.on .lbl{color:var(--ink)}
+.co-step .bar{height:3px;flex:1;background:#fff;border-radius:2px;min-width:10px}
+@media (max-width:560px){.co-step .lbl{display:none}}
+
+/* ---- card + fields ---- */
+.co-card{background:#fff;border-radius:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(67,16,111,.16);padding:clamp(22px,3.4vw,40px)}
+.co-card h2{font-size:clamp(1.3rem,2vw,1.6rem);margin-bottom:4px}
+.co-card .sub{color:#5c1a8c;font-weight:600;font-size:.96rem;margin-bottom:20px;line-height:1.5}
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:.92rem;margin-bottom:6px}
+.field .hint{font-weight:600;font-size:.8rem;color:#8a6db0;margin-top:5px}
+.field input,.field select{
+  width:100%;font-family:var(--font-body);font-size:1rem;color:var(--ink);
+  background:#fcf7ff;border:1.5px solid #ead9f7;border-radius:12px;padding:12px 14px;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.field input:focus,.field select:focus{outline:none;border-color:#c866e9;box-shadow:0 0 0 3px rgba(200,102,233,.18);background:#fff}
+.field input.bad,.field select.bad{border-color:#e0608a;background:#fff5f8}
+.field .err{color:#c43c69;font-weight:700;font-size:.8rem;margin-top:5px;display:none}
+.field.show-err .err{display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dob{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}
+@media (max-width:460px){.row2{grid-template-columns:1fr}}
+
+/* gate (already have nellie) */
+.gate{background:#faf2ff;border:1.5px solid #ead9f7;border-radius:14px;padding:14px 16px;margin-bottom:22px}
+.gate .gate-q{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:.92rem}
+.gate button.link{background:none;border:0;color:#7e37ca;font-family:var(--font-display);font-weight:800;cursor:pointer;text-decoration:underline;font-size:.92rem;padding:0}
+.gate-form{margin-top:14px;display:none}
+.gate.open .gate-form{display:block}
+.gate-ok{margin-top:12px;color:#2f8a4f;font-weight:700;font-size:.9rem;display:none}
+.gate.signed .gate-ok{display:block}
+.gate.signed .gate-form{display:none}
+
+/* gift code */
+.gift-status{font-weight:700;font-size:.86rem;margin-top:7px;min-height:1.1em}
+.gift-status.good{color:#2f8a4f}
+.gift-status.bad{color:#c43c69}
+.gift-status.checking{color:#8a6db0}
+
+/* order summary */
+.summary{background:#faf2ff;border:1.5px solid #ead9f7;border-radius:16px;padding:18px 20px;margin:6px 0 20px}
+.summary .li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;font-weight:600;color:var(--ink)}
+.summary .li .desc{font-size:.95rem}
+.summary .li .desc small{display:block;font-weight:600;color:#8a6db0;font-size:.78rem}
+.summary .li .amt{font-family:var(--font-display);font-weight:800;white-space:nowrap}
+.summary .li.free .amt{color:#2f8a4f}
+.summary .rule{height:1px;background:#ead9f7;margin:8px 0}
+.summary .total{font-family:var(--font-display);font-weight:900;font-size:1.05rem}
+.summary .bonus{color:#2f8a4f;font-weight:700;font-size:.84rem;margin-top:8px}
+
+/* nav buttons */
+.co-nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.co-nav .btn{flex:0 0 auto}
+.co-nav .spacer{flex:1}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.co-cancelled{background:#fff5f8;border:1.5px solid #f2c2d4;color:#a8325c;border-radius:12px;padding:12px 16px;margin-bottom:18px;font-weight:700;font-size:.9rem;text-align:center}
+.co-foot{text-align:center;margin-top:22px;color:#6b3f93;font-weight:600;font-size:.82rem;line-height:1.6}
+.co-foot a{color:#7e37ca}
+.spin{display:inline-block;width:1em;height:1em;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:cospin .7s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes cospin{to{transform:rotate(360deg)}}
+.wiz-step{display:none}
+.wiz-step.active{display:block}
+</style>
+</head>
+<body class="app-booted">
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Nellie homepage"><img src="nellie/images/nellie-logo-dark.svg" alt="nellie"></a>
+    <span class="co-secure">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 4 4v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V4l-8-3Zm0 6a2.5 2.5 0 0 1 2.5 2.5c0 .9-.5 1.7-1.2 2.1V14a1.3 1.3 0 0 1-2.6 0v-2.4A2.5 2.5 0 0 1 12 7Z"/></svg>
+      secure checkout
+    </span>
+  </div>
+</header>
+
+<main class="co-main">
+  <div class="co-wrap">
+
+    <div class="co-head">
+      <span class="kicker">get started</span>
+      <h1>set up nellie for your loved&nbsp;one</h1>
+    </div>
+
+    <!-- stepper -->
+    <div class="co-steps" id="co-steps">
+      <div class="co-step on" data-step="1"><span class="dot">1</span><span class="lbl">your details</span></div>
+      <span class="bar"></span>
+      <div class="co-step" data-step="2"><span class="dot">2</span><span class="lbl">your loved one</span></div>
+      <span class="bar"></span>
+      <div class="co-step" data-step="3"><span class="dot">3</span><span class="lbl">confirm &amp; pay</span></div>
+    </div>
+
+    <div id="co-cancelled" class="co-cancelled" hidden>Payment was cancelled, nothing has been charged. Your details are still here, you can try again whenever you're ready.</div>
+
+    <form class="co-card" id="co-form" novalidate>
+
+      <!-- ============ STEP 1: subscriber ============ -->
+      <section class="wiz-step active" data-step="1">
+        <h2>your details</h2>
+        <p class="sub">We'll set the account up in your name. You manage everything from the nellie connect app on your phone.</p>
+
+        <div class="gate" id="gate">
+          <span class="gate-q">Already have a nellie account? </span>
+          <button type="button" class="link" id="gate-toggle">Sign in</button>
+          <div class="gate-form">
+            <div class="field">
+              <label for="g-email">Account email</label>
+              <input type="email" id="g-email" autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="g-pass">Password</label>
+              <input type="password" id="g-pass" autocomplete="current-password">
+              <div class="err" id="g-err" style="display:none"></div>
+            </div>
+            <button type="button" class="btn btn-primary btn-grape" id="gate-signin"><img src="nellie/icons/get-started.svg" alt="">sign in</button>
+          </div>
+          <div class="gate-ok" id="gate-ok"></div>
+        </div>
+
+        <div class="field" data-req>
+          <label for="first_name">Your first name</label>
+          <input type="text" id="first_name" autocomplete="given-name">
+          <div class="err">Please enter your first name.</div>
+        </div>
+        <div class="field" data-req>
+          <label for="email">Your email</label>
+          <input type="email" id="email" autocomplete="email">
+          <div class="err">Please enter a valid email.</div>
+        </div>
+        <div class="field" data-req>
+          <label for="postcode">Your postcode</label>
+          <input type="text" id="postcode" autocomplete="postal-code" placeholder="e.g. GL54 5BA">
+          <div class="err">Please enter a valid UK postcode.</div>
+        </div>
+        <div class="field" data-req data-dob>
+          <label>Your date of birth</label>
+          <div class="dob">
+            <input type="number" id="dob_day" placeholder="DD" min="1" max="31" inputmode="numeric" aria-label="Day">
+            <input type="number" id="dob_month" placeholder="MM" min="1" max="12" inputmode="numeric" aria-label="Month">
+            <input type="number" id="dob_year" placeholder="YYYY" min="1900" max="2012" inputmode="numeric" aria-label="Year">
+          </div>
+          <div class="err">Please enter a valid date of birth.</div>
+        </div>
+      </section>
+
+      <!-- ============ STEP 2: loved one ============ -->
+      <section class="wiz-step" data-step="2">
+        <h2>your loved one</h2>
+        <p class="sub">Tell us who nellie is for. This personalises their tablet so it feels familiar from day one.</p>
+
+        <div class="field" data-req>
+          <label for="resident_name">Their full name</label>
+          <input type="text" id="resident_name" autocomplete="off">
+          <div class="err">Please enter their name.</div>
+        </div>
+        <div class="row2">
+          <div class="field" data-req>
+            <label for="relationship">Your relationship to them</label>
+            <select id="relationship">
+              <option value="">Choose…</option>
+              <option value="1">Daughter</option><option value="2">Son</option>
+              <option value="3">Granddaughter</option><option value="4">Grandson</option>
+              <option value="5">Wife</option><option value="6">Husband</option>
+              <option value="7">Partner</option><option value="8">Sibling</option>
+              <option value="9">Niece</option><option value="10">Nephew</option>
+              <option value="11">Cousin</option><option value="12">Friend</option>
+              <option value="13">Neighbour</option><option value="14">Carer</option>
+              <option value="15">Volunteer</option><option value="16">Professional</option>
+              <option value="17">Other</option>
+            </select>
+            <div class="err">Please choose your relationship.</div>
+          </div>
+          <div class="field" data-req>
+            <label for="known_to_you_as">You call them</label>
+            <input type="text" id="known_to_you_as" placeholder="e.g. Mum">
+            <div class="err">Please tell us what you call them.</div>
+          </div>
+        </div>
+        <div class="field" data-req>
+          <label for="living_in">Where they live</label>
+          <select id="living_in">
+            <option value="">Choose…</option>
+            <option value="own_home">Their own home</option>
+            <option value="family_home">A family home</option>
+            <option value="sheltered">Sheltered housing</option>
+            <option value="extra_care">Extra-care housing</option>
+            <option value="care_home">A care home</option>
+            <option value="hospice">A hospice</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="err">Please choose where they live.</div>
+        </div>
+        <div class="field" data-req id="care-home-field" hidden>
+          <label for="care_home_name">Care home / hospice name</label>
+          <input type="text" id="care_home_name">
+          <div class="err">Please enter the name.</div>
+        </div>
+        <div class="field" data-req>
+          <label for="resident_postcode">Their postcode</label>
+          <input type="text" id="resident_postcode" placeholder="e.g. GL52 3AA">
+          <div class="err">Please enter a valid UK postcode.</div>
+        </div>
+        <div class="field" data-req data-dob>
+          <label>Their date of birth</label>
+          <div class="dob">
+            <input type="number" id="r_dob_day" placeholder="DD" min="1" max="31" inputmode="numeric" aria-label="Day">
+            <input type="number" id="r_dob_month" placeholder="MM" min="1" max="12" inputmode="numeric" aria-label="Month">
+            <input type="number" id="r_dob_year" placeholder="YYYY" min="1900" max="2020" inputmode="numeric" aria-label="Year">
+          </div>
+          <div class="err">Please enter a valid date of birth.</div>
+        </div>
+      </section>
+
+      <!-- ============ STEP 3: confirm & pay ============ -->
+      <section class="wiz-step" data-step="3">
+        <h2>confirm &amp; pay</h2>
+        <p class="sub">Have a gift code? Add it below. Then continue to our secure Stripe checkout, where you'll enter your card and delivery address.</p>
+
+        <div class="field">
+          <label for="gift_code">Gift code <span style="font-weight:600;color:#8a6db0">(optional)</span></label>
+          <input type="text" id="gift_code" placeholder="e.g. BRAVE-ROBIN-02" autocomplete="off" style="text-transform:uppercase">
+          <div class="gift-status" id="gift-status"></div>
+        </div>
+
+        <div class="summary" id="summary">
+          <div class="li"><span class="desc">Nellie tablet<small>one-time purchase, delivered free</small></span><span class="amt" id="sum-tablet">&pound;199.00</span></div>
+          <div class="li"><span class="desc">Nellie connect<small>monthly subscription</small></span><span class="amt" id="sum-sub">&pound;24.99<span style="font-weight:600">/mo</span></span></div>
+          <div class="rule"></div>
+          <div class="li total"><span class="desc">Due today</span><span class="amt" id="sum-total">&pound;223.99</span></div>
+          <div class="bonus" id="sum-bonus" style="display:none"></div>
+        </div>
+
+        <p class="sub" style="font-size:.84rem;margin-bottom:0">Cancel the subscription any time. The tablet arrives pre-configured, just turn it on.</p>
+      </section>
+
+      <!-- nav -->
+      <div class="co-nav">
+        <button type="button" class="btn btn-deep" id="co-back" style="visibility:hidden"><span>back</span></button>
+        <span class="spacer" style="flex:1"></span>
+        <button type="button" class="btn btn-primary" id="co-next"><span>continue</span></button>
+        <button type="button" class="btn btn-primary btn-bright" id="co-pay" style="display:none"><img src="nellie/icons/get-started.svg" alt=""><span>continue to payment</span></button>
+      </div>
+    </form>
+
+    <p class="co-foot">
+      Your details are saved securely with nellie before payment. Card details are handled by <strong>Stripe</strong>, we never see them.<br>
+      Need a hand? <a href="index.html#contact">Get in touch</a>.
+    </p>
+
+  </div>
+</main>
+
+<script src="assets/subscribe.js?v=1"></script>
+</body>
+</html>

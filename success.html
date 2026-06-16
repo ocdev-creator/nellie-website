@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're all set | Nellie</title>
+<meta name="description" content="Your nellie account is ready.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="nellie/images/nellie-logo-dark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site-v2.css?v=4">
+<style>
+.su-main{min-height:100vh;background:linear-gradient(180deg,#e4b8f5,#fef0fe);padding:calc(var(--header-h,76px) + clamp(24px,4vw,52px)) 0 clamp(60px,8vw,96px)}
+.su-wrap{width:min(620px,92vw);margin:0 auto;text-align:center}
+.su-card{background:#fff;border-radius:clamp(22px,2.6vw,32px);box-shadow:0 24px 60px rgba(67,16,111,.16);padding:clamp(26px,4vw,48px)}
+.su-tick{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,#c866e9,#7e37ca);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 16px 34px rgba(126,55,202,.4)}
+.su-tick svg{width:38px;height:38px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.su-card h1{font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:8px}
+.su-lede{color:#5c1a8c;font-weight:600;font-size:1.02rem;line-height:1.55;margin-bottom:24px}
+.code-box{background:linear-gradient(180deg,#faf2ff,#f3e3fb);border:1.5px solid #e7d2f6;border-radius:18px;padding:20px;margin:0 auto 22px;max-width:340px}
+.code-box .cap{font-family:var(--font-display);font-weight:800;color:#7e37ca;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.code-box .code{font-family:var(--font-display);font-weight:900;color:var(--ink);font-size:clamp(2.2rem,7vw,3rem);letter-spacing:.18em}
+.code-box .note{color:#6b3f93;font-weight:600;font-size:.82rem;margin-top:8px}
+.su-steps{text-align:left;max-width:420px;margin:0 auto 26px;padding:0;list-style:none}
+.su-steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;font-weight:600;color:var(--ink);line-height:1.5}
+.su-steps .n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#c866e9;color:#fff;font-family:var(--font-display);font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.stores{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:6px 0 8px}
+.badge-dark{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 18px;background:#000;color:#fff;border-radius:12px;text-decoration:none;font-family:var(--font-body)}
+.badge-dark:hover{transform:translateY(-2px);transition:transform .2s}
+.badge-dark .g{width:24px;height:24px;flex-shrink:0}
+.badge-dark .t{display:flex;flex-direction:column;line-height:1.1;text-align:left}
+.badge-dark small{font-size:.6rem;font-weight:600;opacity:.9}
+.badge-dark b{font-size:1.02rem;font-weight:700}
+.su-order{background:#faf2ff;border:1.5px solid #ead9f7;border-radius:14px;padding:14px 18px;margin-top:22px;text-align:left;color:var(--ink);font-weight:600;font-size:.92rem;line-height:1.6}
+.su-order strong{font-family:var(--font-display)}
+.su-foot{margin-top:20px;color:#6b3f93;font-weight:600;font-size:.84rem}
+.su-foot a{color:#7e37ca}
+.muted-load{color:#7a5ca0;font-weight:700}
+.hide{display:none}
+</style>
+</head>
+<body class="app-booted">
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Nellie homepage"><img src="nellie/images/nellie-logo-dark.svg" alt="nellie"></a>
+  </div>
+</header>
+
+<main class="su-main">
+  <div class="su-wrap">
+    <div class="su-card">
+
+      <!-- loading -->
+      <div id="su-loading">
+        <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h1>finishing your setup…</h1>
+        <p class="su-lede muted-load">One moment while we get your loved one’s account ready.</p>
+      </div>
+
+      <!-- new customer: access code -->
+      <div id="su-new" class="hide">
+        <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h1>you're all set!</h1>
+        <p class="su-lede" id="su-new-lede">Thank you. Your loved one’s nellie is on its way.</p>
+
+        <div class="code-box">
+          <div class="cap">your access code</div>
+          <div class="code" id="su-code">––––––</div>
+          <div class="note">You’ll set a password the first time you log in.</div>
+        </div>
+
+        <ul class="su-steps">
+          <li><span class="n">1</span><span>Download the <strong>nellie connect</strong> app on your phone.</span></li>
+          <li><span class="n">2</span><span>Enter the access code above and create your password.</span></li>
+          <li><span class="n">3</span><span>Add photos, messages and reminders, they appear on the tablet automatically.</span></li>
+        </ul>
+
+        <div class="stores">
+          <a class="badge-dark" href="#" aria-label="Download on the App Store">
+            <svg class="g" viewBox="0 0 384 512" aria-hidden="true"><path fill="#fff" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            <span class="t"><small>Download on the</small><b>App Store</b></span>
+          </a>
+          <a class="badge-dark" href="#" aria-label="Get it on Google Play">
+            <svg class="g" viewBox="0 0 30 32" aria-hidden="true"><polygon points="4,3 18.5,9.5 4,16" fill="#00d2ff"/><polygon points="4,16 18.5,22.5 4,29" fill="#00e676"/><polygon points="4,16 18.5,9.5 27,16" fill="#ffce00"/><polygon points="4,16 27,16 18.5,22.5" fill="#ff424b"/></svg>
+            <span class="t"><small>GET IT ON</small><b>Google Play</b></span>
+          </a>
+        </div>
+
+        <div class="su-order" id="su-order"></div>
+      </div>
+
+      <!-- returning customer: no code -->
+      <div id="su-returning" class="hide">
+        <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h1>welcome back!</h1>
+        <p class="su-lede" id="su-ret-lede">Your new loved one has been added to your account.</p>
+        <p class="su-lede">Just open the <strong>nellie connect</strong> app and log in with your existing email and password, everything’s waiting for you.</p>
+        <div class="su-order" id="su-order-ret"></div>
+      </div>
+
+      <!-- safety-net / pending -->
+      <div id="su-pending" class="hide">
+        <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h1>payment received, thank you!</h1>
+        <p class="su-lede">Your account is being set up. If you don’t see your access code here, check your email shortly, we’ll send your code and next steps. Your loved one’s tablet is on its way.</p>
+        <p class="su-foot">Need a hand? <a href="index.html#contact">Get in touch</a>.</p>
+      </div>
+
+    </div>
+    <p class="su-foot">Questions about your order? <a href="index.html#contact">We’re here to help</a>.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var FN = '/.netlify/functions/';
+  var deviceToken = localStorage.getItem('nellie_device_token');
+  var ctx = {};
+  try { ctx = JSON.parse(localStorage.getItem('nellie_checkout') || '{}'); } catch (e) { ctx = {}; }
+
+  function show(id) {
+    ['su-loading', 'su-new', 'su-returning', 'su-pending'].forEach(function (x) {
+      document.getElementById(x).classList.toggle('hide', x !== id);
+    });
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function renderNew(result) {
+    if (result.access_code) document.getElementById('su-code').textContent = result.access_code;
+    var who = esc(ctx.known_as || result.known_as || 'your loved one');
+    document.getElementById('su-new-lede').innerHTML = 'Thank you. ' + who + '’s nellie tablet is on its way, pre-configured and ready, just turn it on.';
+    document.getElementById('su-order').innerHTML =
+      '<strong>Order:</strong> Nellie tablet + nellie connect.<br>' +
+      'Estimated delivery: <strong>3–5 working days</strong> with free tracked UK delivery.';
+    show('su-new');
+  }
+  function renderReturning() {
+    document.getElementById('su-order-ret').innerHTML =
+      '<strong>Order:</strong> a second nellie tablet + nellie connect.<br>' +
+      'Estimated delivery: <strong>3–5 working days</strong> with free tracked UK delivery.';
+    show('su-returning');
+  }
+
+  // already finalised (forever_free path, or a prior render this session)?
+  var stashed = null;
+  try { stashed = JSON.parse(localStorage.getItem('nellie_result') || 'null'); } catch (e) { stashed = null; }
+
+  function decide(result) {
+    // returning customers get no access code
+    if (ctx.existing_person_id) { renderReturning(); return; }
+    if (result && result.access_code) { renderNew(result); return; }
+    // finalised but no code surfaced to us (e.g. webhook won the race and
+    // Step B returned "already completed" without re-issuing the code)
+    show('su-pending');
+  }
+
+  if (stashed && (stashed.access_code || stashed.success)) {
+    decide(stashed);
+    return;
+  }
+
+  if (!deviceToken || !ctx.setup_id) {
+    // no local context (different device/browser, or cleared storage):
+    // the webhook safety net will have created the account server-side
+    show(ctx.existing_person_id ? 'su-returning' : 'su-pending');
+    return;
+  }
+
+  // finalise (Step B). Idempotent: if the webhook beat us, this is a no-op.
+  fetch(FN + 'setup-complete', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ device_token: deviceToken, setup_id: ctx.setup_id }),
+  }).then(function (r) { return r.json().catch(function () { return {}; }); })
+    .then(function (b) {
+      if (b && b.success && b.access_code) {
+        localStorage.setItem('nellie_result', JSON.stringify(b));
+      }
+      decide(b || {});
+    })
+    .catch(function () { show(ctx.existing_person_id ? 'su-returning' : 'su-pending'); });
+})();
+</script>
+</body>
+</html>

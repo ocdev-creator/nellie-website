@@ -10,9 +10,9 @@ set -euo pipefail
 rm -rf _site
 mkdir -p _site
 
-# the three pages
-cp index.html how-it-works.html pricing.html _site/
-cp index-v2.html how-it-works-v2.html pricing-v2.html _site/
+# the public pages (the v2 redesign is now the live site) plus the
+# purchase flow (subscribe form + post-payment success page)
+cp index.html how-it-works.html pricing.html subscribe.html success.html _site/
 
 # shared styles + script, and all imagery / icons
 cp -r assets nellie _site/

@@ -1,3 +1,4 @@
 .claude/
 design*.svg
 _site/
+node_modules/

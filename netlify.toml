@@ -1,6 +1,15 @@
 # Netlify deploy config. The build stages only the public site into
 # _site/ (see netlify-build.sh); reference files in the repo are not
-# published. No framework, no dependencies, just a copy step.
+# published. The static site itself has no framework, just a copy step.
 [build]
   command = "bash netlify-build.sh"
   publish = "_site"
+
+# Serverless functions power the purchase flow: the Stripe Checkout
+# session, the Stripe webhook, and four thin server-to-server proxies to
+# the Nellie account APIs (so the browser never deals with CORS and the
+# secret keys / API base stay server-side). esbuild bundles the `stripe`
+# dependency from package.json into the function.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

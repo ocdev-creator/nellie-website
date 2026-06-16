@@ -9,23 +9,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=57">
+<link rel="stylesheet" href="assets/site-v2.css?v=4">
 <style>
-/* page-local: hero photo has its pale zone on the LEFT */
+/* page-local: Simple-Pricing shot. The couple sit on the RIGHT and the
+   photo already fades to pale on the LEFT, so the copy reads cleanly on
+   the left with just a light reinforcing tint, no heavy top mask. */
 .pricing-hero .hero-photo{
-  background:url('nellie/images/pricing-cta.jpg') right bottom/min(100%,calc(100svh * 2.18)) auto no-repeat;
-  -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - 45.9vw),#000 calc(100% - 45.9vw + 80px));
-  mask-image:linear-gradient(180deg,transparent calc(100% - 45.9vw),#000 calc(100% - 45.9vw + 80px));
-  transform-origin:right bottom;
+  background:url('nellie/images/Simple-Pricing.jpg') right center/cover no-repeat;
 }
-.pricing-hero .hero-tint{background:linear-gradient(90deg,rgba(255,240,255,.92),rgba(255,240,255,.65) 30%,rgba(255,240,255,.25) 42%,rgba(255,240,255,0) 50%)}
+.pricing-hero .hero-tint{background:linear-gradient(90deg,#fef0fe 14%,rgba(254,240,254,.45) 38%,rgba(254,240,254,0) 56%)}
 @media (max-width:960px){
-  .pricing-hero .hero-photo{
-    background-size:auto 46%;background-position:70% bottom;
-    -webkit-mask-image:linear-gradient(180deg,transparent 52%,#000 57%);
-    mask-image:linear-gradient(180deg,transparent 52%,#000 57%);
-  }
-  .pricing-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,1) 0%,rgba(255,240,255,1) 46%,rgba(255,240,255,.45) 55%,rgba(255,240,255,0) 62%)}
+  .pricing-hero .hero-photo{background-position:72% center}
+  .pricing-hero .hero-tint{background:linear-gradient(180deg,rgba(254,240,254,.97) 0%,rgba(254,240,254,.9) 42%,rgba(254,240,254,.4) 55%,rgba(254,240,254,0) 64%)}
 }
 /* phones: immersive overlay (layout in site.css). Full-bleed couple
    photo, its top fading into the copy via a gradient layer (no mask). */
@@ -33,7 +28,7 @@
   .pricing-hero .hero-photo{
     background:
       linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 24%),
-      url('nellie/images/pricing-cta-mobile.jpg') center/cover no-repeat;
+      url('nellie/images/Simple-Pricing.jpg') 70% center/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
   }
   .pricing-hero .hero-tint{display:none}
@@ -80,7 +75,7 @@
         <p class="hero-sub reveal" style="transition-delay:.4s;margin-bottom:0">a simple one-time tablet purchase, paired with a gentle monthly subscription that keeps the whole family connected</p>
         <p class="hero-sub reveal" style="transition-delay:.5s;margin-top:14px">easy to use, easy to manage, and comforting for your loved one</p>
         <div class="hero-ctas reveal" style="transition-delay:.55s">
-          <a class="btn btn-primary" href="#purchase"><img src="nellie/icons/get-started.svg" alt="">get started</a>
+          <a class="btn btn-primary btn-bright" href="#purchase"><img src="nellie/icons/get-started.svg" alt="">get started</a>
           <a class="btn btn-deep" href="how-it-works.html"><img src="nellie/icons/how-it-works.svg" alt="">how it works</a>
         </div>
       </div>
@@ -97,7 +92,7 @@
           <div class="plan-photo"><img src="nellie/images/product-tablet.png" alt="The nellie tablet in its purple easy-hold case on a desk" loading="lazy"></div>
           <div class="plan-body">
             <span class="step-pill">step one</span>
-            <h3><b>first:</b> buy the nellie tablet</h3>
+            <h3>buy the nellie tablet</h3>
             <p class="price-big"><s>&pound;249</s>&pound;199<small>one-time purchase</small></p>
             <ul class="ticks">
               <li><img src="nellie/icons/tick-dark.svg" alt="">Simple, secure and easy-to-use tablet</li>
@@ -107,7 +102,7 @@
               <li><img src="nellie/icons/tick-dark.svg" alt="">Lifetime warranty</li>
               <li><img src="nellie/icons/tick-dark.svg" alt="">6 month buy-back scheme*</li>
             </ul>
-            <a class="btn btn-primary" href="#"><img src="nellie/icons/get-started.svg" alt="">buy tablet</a>
+            <a class="btn btn-primary btn-bright" href="subscribe.html"><img src="nellie/icons/present.svg" alt="">buy tablet</a>
             <div class="perks">
               <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">free tracked UK delivery</span>
               <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">no technical setup required</span>
@@ -121,7 +116,7 @@
           <div class="plan-photo"><img src="nellie/images/product-phone.png" alt="The nellie connect welcome screen on a phone" loading="lazy"></div>
           <div class="plan-body">
             <span class="step-pill">step two</span>
-            <h3><b>then:</b> add nellie<span>connect</span></h3>
+            <h3>add nellie<span>connect</span></h3>
             <p class="price-big">&pound;24.99<small>/month</small></p>
             <ul class="ticks">
               <li><img src="nellie/icons/tick-dark.svg" alt="">Manage your loved one's nellie tablet</li>
@@ -131,7 +126,7 @@
               <li><img src="nellie/icons/tick-dark.svg" alt="">View daily insights of their activity</li>
               <li><img src="nellie/icons/tick-dark.svg" alt="">Invite unlimited family &amp; friends</li>
             </ul>
-            <a class="btn btn-primary" href="#"><img src="nellie/icons/get-started.svg" alt="">get nellie connect</a>
+            <a class="btn btn-primary btn-grape" href="subscribe.html"><img src="nellie/icons/link.svg" alt="">get <span class="nowrap">nellieconnect</span></a>
             <div class="perks">
               <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">cancel any time</span>
               <span class="perk"><img src="nellie/icons/tick-dark.svg" alt="">2 months for free</span>
@@ -153,7 +148,7 @@
           <span class="step-num">1</span>
           <div class="photo"><img src="nellie/images/homepage-step-1.png" alt="The nellie tablet and its box on a kitchen table" loading="lazy"></div>
           <div class="body">
-            <h3>get started with nellie</h3>
+            <h3>get started with <b>nellie</b></h3>
             <p>purchase the nellie tablet and personalise it for your loved one</p>
           </div>
         </div>
@@ -161,13 +156,13 @@
           <span class="step-num">2</span>
           <div class="photo"><img src="nellie/images/homepage-step-2.jpg" alt="A hand writing a new post in the nellie connect app" loading="lazy"></div>
           <div class="body">
-            <h3>set everything up with <span class="nowrap">nellie <b>connect</b></span></h3>
+            <h3>set everything up with <span class="nowrap">nellie<b>connect</b></span></h3>
             <p>download the app, invite family and friends and start sending messages and photos</p>
           </div>
         </div>
         <div class="step-card tilt-card reveal r-drop" data-delay="480">
           <span class="step-num">3</span>
-          <div class="photo"><img src="nellie/images/homepage-step-3-new.jpg" alt="An older lady smiling at her nellie tablet on the sofa" loading="lazy"></div>
+          <div class="photo"><img src="nellie/images/Device-4.png" alt="The nellie tablet showing a family photo memory" loading="lazy"></div>
           <div class="body">
             <h3>stay connected every day</h3>
             <p>everything appears instantly on their nellie tablet, helping them feel connected, comforted and remembered</p>
@@ -240,7 +235,7 @@
         <span class="kicker reveal">designed for families</span>
         <h2 class="reveal">bring your family closer with nellie</h2>
         <p class="reveal" data-delay="100">a gentle, easy-to-use experience designed to help loved ones feel connected every day</p>
-        <a class="btn btn-primary reveal r-pop" data-delay="200" href="#purchase"><img src="nellie/icons/get-started.svg" alt="">buy nellie</a>
+        <a class="btn btn-primary btn-bright reveal r-pop" data-delay="200" href="subscribe.html"><img src="nellie/icons/get-started.svg" alt="">buy nellie</a>
       </div>
     </div>
   </section>
@@ -259,7 +254,7 @@
         <a href="index.html">about</a>
         <a href="pricing.html">prices</a>
         <a href="how-it-works.html">how it works</a>
-        <a href="how-it-works.html">nellie <span>connect</span></a>
+        <a href="how-it-works.html">nellie<span>connect</span></a>
       </div>
       <div class="footer-col">
         <a href="#">help</a>
@@ -268,9 +263,9 @@
         <a href="#">support</a>
       </div>
       <div class="footer-col">
-        <a href="#">nellie <span>radio</span></a>
-        <a href="#">nellie <span>tv</span></a>
-        <a href="#">nellie <span>care</span></a>
+        <a href="#">nellie<span>radio</span></a>
+        <a href="#">nellie<span>tv</span></a>
+        <a href="#">nellie<span>care</span></a>
       </div>
     </div>
   </div>
