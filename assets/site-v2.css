@@ -796,6 +796,14 @@ h1 .w i{display:inline-block;font-style:normal}
    together on the row beneath, both phone and desktop, so the set reads
    as one tidy block at matched heights */
 .store-badges{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:18px}
+/* how-it-works hero: the get-started button and the two app-store badges
+   all sit on one row per the mockup (desktop only, mobile keeps the
+   stack). width:max-content lets the row size to its three items and
+   spill into the clean right space rather than wrapping inside the
+   narrower copy column. */
+@media (min-width:761px){
+  .hiw-hero .store-badges{flex-direction:row;flex-wrap:nowrap;align-items:center;width:max-content}
+}
 .store-badges .btn{flex-shrink:0;height:54px;padding-top:0;padding-bottom:0}
 .store-badges .btn img{height:1.25em;width:auto}
 .badge-row{display:flex;gap:12px;flex-wrap:wrap}
@@ -811,7 +819,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .nc-lockup span{color:var(--accent-bright)}
 
 /* ---------- app feature grid (6 phone screens) ---------- */
-.app-features{background:linear-gradient(#fbeefe,#f7defd);padding:clamp(44px,6vw,76px) 0}
+.app-features{background:linear-gradient(180deg,#e4b8f5,#fef0fe);padding:clamp(44px,6vw,76px) 0}
 .app-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:clamp(18px,2.6vw,30px);margin-top:clamp(26px,3.6vw,44px);
@@ -819,75 +827,64 @@ h1 .w i{display:inline-block;font-style:normal}
 @media (max-width:980px){.app-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.app-grid{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
 /* horizontal lozenge cards per the reference: copy left, phone right */
+/* the phone UI now sits flush against the card's bottom inner edge, so
+   the card aligns its children to the bottom and drops its own bottom
+   padding; the copy keeps its breathing room via its own pad-bottom */
 .app-card{
-  display:flex;align-items:center;gap:14px;
+  display:flex;align-items:flex-end;gap:14px;
   background:#fff;border-radius:clamp(26px,2.6vw,40px);
   box-shadow:var(--card-shadow);
-  padding:14px 14px 14px clamp(16px,1.8vw,24px);
-  text-align:left;
+  padding:14px 14px 0 clamp(16px,1.8vw,24px);
+  text-align:left;overflow:hidden;
   transition:transform .35s ease,box-shadow .35s ease;
 }
 .app-card:hover{transform:translateY(-5px);box-shadow:var(--card-shadow-hover)}
-.app-card .copy{flex:1;min-width:0}
+.app-card .copy{flex:1;min-width:0;padding-bottom:clamp(16px,1.9vw,24px)}
+/* no drop shadow, square bottom (no rounded crop) so the screen meets the
+   card edge cleanly, and nudged slightly left */
 .app-card .screen{
-  width:clamp(86px,7.6vw,104px);height:clamp(124px,11vw,150px);flex-shrink:0;
-  border-radius:14px;overflow:hidden;
-  box-shadow:0 10px 24px rgba(44,10,77,.22);
+  width:clamp(86px,7.6vw,104px);height:clamp(128px,11.4vw,158px);flex-shrink:0;
+  border-radius:14px 14px 0 0;overflow:hidden;box-shadow:none;
+  transform:translateX(-6px);
 }
 .app-card .screen img{width:100%;height:100%;object-fit:cover;object-position:top}
-.app-card h3{font-size:clamp(1.05rem,1.35vw,1.2rem)}
-.app-card p{margin-top:4px;font-weight:600;color:#3e0a6e;font-size:clamp(.92rem,1.05vw,1rem);line-height:1.5}
+/* hold titles to two lines and body to three so the cards stay even */
+.app-card h3{font-size:clamp(1.05rem,1.35vw,1.2rem);min-height:2.4em}
+.app-card p{margin-top:4px;font-weight:600;color:#3e0a6e;font-size:clamp(.92rem,1.05vw,1rem);line-height:1.5;min-height:4.5em}
 
-/* ---------- family connection collage ---------- */
-.family{background:var(--lav-0);padding:clamp(44px,6vw,80px) 0}
-.family-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,3.6vw,48px);align-items:center}
-@media (max-width:900px){.family-grid{grid-template-columns:1fr}}
-/* the story: family everywhere, each sending something that arrives
-   with Nana. Senders orbit the big photo at different depths, gently
-   drifting, each with a badge for what they're sending. */
-/* the photo is inset on all sides so senders can orbit AROUND it (top,
-   right and bottom), not just line up one edge. The padding is the orbit
-   gutter, so an overhanging circle stays inside the column and never gets
-   clipped at the viewport edge. */
-.collage{position:relative;padding:clamp(34px,4vw,56px) clamp(34px,4.4vw,62px) clamp(48px,5vw,72px)}
-.collage .big{
-  border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--card-shadow);
-  height:clamp(360px,36vw,500px);
+/* ---------- family connection (image left, copy right) ----------
+   white section, the photo full-bleeds the left half, three photo
+   bubbles sit centred over the seam, and the copy fills the right half.
+   No icons on the bubbles, just a thin accent stroke. */
+.family{
+  background:#fff;display:grid;grid-template-columns:1fr 1fr;
+  align-items:stretch;position:relative;overflow:hidden;
 }
-.collage .big img{width:100%;height:100%;object-fit:cover}
-.collage .c{
-  position:absolute;z-index:2;aspect-ratio:1;
-  filter:drop-shadow(0 16px 32px rgba(67,16,111,.3));
+.family-media{position:relative;min-height:clamp(420px,46vw,620px)}
+.family-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* the bubbles stack vertically and sit centred on the column seam */
+.family-bubbles{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:3;display:flex;flex-direction:column;gap:clamp(16px,2.2vw,30px);
+  pointer-events:none;
 }
-.collage .c > img{
-  width:100%;height:100%;object-fit:cover;
-  border-radius:50%;border:4px solid #fff;
+.fbub{
+  width:clamp(124px,12.5vw,180px);aspect-ratio:1;border-radius:50%;
+  overflow:hidden;background:#fff;border:2px solid #c866e9;
+  box-shadow:0 18px 36px rgba(67,16,111,.26);
 }
-/* three senders orbiting three sides: top-left corner, right edge,
-   bottom centre, each a different size so it reads as a real crowd.
-   Keyed off explicit s1/s2/s3 classes, NOT :nth-of-type: the .big photo
-   is the first div child, so :nth-of-type(1) skips it and shifts every
-   rule (a sender ended up with no width and sprawled to 460px). */
-.collage .c.s1{width:clamp(104px,9.6vw,138px);top:-1%;left:-1%}
-.collage .c.s2{width:clamp(88px,8.2vw,116px);top:30%;right:-2%}
-.collage .c.s3{width:clamp(118px,10.8vw,158px);bottom:-3%;left:22%}
-/* what each is sending */
-.c-badge{
-  position:absolute;right:-2%;bottom:2%;width:36%;aspect-ratio:1;
-  border-radius:50%;background:var(--icon-grad);
-  border:3px solid #fff;
-  display:flex;align-items:center;justify-content:center;
+.fbub img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.family-copy{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(44px,6vw,84px) clamp(28px,5vw,72px) clamp(44px,6vw,84px) clamp(96px,9vw,150px);
 }
-.c-badge img{width:50%;height:50%}
-/* gentle drift once revealed (the animation owns transform, so it
-   starts after the pop-in's opacity fade) */
-@keyframes senderdrift{from{transform:translateY(-7px)}to{transform:translateY(9px)}}
-.js.ok-motion .collage .c.in{animation:senderdrift var(--dur,6s) ease-in-out infinite alternate;animation-delay:var(--fd,0s)}
 @media (max-width:900px){
-  .collage{padding:clamp(30px,7vw,48px) clamp(30px,7vw,48px) clamp(40px,8vw,56px)}
-  .collage .c.s1{width:clamp(86px,17vw,116px)}
-  .collage .c.s2{width:clamp(74px,14vw,98px)}
-  .collage .c.s3{width:clamp(98px,19vw,128px)}
+  .family{grid-template-columns:1fr}
+  .family-media{min-height:clamp(300px,72vw,440px)}
+  /* on a stacked layout the bubbles straddle the seam in a row */
+  .family-bubbles{top:auto;bottom:0;left:50%;transform:translate(-50%,50%);flex-direction:row}
+  .fbub{width:clamp(92px,22vw,128px)}
+  .family-copy{padding:clamp(64px,13vw,96px) clamp(22px,6vw,40px) clamp(36px,8vw,52px)}
 }
 
 /* ---------- gentle insights (quote bubbles over photo) ---------- */
@@ -919,6 +916,14 @@ h1 .w i{display:inline-block;font-style:normal}
   display:flex;align-items:center;justify-content:center;
 }
 .quote .q-ico img{width:50%;height:50%}
+/* slightly larger badges, and per-insight colours: messages keep the
+   gradient, music #c866e9, calendar #7e37ca, photos #e4b8f5 (light, so
+   its white glyph is recoloured dark to stay legible) */
+.quote .q-ico{width:clamp(36px,2.9vw,48px);height:clamp(36px,2.9vw,48px)}
+.insights .quotes > div:nth-child(2) .q-ico{background:#c866e9}
+.insights .quotes > div:nth-child(3) .q-ico{background:#7e37ca}
+.insights .quotes > div:nth-child(4) .q-ico{background:#e4b8f5}
+.insights .quotes > div:nth-child(4) .q-ico img{filter:brightness(0) saturate(100%) invert(9%) sepia(64%) saturate(3500%) hue-rotate(266deg) brightness(72%) contrast(104%)}
 @media (max-width:560px){
   .quotes{grid-template-columns:1fr 1fr;gap:10px}
   .quote{border-radius:24px;aspect-ratio:auto;padding:14px}
@@ -930,7 +935,9 @@ h1 .w i{display:inline-block;font-style:normal}
 .simple{background:var(--lav-0);padding:clamp(44px,6vw,80px) 0}
 .simple-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,64px);align-items:center}
 @media (max-width:900px){.simple-grid{grid-template-columns:1fr}}
-.simple-grid .cutout{will-change:transform}
+.simple-grid .cutout{will-change:auto}
+/* the tablet no longer floats (animation removed per the v2 brief) */
+.simple .cutout img{animation:none!important;transform:none!important}
 .simple-sub{margin:14px 0 18px;font-weight:600;color:#3e0a6e;font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.55}
 .simple-sub strong{color:var(--ink);font-weight:800}
 

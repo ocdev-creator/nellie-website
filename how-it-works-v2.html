@@ -9,24 +9,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=1">
+<link rel="stylesheet" href="assets/site-v2.css?v=3">
 <style>
-/* page-local tweaks: the hero photo has its pale zone on the RIGHT */
+/* v2 header: the nellie connect banner shot. The devices sit in the left
+   half, the right half is clean pale wall, so the copy lands there with
+   NO tint or overlay. The shot is shown whole (contain) and anchored to
+   the foot, full-bleed across the width; the section fills the space
+   above it with the shot's own pale wall tone so it reads as one image
+   filling the screen. */
+.hiw-hero{background:#f1dff3}
+/* the shot is contained at the foot; a soft top-down wash in the same
+   pale wall tone sits OVER the image's top edge, fading to clear, so the
+   join between the flat fill and the photo is invisible (no hard seam) */
 .hiw-hero .hero-photo{
-  background:url('nellie/images/hiw-hero.jpg') left bottom/min(100%,calc(100svh * 2.22)) auto no-repeat;
-  -webkit-mask-image:linear-gradient(180deg,transparent calc(100% - 44.9vw),#000 calc(100% - 44.9vw + 95px));
-  mask-image:linear-gradient(180deg,transparent calc(100% - 44.9vw),#000 calc(100% - 44.9vw + 95px));
-  transform-origin:left bottom;
+  background-color:#f1dff3;
+  background-image:
+    linear-gradient(180deg,#f1dff3 0%,rgba(241,223,243,0) 100%),
+    url('nellie/images/nellie-connect-header.png');
+  background-repeat:no-repeat,no-repeat;
+  background-position:top,center bottom;
+  background-size:100% 48%,contain;
 }
-.hiw-hero .hero-tint{background:linear-gradient(270deg,rgba(255,240,255,.96),rgba(255,240,255,.85) 34%,rgba(255,240,255,.35) 44%,rgba(255,240,255,0) 52%)}
+.hiw-hero .hero-tint{display:none}
+/* wider copy column so the headline lands on two lines, not three, kept
+   clear of the devices on the left */
+.hiw-hero .hero-copy-right{max-width:clamp(380px,34vw,520px)}
+.hiw-hero #hero-title{max-width:11em}
 @media (max-width:960px){
-  .hiw-hero .hero-photo{
-    background-size:auto 46%;background-position:30% bottom;
-    -webkit-mask-image:linear-gradient(180deg,transparent 52%,#000 57%);
-    mask-image:linear-gradient(180deg,transparent 52%,#000 57%);
-  }
-  /* opaque pale over the whole copy zone, photo revealed only at the foot */
-  .hiw-hero .hero-tint{background:linear-gradient(180deg,rgba(255,240,255,1) 0%,rgba(255,240,255,1) 46%,rgba(255,240,255,.45) 55%,rgba(255,240,255,0) 62%)}
+  .hiw-hero .hero-photo{background-position:top,center bottom}
 }
 /* app-store style badges (brand glyph + label). Swap for the official
    Apple / Google packaged artwork if/when supplied. Height is locked to
@@ -107,28 +117,14 @@
   <!-- ============================ HERO ============================ -->
   <section class="page-hero hiw-hero" id="hero">
     <div class="hero-photo" data-parallax="0.08" aria-hidden="true"></div>
-    <div class="hero-tint" aria-hidden="true"></div>
-    <div class="float-layer" aria-hidden="true">
-      <div class="note note-1" data-depth="30" style="--fd:0s">
-        <div class="note-inner">
-          <span class="emoji">📷</span>
-          <span>Sophie uploaded 3 photos<small>to the family album</small></span>
-        </div>
-      </div>
-      <div class="note note-2" data-depth="16" style="--fd:1.4s">
-        <div class="note-inner">
-          <span class="emoji">🔔</span>
-          <span>Reminder added: bingo<small>Thursday afternoon</small></span>
-        </div>
-      </div>
-    </div>
     <div class="wrap">
       <div class="hero-copy-right">
         <span class="kicker reveal">nellie connect</span>
-        <h1 id="hero-title" style="max-width:9.6em">everything managed in one simple app</h1>
+        <h1 id="hero-title">everything managed in one simple app</h1>
         <p class="hero-sub reveal" style="transition-delay:.4s">family and friends can all share messages, memories and updates, helping your loved one feel connected every day</p>
+        <div class="nc-lockup reveal" style="transition-delay:.45s">nellie<span>connect</span></div>
         <div class="store-badges reveal" style="transition-delay:.5s">
-          <a class="btn btn-primary" href="pricing-v2.html"><img src="nellie/icons/get-started.svg" alt="">get started</a>
+          <a class="btn btn-primary" href="pricing-v2.html#purchase"><img src="nellie/icons/get-started.svg" alt="">get started</a>
           <!-- phones only: the device image sits between the primary CTA
                and the store badges, so the black badges land under it -->
           <div class="hiw-inline-photo" aria-hidden="true"></div>
@@ -208,30 +204,20 @@
 
   <!-- ====================== FAMILY CONNECTION ====================== -->
   <section class="family">
-    <div class="wrap">
-      <div class="family-grid">
-        <div>
-          <span class="kicker reveal">family connection</span>
-          <h2 class="reveal">keeping loved ones present in everyday life</h2>
-          <p class="simple-sub reveal" data-delay="100">family and friends can all share messages, memories and updates, helping your loved one feel connected every day.</p>
-        </div>
-        <div class="collage">
-          <div class="big reveal r-rise"><img src="nellie/images/hiw-family-big.jpg" alt="An older lady enjoying photos on her nellie tablet" loading="lazy"></div>
-          <!-- the family, everywhere, each sending something to Nana -->
-          <div class="c s1 reveal r-pop" data-delay="350" style="--dur:5.6s;--fd:0s">
-            <img src="nellie/images/hiw-circle-1.jpg" alt="A grandmother sending a photo from the city" loading="lazy">
-            <span class="c-badge"><img src="nellie/icons/photos.svg" alt=""></span>
-          </div>
-          <div class="c s2 reveal r-pop" data-delay="550" style="--dur:6.8s;--fd:1.1s">
-            <img src="nellie/images/hiw-circle-2.jpg" alt="A son sending a message from his desk" loading="lazy">
-            <span class="c-badge"><img src="nellie/icons/messages.svg" alt=""></span>
-          </div>
-          <div class="c s3 reveal r-pop" data-delay="750" style="--dur:6.1s;--fd:2s">
-            <img src="nellie/images/hiw-circle-3.jpg" alt="A daughter sharing music from her travels" loading="lazy">
-            <span class="c-badge"><img src="nellie/icons/music.svg" alt=""></span>
-          </div>
-        </div>
-      </div>
+    <!-- image full-bleed on the left half, photo bubbles centred over the
+         seam, copy on the right -->
+    <div class="family-media reveal r-left">
+      <img class="family-photo" src="nellie/images/Female-3.png" alt="An older lady enjoying photos on her nellie tablet" loading="lazy">
+    </div>
+    <div class="family-bubbles" aria-hidden="true">
+      <div class="fbub reveal r-pop" data-delay="250" style="--dur:5.6s;--fd:0s"><img src="nellie/images/hiw-circle-1.jpg" alt="" loading="lazy"></div>
+      <div class="fbub reveal r-pop" data-delay="400" style="--dur:6.8s;--fd:1.1s"><img src="nellie/images/hiw-circle-2.jpg" alt="" loading="lazy"></div>
+      <div class="fbub reveal r-pop" data-delay="550" style="--dur:6.1s;--fd:2s"><img src="nellie/images/hiw-circle-3.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="family-copy">
+      <span class="kicker reveal">family connection</span>
+      <h2 class="reveal">keeping your loved&nbsp;ones<br>present in<br>everyday&nbsp;life</h2>
+      <p class="simple-sub reveal" data-delay="100">family and friends can all share messages, memories and updates, helping your loved one feel connected every day.</p>
     </div>
   </section>
 
@@ -297,7 +283,7 @@
         <a href="index-v2.html">about</a>
         <a href="pricing-v2.html">prices</a>
         <a href="how-it-works-v2.html">how it works</a>
-        <a href="how-it-works-v2.html">nellie <span>connect</span></a>
+        <a href="how-it-works-v2.html">nellie<span>connect</span></a>
       </div>
       <div class="footer-col">
         <a href="#">help</a>
@@ -306,9 +292,9 @@
         <a href="#">support</a>
       </div>
       <div class="footer-col">
-        <a href="#">nellie <span>radio</span></a>
-        <a href="#">nellie <span>tv</span></a>
-        <a href="#">nellie <span>care</span></a>
+        <a href="#">nellie<span>radio</span></a>
+        <a href="#">nellie<span>tv</span></a>
+        <a href="#">nellie<span>care</span></a>
       </div>
     </div>
   </div>
