@@ -495,12 +495,18 @@ h1 .w i{display:inline-block;font-style:normal}
   padding:clamp(56px,7vw,96px) 0;
   min-height:clamp(420px,44vw,620px);
   display:flex;align-items:center;
-  /* horizontal brand gradient base so it never merges with the next
-     section, with the new photo sitting on the right */
-  background:
-    url('../nellie/images/Who-is-nellie-for.jpg') right center/auto 100% no-repeat,
-    linear-gradient(90deg,#e4b8f5,#fef0fe);
+  background:url('../nellie/images/Who-is-nellie-for.jpg') right center/cover no-repeat;
+  background-color:#fef0fe;
   overflow:hidden;
+}
+/* #e4b8f5 wash backs the copy and fades smoothly into the photo, so the
+   colour and the image meet with no hard seam (the photo's own pale left
+   carries the blend through to #fef0fe) */
+.who::before{
+  content:'';position:absolute;inset:0;
+  /* one continuous fade from the #e4b8f5 copy side into the photo, no
+     colour stops, so there is no perceptible seam */
+  background:linear-gradient(90deg,#e4b8f5 8%,rgba(228,184,245,0) 64%);
 }
 @media (max-width:900px){
   /* stacked: copy on a solid wash, the photo as a clear band at the
