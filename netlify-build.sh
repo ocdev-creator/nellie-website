@@ -12,6 +12,7 @@ mkdir -p _site
 
 # the three pages
 cp index.html how-it-works.html pricing.html _site/
+cp index-v2.html how-it-works-v2.html pricing-v2.html _site/
 
 # shared styles + script, and all imagery / icons
 cp -r assets nellie _site/

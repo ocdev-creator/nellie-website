@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nellie | A gentle way to stay close</title>
+<meta name="description" content="Nellie is a simple tablet and family app that helps loved ones stay connected through photos, messages and familiar memories.">
+<link rel="icon" href="nellie/images/nellie-logo-dark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Both families are variable fonts on Google Fonts: requesting the
+     full 400..900 weight axis plus italics (and Nunito Sans's optical
+     size axis) means every weight/style the CSS asks for is the real
+     font, never a synthesised faux-bold or faux-italic. -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site-v2.css?v=1">
+</head>
+<body>
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index-v2.html" class="logo" aria-label="Nellie homepage"><img src="nellie/images/nellie-logo-dark.svg" alt="nellie"></a>
+    <nav class="nav-desktop" id="nav-desktop" aria-label="Primary">
+      <a href="index-v2.html" class="active">about</a>
+      <a href="how-it-works-v2.html">how it works</a>
+      <a href="pricing-v2.html">pricing</a>
+      <a href="pricing-v2.html#faqs">FAQs</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+  <a href="index-v2.html" class="active">about</a>
+  <a href="how-it-works-v2.html">how it works</a>
+  <a href="pricing-v2.html">pricing</a>
+  <a href="pricing-v2.html#faqs">FAQs</a>
+  <a href="#contact">contact</a>
+</nav>
+
+<main>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero" id="hero">
+    <div class="hero-photo" data-parallax="0.1" aria-hidden="true"></div>
+    <div class="hero-tint" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="hero-content">
+        <h1 id="hero-title">a gentle way to stay close</h1>
+        <p class="hero-sub reveal" style="transition-delay:.45s"><strong>nellie</strong> is a simple tablet that helps families stay connected to loved ones through photos, messages and familiar memories.</p>
+        <div class="hero-ctas reveal" style="transition-delay:.6s">
+          <a class="btn btn-primary" href="pricing-v2.html#purchase"><img src="nellie/icons/get-started.svg" alt="">get started</a>
+          <a class="btn btn-deep" href="how-it-works-v2.html"><img src="nellie/icons/how-it-works.svg" alt="">how it works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== FEATURES BAR ====================== -->
+  <section class="features-band" id="about">
+    <div class="wrap features-dock">
+      <div class="features-bar reveal">
+        <div class="fb-pill">with <b>nellie</b> your loved one can...</div>
+        <div class="fb-item">
+          <span class="fb-ico fb-msg"><img src="nellie/icons/messages.svg" alt=""></span>
+          <span>view photos &amp; messages from family &amp; friends</span>
+        </div>
+        <div class="fb-item">
+          <span class="fb-ico fb-photo"><img src="nellie/icons/photos.svg" alt=""></span>
+          <span>watch personal photo slideshows</span>
+        </div>
+        <div class="fb-item">
+          <span class="fb-ico fb-music"><img src="nellie/icons/music.svg" alt=""></span>
+          <span>listen to familiar music and favourite radio stations</span>
+        </div>
+        <div class="fb-item">
+          <span class="fb-ico fb-cal"><img src="nellie/icons/calendar-events.svg" alt=""></span>
+          <span>see gentle reminders of time, date &amp; visits</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ WHY ============================ -->
+  <section class="why">
+    <div class="wrap">
+      <div class="why-grid">
+        <div class="why-circle-wrap reveal r-left">
+          <div class="why-circle">
+            <img src="nellie/images/male-before-nellie.jpg" alt="An older man sitting alone by the window" loading="lazy">
+          </div>
+        </div>
+        <div class="why-copy">
+          <span class="kicker reveal">why nellie?</span>
+          <h2 class="reveal">cognitive decline and ageing can often lead to becoming less connected</h2>
+          <div class="why-list">
+            <div class="why-item reveal r-right" data-delay="0">
+              <span class="ico"><img src="nellie/icons/living-alone.svg" alt=""></span>
+              <p>over <span class="stat" data-count="8" data-suffix=" million">8 million</span> UK residents live alone or in care homes</p>
+            </div>
+            <div class="why-item reveal r-right" data-delay="120">
+              <span class="ico"><img src="nellie/icons/confused.svg" alt=""></span>
+              <p>modern technology becomes increasingly confusing</p>
+            </div>
+            <div class="why-item reveal r-right" data-delay="240">
+              <span class="ico"><img src="nellie/icons/connected.svg" alt=""></span>
+              <p>staying connected becomes harder</p>
+            </div>
+            <div class="why-item reveal r-right" data-delay="360">
+              <span class="ico"><img src="nellie/icons/lonely.svg" alt=""></span>
+              <p>loneliness can build quietly, day by day</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-pill reveal r-pop">nellie was designed to make connection simple again</div>
+    </div>
+  </section>
+
+  <!-- ============================ WHO ============================ -->
+  <section class="who">
+    <div class="wrap">
+      <div class="who-copy">
+        <span class="kicker reveal">who is nellie for?</span>
+        <h2 class="reveal">for families who want to stay connected</h2>
+        <p class="reveal" data-delay="100"><strong>Whether your loved one lives:</strong></p>
+        <ul class="who-list">
+          <li class="reveal r-left" data-delay="150">in their own home</li>
+          <li class="reveal r-left" data-delay="250">in assisted accommodation</li>
+          <li class="reveal r-left" data-delay="350">or in a care home</li>
+        </ul>
+        <p class="reveal" data-delay="400"><strong>nellie</strong> helps you stay present in their everyday life, through photos, messages, music and familiar memories.</p>
+        <div class="chips">
+          <span class="chip chip-1 reveal r-pop" data-delay="450"><img src="nellie/icons/tick-light.svg" alt="">simple</span>
+          <span class="chip chip-2 reveal r-pop" data-delay="550"><img src="nellie/icons/tick-light.svg" alt="">familiar</span>
+          <span class="chip chip-3 reveal r-pop" data-delay="650"><img src="nellie/icons/tick-light.svg" alt="">comforting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== KEY FEATURES, FULL-BLEED SLIDER ==================== -->
+  <section class="features-slider" id="how-it-works">
+    <div class="wrap t-center">
+      <span class="kicker reveal">key features</span>
+      <h2 class="reveal">designed for everyday comfort</h2>
+    </div>
+    <div class="slider reveal r-rise">
+      <div class="slides" id="slides" aria-roledescription="carousel" aria-label="Key features">
+        <figure class="slide cap-left on" data-i="0">
+          <img src="nellie/images/carousel-see-messages.jpg" alt="An older lady reading family messages on her nellie tablet" loading="lazy">
+          <figcaption class="slide-cap">
+            <span class="cap-ico"><img src="nellie/icons/messages.svg" alt=""></span>
+            see photos and messages from family and friends
+          </figcaption>
+        </figure>
+        <figure class="slide cap-right" data-i="1">
+          <img src="nellie/images/carousel-photo-slideshows.jpg" alt="The nellie tablet showing a photo slideshow of a wedding day" loading="lazy">
+          <figcaption class="slide-cap">
+            <span class="cap-ico"><img src="nellie/icons/photos.svg" alt=""></span>
+            watch photo slideshows of treasured memories
+          </figcaption>
+        </figure>
+        <figure class="slide cap-left" data-i="2">
+          <img src="nellie/images/carousel-radio.jpg" alt="The nellie tablet playing familiar radio" loading="lazy">
+          <figcaption class="slide-cap">
+            <span class="cap-ico"><img src="nellie/icons/music.svg" alt=""></span>
+            listen to familiar music and favourite radio stations
+          </figcaption>
+        </figure>
+        <figure class="slide cap-right" data-i="3">
+          <img src="nellie/images/carousel-reminders.jpg" alt="A daughter hugging her mother in a care home" loading="lazy">
+          <figcaption class="slide-cap">
+            <span class="cap-ico"><img src="nellie/icons/calendar-events.svg" alt=""></span>
+            see gentle reminders of time, date and visits
+          </figcaption>
+        </figure>
+        <figure class="slide cap-right" data-i="4">
+          <img src="nellie/images/carousel-stories.jpg" alt="An older man reading local stories on his nellie tablet in the garden" loading="lazy">
+          <figcaption class="slide-cap">
+            <span class="cap-ico"><img src="nellie/icons/messages.svg" alt=""></span>
+            read stories and news from round our way
+          </figcaption>
+        </figure>
+        <figure class="slide cap-left" data-i="5">
+          <img src="nellie/images/carousel-tv-guide.jpg" alt="The nellie tablet showing a simple TV guide" loading="lazy">
+          <figcaption class="slide-cap">
+            <span class="cap-ico"><img src="nellie/icons/how-it-works.svg" alt=""></span>
+            a simple TV guide for the programmes they love
+          </figcaption>
+        </figure>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn prev" id="slider-prev" aria-label="Previous feature"></button>
+        <div class="slider-dots" id="slider-dots"></div>
+        <button class="slider-btn next" id="slider-next" aria-label="Next feature"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ HELPS ============================ -->
+  <section class="helps">
+    <div class="wrap">
+      <div class="t-center"><span class="kicker reveal">how nellie helps</span></div>
+      <!-- each photo pairs with its own list: alone -> for your loved
+           one, family -> for you & your family. On phones the column
+           stack keeps the photo directly above the list it belongs to,
+           rather than both photos then both lists. -->
+      <div class="helps-cols">
+        <div class="helps-col">
+          <div class="ph reveal r-left"><img src="nellie/images/Norma_2.png" alt="An older lady enjoying her nellie tablet in her armchair" loading="lazy"></div>
+          <h3 class="reveal">for your loved one</h3>
+          <ul class="ticks reveal" data-delay="80">
+            <li><img src="nellie/icons/tick-dark.svg" alt="">less loneliness</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">more connection</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">greater sense of calm</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">comfort and familiarity</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">ways to reflect on past memories</li>
+          </ul>
+        </div>
+        <div class="helps-col">
+          <div class="ph reveal r-right" data-delay="120"><img src="nellie/images/Grandma-Grandchildren.png" alt="A grandmother laughing with her grandchildren around the nellie tablet" loading="lazy"></div>
+          <h3 class="reveal">for you &amp; your family</h3>
+          <ul class="ticks reveal" data-delay="80">
+            <li><img src="nellie/icons/tick-dark.svg" alt="">less anxiety</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">reduced day-to-day worry</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">closes the distance between modern families</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">reassurance that your loved one feels remembered</li>
+            <li><img src="nellie/icons/tick-dark.svg" alt="">comfort in knowing they are engaging with nellie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ STEPS ============================ -->
+  <section class="steps" id="pricing">
+    <div class="wrap">
+      <div class="t-center"><span class="kicker reveal">setting up nellie</span></div>
+      <h2 class="reveal" style="text-align:center">get connected in 3 simple steps</h2>
+      <div class="steps-grid">
+        <div class="step-card tilt-card reveal r-drop" data-delay="0">
+          <span class="step-num">1</span>
+          <div class="photo"><img src="nellie/images/homepage-step-1.png" alt="The nellie tablet and its box on a kitchen table" loading="lazy"></div>
+          <div class="body">
+            <h3>get started with <b>nellie</b></h3>
+            <p>purchase the nellie tablet and personalise it for your loved one</p>
+          </div>
+        </div>
+        <div class="step-card tilt-card reveal r-drop" data-delay="240">
+          <span class="step-num">2</span>
+          <div class="photo"><img src="nellie/images/homepage-step-2.jpg" alt="A hand writing a new post in the nellie connect app" loading="lazy"></div>
+          <div class="body">
+            <h3>set everything up with <span class="nowrap">nellie<b>connect</b></span></h3>
+            <p>download the app, invite family and friends and start sending messages and photos</p>
+          </div>
+        </div>
+        <div class="step-card tilt-card reveal r-drop" data-delay="480">
+          <span class="step-num">3</span>
+          <div class="photo"><img src="nellie/images/Homepage-Step3.png" alt="An older lady smiling at her nellie tablet on the sofa" loading="lazy"></div>
+          <div class="body">
+            <h3>stay connected every day</h3>
+            <p>everything appears instantly on their nellie tablet, helping them feel connected, comforted and remembered</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA ============================ -->
+  <section class="cta" id="FAQs">
+    <div class="wrap">
+      <span class="kicker reveal">nellie</span>
+      <h2 class="reveal">built to bring comfort, connection and <span class="nowrap">peace of mind</span> to loved ones and families</h2>
+      <a class="btn btn-soft reveal r-pop" data-delay="200" href="pricing-v2.html"><img src="nellie/icons/get-started.svg" alt="">get started</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="lg" src="nellie/images/nellie-logo-dark.svg" alt="nellie">
+        <span class="powered"><img src="nellie/icons/powered-by-lozenge.svg" alt="powered by nellie connect"></span>
+      </div>
+      <div class="footer-col">
+        <a href="index-v2.html" class="active">about</a>
+        <a href="pricing-v2.html">prices</a>
+        <a href="how-it-works-v2.html">how it works</a>
+        <a href="how-it-works-v2.html">nellie<span>connect</span></a>
+      </div>
+      <div class="footer-col">
+        <a href="#">help</a>
+        <a href="#">demo</a>
+        <a href="#">delivery</a>
+        <a href="#">support</a>
+      </div>
+      <div class="footer-col">
+        <a href="#">nellie<span>radio</span></a>
+        <a href="#">nellie<span>tv</span></a>
+        <a href="#">nellie<span>care</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=57"></script>
+</body>
+</html>
