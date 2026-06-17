@@ -271,7 +271,7 @@ main section{overflow-x:clip}
      product colours. */
   /* lifted a touch off the floor: a little more space below the scene,
      a slight extra crop at the top */
-  background:url('../nellie/images/hero-v4.jpg') center calc(100% - 34px)/100% auto no-repeat;
+  background:url('../nellie/images/hero-v4.jpg') center calc(100% - 64px)/100% auto no-repeat;
   /* short fade right at the photo's top edge only: blends the wall
      into the wash but stays clear of the devices below */
   -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px);
