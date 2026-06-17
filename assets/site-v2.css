@@ -870,7 +870,11 @@ h1 .w i{display:inline-block;font-style:normal}
   gap:clamp(18px,2.6vw,30px);margin-top:clamp(26px,3.6vw,44px);
 }
 @media (max-width:980px){.app-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.app-grid{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
+@media (max-width:600px){
+  .app-grid{grid-template-columns:1fr;max-width:360px;margin-left:auto;margin-right:auto}
+  /* single column: drop the row-alignment min-heights so cards aren't padded out */
+  .app-card h3,.app-card p{min-height:0}
+}
 /* horizontal lozenge cards per the reference: copy left, phone right */
 /* the phone UI now sits flush against the card's bottom inner edge, so
    the card aligns its children to the bottom and drops its own bottom
@@ -925,11 +929,16 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 @media (max-width:900px){
   .family{grid-template-columns:1fr}
-  .family-media{min-height:clamp(300px,72vw,440px)}
-  /* on a stacked layout the bubbles straddle the seam in a row */
-  .family-bubbles{top:auto;bottom:0;left:50%;transform:translate(-50%,50%);flex-direction:row}
-  .fbub{width:clamp(92px,22vw,128px)}
-  .family-copy{padding:clamp(64px,13vw,96px) clamp(22px,6vw,40px) clamp(36px,8vw,52px)}
+  .family-media{min-height:clamp(280px,66vw,420px)}
+  /* stacked: the bubbles become an in-flow, centred row tucked under the
+     photo (source order is media -> bubbles -> copy) rather than floating
+     across the section seam, which read as misaligned on phones */
+  .family-bubbles{position:static;transform:none;flex-direction:row;justify-content:center;gap:clamp(14px,4vw,24px);margin:-42px auto clamp(10px,3vw,18px)}
+  .fbub{width:clamp(84px,21vw,112px)}
+  .family-copy{padding:0 clamp(22px,6vw,40px) clamp(36px,8vw,52px)}
+  /* let the heading wrap naturally on phones (the desktop line breaks
+     leave an awkward stranded middle line) */
+  .d-br{display:none}
 }
 
 /* ---------- gentle insights (quote bubbles over photo) ---------- */
