@@ -18,19 +18,21 @@
    above it with the shot's own pale wall tone so it reads as one image
    filling the screen. */
 .hiw-hero{background:#f1dff3}
-/* the shot sits bottom-LEFT so the devices read large on the left and the
-   copy gets clean pale wall on the right (no heavy fade washing the image,
-   no text overlapping the devices). The image's own pale top blends into
-   the flat fill, so only a thin top blend is needed. The right edge / towel
-   may crop, which is fine. */
+/* the shot is sized to the full WIDTH and anchored to the foot, so the
+   composition is identical at every width: devices on the left, clean pale
+   wall on the right where the copy sits (no overlap, no zoom). Because it
+   spans the full width there is no right-edge seam; the only join is the
+   image's top edge, which is the same pale wall tone as the section, so a
+   short top fade blends it with no hard line and without washing the
+   devices (they sit lower down). */
 .hiw-hero .hero-photo{
   background-color:#f1dff3;
   background-image:
-    linear-gradient(180deg,#f1dff3 0%,rgba(241,223,243,0) 18%),
+    linear-gradient(180deg, #f1dff3 0%, #f1dff3 8%, rgba(241,223,243,0) 38%),
     url('nellie/images/nellie-connect-header.png');
   background-repeat:no-repeat,no-repeat;
-  background-position:top,left bottom;
-  background-size:100% 22%,auto 78%;
+  background-position:top, left bottom;
+  background-size:100% 42%, 100% auto;
 }
 .hiw-hero .hero-tint{display:none}
 /* copy pinned to the clear right, kept narrow so it never runs into the
@@ -38,7 +40,7 @@
 .hiw-hero .hero-copy-right{max-width:clamp(340px,30vw,460px)}
 .hiw-hero #hero-title{max-width:11em}
 @media (max-width:960px){
-  .hiw-hero .hero-photo{background-position:top,left bottom}
+  .hiw-hero .hero-photo{background-position:top, left bottom}
 }
 /* app-store style badges (brand glyph + label). Swap for the official
    Apple / Google packaged artwork if/when supplied. Height is locked to
