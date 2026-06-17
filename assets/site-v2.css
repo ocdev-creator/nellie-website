@@ -682,9 +682,10 @@ h1 .w i{display:inline-block;font-style:normal}
   display:flex;gap:11px;align-items:flex-start;
   padding:6px 0;font-weight:600;font-size:clamp(1rem,1.25vw,1.15rem);line-height:1.4;
 }
-/* tick mark tinted to accent 2 (#c866e9) */
-.ticks img{width:22px;height:22px;margin-top:3px;flex-shrink:0;
-  filter:brightness(0) saturate(100%) invert(54%) sepia(68%) saturate(2009%) hue-rotate(247deg) brightness(98%) contrast(89%)}
+/* tick badge: tick-pink.svg is already a #c866e9 circle with a white
+   check, so no recolour filter (a filter would flatten the white tick
+   into the pink fill and it would read as a plain dot) */
+.ticks img{width:22px;height:22px;margin-top:3px;flex-shrink:0}
 @media (max-width:860px){
   .helps-cols{grid-template-columns:1fr;row-gap:clamp(36px,8vw,48px);max-width:520px;margin-left:auto;margin-right:auto}
 }
