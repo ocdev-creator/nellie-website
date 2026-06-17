@@ -101,12 +101,33 @@
         <div class="su-order" id="su-order-ret"></div>
       </div>
 
-      <!-- safety-net / pending -->
+      <!-- account created, access code delivered by email. This is the COMMON
+           path: the Stripe webhook usually finalises the account a moment
+           before this page loads, so the code is emailed rather than shown
+           here. It's a full success state, not a fallback. -->
       <div id="su-pending" class="hide">
         <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
-        <h1>payment received, thank you!</h1>
-        <p class="su-lede">Your account is being set up. If you don’t see your access code here, check your email shortly, we’ll send your code and next steps. Your loved one’s tablet is on its way.</p>
-        <p class="su-foot">Need a hand? <a href="index.html#contact">Get in touch</a>.</p>
+        <h1>you're all set!</h1>
+        <p class="su-lede" id="su-pending-lede">Thank you. We’ve emailed your 6-digit access code and next steps. Your loved one’s tablet is on its way, pre-configured and ready, just turn it on.</p>
+
+        <ul class="su-steps">
+          <li><span class="n">1</span><span>Download the <strong>nellie connect</strong> app on your phone.</span></li>
+          <li><span class="n">2</span><span>Open the email from us, enter your 6-digit access code and create your password.</span></li>
+          <li><span class="n">3</span><span>Add photos, messages and reminders, they appear on the tablet automatically.</span></li>
+        </ul>
+
+        <div class="stores">
+          <a class="badge-dark" href="#" aria-label="Download on the App Store">
+            <svg class="g" viewBox="0 0 384 512" aria-hidden="true"><path fill="#fff" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            <span class="t"><small>Download on the</small><b>App Store</b></span>
+          </a>
+          <a class="badge-dark" href="#" aria-label="Get it on Google Play">
+            <svg class="g" viewBox="0 0 30 32" aria-hidden="true"><polygon points="4,3 18.5,9.5 4,16" fill="#00d2ff"/><polygon points="4,16 18.5,22.5 4,29" fill="#00e676"/><polygon points="4,16 18.5,9.5 27,16" fill="#ffce00"/><polygon points="4,16 27,16 18.5,22.5" fill="#ff424b"/></svg>
+            <span class="t"><small>GET IT ON</small><b>Google Play</b></span>
+          </a>
+        </div>
+
+        <div class="su-order" id="su-order-pending"></div>
       </div>
 
     </div>
@@ -144,6 +165,18 @@
       'Estimated delivery: <strong>3–5 working days</strong> with free tracked UK delivery.';
     show('su-returning');
   }
+  // account created, code delivered by email (the common path)
+  function renderEmailed() {
+    var who = esc(ctx.known_as || 'your loved one');
+    var toEmail = ctx.email ? ' to <strong>' + esc(ctx.email) + '</strong>' : '';
+    document.getElementById('su-pending-lede').innerHTML =
+      'Thank you. We’ve emailed your 6-digit access code and next steps' + toEmail +
+      '. ' + who + '’s nellie tablet is on its way, pre-configured and ready, just turn it on.';
+    document.getElementById('su-order-pending').innerHTML =
+      '<strong>Order:</strong> Nellie tablet + nellie connect.<br>' +
+      'Estimated delivery: <strong>3–5 working days</strong> with free tracked UK delivery.';
+    show('su-pending');
+  }
 
   // already finalised (forever_free path, or a prior render this session)?
   var stashed = null;
@@ -152,21 +185,14 @@
   function decide(result) {
     // returning customers get no access code
     if (ctx.existing_person_id) { renderReturning(); return; }
+    // race won: we have the code, show it on screen (it's also emailed)
     if (result && result.access_code) { renderNew(result); return; }
-    // finalised but no code surfaced to us (e.g. webhook won the race and
-    // Step B returned "already completed" without re-issuing the code)
-    show('su-pending');
+    // common path: account created, code delivered by email
+    renderEmailed();
   }
 
   if (stashed && (stashed.access_code || stashed.success)) {
     decide(stashed);
-    return;
-  }
-
-  if (!deviceToken || !ctx.setup_id) {
-    // no local context (different device/browser, or cleared storage):
-    // the webhook safety net will have created the account server-side
-    show(ctx.existing_person_id ? 'su-returning' : 'su-pending');
     return;
   }
 
@@ -175,7 +201,11 @@
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
     }).then(function (r) { return r.json().catch(function () { return {}; }); });
   }
-  function pending() { show(ctx.existing_person_id ? 'su-returning' : 'su-pending'); }
+  function pending() { if (ctx.existing_person_id) { renderReturning(); } else { renderEmailed(); } }
+
+  // no local context (different device/browser, or cleared storage): the
+  // webhook safety net will have created the account + emailed the code
+  if (!deviceToken || !ctx.setup_id) { pending(); return; }
 
   // Try to finalise (Step B). Step B is NOT idempotent: if the webhook beat
   // us to it, it returns "already completed" with no code, so we then read
