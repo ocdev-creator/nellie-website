@@ -170,18 +170,34 @@
     return;
   }
 
-  // finalise (Step B). Idempotent: if the webhook beat us, this is a no-op.
-  fetch(FN + 'setup-complete', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ device_token: deviceToken, setup_id: ctx.setup_id }),
-  }).then(function (r) { return r.json().catch(function () { return {}; }); })
+  function postJSON(name, payload) {
+    return fetch(FN + name, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+  function pending() { show(ctx.existing_person_id ? 'su-returning' : 'su-pending'); }
+
+  // Try to finalise (Step B). Step B is NOT idempotent: if the webhook beat
+  // us to it, it returns "already completed" with no code, so we then read
+  // the stored result via con_setup_result to get the code anyway.
+  postJSON('setup-complete', { device_token: deviceToken, setup_id: ctx.setup_id })
     .then(function (b) {
       if (b && b.success && b.access_code) {
         localStorage.setItem('nellie_result', JSON.stringify(b));
+        decide(b);
+        return;
       }
-      decide(b || {});
+      return postJSON('setup-result', { device_token: deviceToken, setup_id: ctx.setup_id })
+        .then(function (res) {
+          if (res && res.completed && res.access_code) {
+            localStorage.setItem('nellie_result', JSON.stringify(res));
+            decide(res);
+          } else {
+            pending();
+          }
+        });
     })
-    .catch(function () { show(ctx.existing_person_id ? 'su-returning' : 'su-pending'); });
+    .catch(pending);
 })();
 </script>
 </body>

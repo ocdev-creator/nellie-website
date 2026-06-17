@@ -11,16 +11,23 @@
 // Node 18+ on Netlify has a global fetch, so there is no dependency here.
 
 const API_BASE = process.env.NELLIE_API_BASE || 'https://dev.nellieconnect.com';
+// dev.nellieconnect.com is behind a login gate (dev_gate.php). Server-to-
+// server callers bypass it with this shared-secret header, set in a
+// Netlify env var and sent ONLY from these functions, never the browser.
+// Harmless once we move to a production ungated host (it just gets ignored).
+const DEV_TOKEN = process.env.NELLIE_DEV_TOKEN || '';
 
 // POST a JSON body to a Nellie API path and return a normalised result.
 // Never throws on a non-2xx: it returns { ok, status, data } so each
 // proxy can decide what to forward to the browser.
 async function nelliePost(path, payload) {
   let res;
+  const headers = { 'Content-Type': 'application/json' };
+  if (DEV_TOKEN) headers['X-Dev-Access'] = DEV_TOKEN;
   try {
     res = await fetch(API_BASE + path, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify(payload),
     });
   } catch (e) {

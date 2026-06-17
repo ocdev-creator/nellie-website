@@ -133,23 +133,22 @@
         <h2>your details</h2>
         <p class="sub">We'll set the account up in your name. You manage everything from the nellie connect app on your phone.</p>
 
+        <!-- "Already have a nellie account?" gate (Journey B) is HIDDEN for
+             launch: the backend doesn't yet link a new resident to an
+             existing person (existing_person_id is handled by no API), so a
+             returning customer would get a DUPLICATE account. Re-enable this
+             block + the gate logic in subscribe.js once Step B supports it.
         <div class="gate" id="gate">
           <span class="gate-q">Already have a nellie account? </span>
           <button type="button" class="link" id="gate-toggle">Sign in</button>
           <div class="gate-form">
-            <div class="field">
-              <label for="g-email">Account email</label>
-              <input type="email" id="g-email" autocomplete="email">
-            </div>
-            <div class="field">
-              <label for="g-pass">Password</label>
-              <input type="password" id="g-pass" autocomplete="current-password">
-              <div class="err" id="g-err" style="display:none"></div>
-            </div>
+            <div class="field"><label for="g-email">Account email</label><input type="email" id="g-email" autocomplete="email"></div>
+            <div class="field"><label for="g-pass">Password</label><input type="password" id="g-pass" autocomplete="current-password"><div class="err" id="g-err" style="display:none"></div></div>
             <button type="button" class="btn btn-primary btn-grape" id="gate-signin"><img src="nellie/icons/get-started.svg" alt="">sign in</button>
           </div>
           <div class="gate-ok" id="gate-ok"></div>
         </div>
+        -->
 
         <div class="field" data-req>
           <label for="first_name">Your first name</label>

@@ -57,6 +57,9 @@ STRIPE_WEBHOOK_SECRET  = whsec_…            (from the Stripe webhook endpoint)
 PRICE_TABLET           = price_…            (one-off tablet price ID)
 PRICE_SUBSCRIPTION     = price_…            (monthly subscription price ID)
 NELLIE_API_BASE        = https://dev.nellieconnect.com   (prod URL TBC)
+NELLIE_DEV_TOKEN       = <token from dev_gate .htaccess>  (dev only; sent as the
+                          X-Dev-Access header so the functions bypass the dev login
+                          gate; never exposed to the browser)
 SITE_URL               = https://nellieconnect.netlify.app  (then https://nellieconnect.com)
 ```
 
@@ -65,18 +68,32 @@ are Nellie's, not Stripe coupons), and add a `checkout.session.completed` webhoo
 pointing at `/.netlify/functions/stripe-webhook`. Start in **test mode**
 (card `4242 4242 4242 4242`).
 
-### Backend items still to confirm before go-live
+### Backend behaviour the build is matched to (verified against backend code)
 
-- **Step B returns the access code idempotently** on a repeat call. The success
-  page and the webhook race to finalise; if the webhook wins, Step B currently
-  returns "already completed" with no code, leaving the success page unable to show
-  it (it falls back to a "check your email" message).
-- **`forever_free` delivery + order**: these skip Stripe, so no address is captured
-  and no `checkout.session.completed` fires, does forever_free include a tablet,
-  and if so, how is the address collected and the order created?
-- **`existing_person_id`** exact field name in Step A (Journey B).
-- Final prices + the two Stripe **Price IDs**, the production API base URL, and the
-  Stripe **test keys** loaded so the chain can be run end-to-end in test mode.
+- **Dev gate bypass:** `dev.nellieconnect.com` is gated; the proxies send
+  `X-Dev-Access: $NELLIE_DEV_TOKEN` to get through (server-side only).
+- **`step_4` must carry** `platform` (`stripe`/`gift`, or it defaults to `apple`),
+  `voucher_code` + `voucher_type` as well as `gift_code` (the forever_free status is
+  set from the voucher_* pair), and `payment_confirmed: true` (Step B reads it from
+  the saved data and only ever runs after payment). `step_2` sends both `known_as`
+  and `known_to_you_as`.
+- **Step B is not idempotent:** a repeat call returns "already completed" with no
+  code, so `/success` falls back to `con_setup_result.php` to fetch the code (the
+  webhook + success page both finalise). `con_setup_result.php` is written but
+  **awaiting deploy** by the backend.
+- **Journey B ("already have Nellie?") is hidden:** the backend doesn't link a new
+  resident to an existing person yet, so the gate is commented out (new-customers
+  only) until Step B supports `existing_person_id`.
+- **`forever_free` = subscription-only, no tablet:** it correctly skips Stripe, so
+  no address/order is needed. `device_bonus` ships a reduced-price tablet via Stripe
+  (a separate Price ID), so address + order are handled the normal way (only needed
+  once those codes are issued).
+
+### Still needed before go-live
+
+- The **`NELLIE_DEV_TOKEN`** value set in Netlify (from the dev_gate `.htaccess`).
+- `con_setup_result.php` **deployed**.
+- Swap Stripe **test → live** keys, set `SITE_URL` to the live domain, point DNS.
 
 ## Deploy
 

@@ -106,7 +106,11 @@
       step_2: {
         resident_name: val('resident_name'),
         relationship: +val('relationship'),
+        // Step B uses known_as for the greeting/welcome story and
+        // known_to_you_as for the account link, so send BOTH (same value)
+        // or the greeting falls back to the resident's first name.
         known_to_you_as: val('known_to_you_as'),
+        known_as: val('known_to_you_as'),
         living_in: val('living_in'),
         resident_postcode: val('resident_postcode').toUpperCase(),
         care_home_name: ($('care-home-field').hasAttribute('hidden') ? '' : val('care_home_name')),
@@ -114,11 +118,19 @@
       },
       step_4: {
         gift_code: state.giftCode || '',
+        // Step B marks the code used from gift_code, but sets the
+        // forever_free STATUS from voucher_code + voucher_type. Send all
+        // three or a forever_free account is created as a normal PAID one.
+        voucher_code: state.giftCode || '',
+        voucher_type: state.codeType || '',
         bonus_months: state.bonusMonths || 0,
-        // forever_free is created directly (platform 'gift'); everyone else
-        // pays via Stripe. payment_confirmed stays false on this pre-payment
-        // save - Step B / the webhook is the real payment gate.
-        payment_confirmed: state.codeType === 'forever_free',
+        // Step B reads payment_confirmed from the SAVED data and only marks
+        // the subscription active when true. Step B only ever runs AFTER
+        // payment (success page / webhook), so storing true is safe and
+        // correct: if the customer abandons at Stripe, Step B never runs.
+        payment_confirmed: true,
+        // REQUIRED - the backend defaults platform to "apple" if omitted.
+        // 'gift' for the forever_free bypass, 'stripe' for everyone paying.
         platform: state.codeType === 'forever_free' ? 'gift' : 'stripe',
       },
     };
@@ -199,6 +211,7 @@
   // ---------- the "already have nellie?" gate ----------
   function setupGate() {
     var gate = $('gate');
+    if (!gate) return;   // gate hidden for launch (Journey B not in backend yet)
     $('gate-toggle').addEventListener('click', function () { gate.classList.toggle('open'); });
     $('gate-signin').addEventListener('click', function () {
       var email = val('g-email'), pass = val('g-pass');
