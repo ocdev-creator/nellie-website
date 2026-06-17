@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Nellie</title>
+<meta name="description" content="Get in touch with the nellie team, we're happy to help with anything about nellie or nellie connect.">
+<link rel="icon" href="nellie/images/nellie-logo-dark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site-v2.css?v=5">
+<style>
+.ct-main{min-height:100vh;background:linear-gradient(180deg,#e4b8f5,#fef0fe);padding:calc(var(--header-h,76px) + clamp(20px,3vw,42px)) 0 clamp(60px,8vw,96px)}
+.ct-wrap{width:min(620px,92vw);margin:0 auto}
+.ct-head{text-align:center;margin-bottom:clamp(18px,3vw,28px)}
+.ct-head .kicker{justify-content:center}
+.ct-head h1{font-size:clamp(1.9rem,3.2vw,2.6rem)}
+.ct-head p{color:#5c1a8c;font-weight:600;font-size:1.02rem;line-height:1.55;max-width:32em;margin:10px auto 0}
+.ct-card{background:#fff;border-radius:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(67,16,111,.16);padding:clamp(24px,3.6vw,40px)}
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:.92rem;margin-bottom:6px}
+.field input,.field textarea{
+  width:100%;font-family:var(--font-body);font-size:1rem;color:var(--ink);
+  background:#fcf7ff;border:1.5px solid #ead9f7;border-radius:12px;padding:12px 14px;
+  transition:border-color .2s ease,box-shadow .2s ease;resize:vertical;
+}
+.field textarea{min-height:130px;line-height:1.5}
+.field input:focus,.field textarea:focus{outline:none;border-color:#c866e9;box-shadow:0 0 0 3px rgba(200,102,233,.18);background:#fff}
+.field input.bad,.field textarea.bad{border-color:#e0608a;background:#fff5f8}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:460px){.row2{grid-template-columns:1fr}}
+.ct-hp{position:absolute;left:-9999px}
+.ct-submit{margin-top:6px}
+.ct-err{color:#c43c69;font-weight:700;font-size:.86rem;margin-top:10px;display:none}
+.ct-or{text-align:center;color:#6b3f93;font-weight:600;font-size:.9rem;margin-top:18px}
+.ct-or a{color:#7e37ca;font-weight:800}
+.spin{display:inline-block;width:1em;height:1em;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:ctspin .7s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes ctspin{to{transform:rotate(360deg)}}
+/* thank-you state */
+.ct-thanks{display:none;text-align:center}
+.ct-thanks .su-tick{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#c866e9,#7e37ca);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 16px 34px rgba(126,55,202,.4)}
+.ct-thanks .su-tick svg{width:36px;height:36px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.ct-thanks h2{font-size:clamp(1.4rem,2.2vw,1.8rem)}
+.ct-thanks p{color:#5c1a8c;font-weight:600;line-height:1.55;margin-top:8px}
+.ct-card.sent .ct-form{display:none}
+.ct-card.sent .ct-thanks{display:block}
+</style>
+</head>
+<body class="app-booted">
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Nellie homepage"><img src="nellie/images/nellie-logo-dark.svg" alt="nellie"></a>
+    <nav class="nav-desktop" id="nav-desktop" aria-label="Primary">
+      <a href="index.html">about</a>
+      <a href="how-it-works.html">how it works</a>
+      <a href="pricing.html">pricing</a>
+      <a href="pricing.html#faqs">FAQs</a>
+      <a href="contact.html" class="active">contact</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+  <a href="index.html">about</a>
+  <a href="how-it-works.html">how it works</a>
+  <a href="pricing.html">pricing</a>
+  <a href="pricing.html#faqs">FAQs</a>
+  <a href="contact.html">contact</a>
+</nav>
+
+<main class="ct-main">
+  <div class="ct-wrap">
+    <div class="ct-head">
+      <span class="kicker reveal">contact</span>
+      <h1 class="reveal">we’re here to help</h1>
+      <p class="reveal" data-delay="100">Questions about nellie, an order or your <span class="nowrap">nellie<b style="color:var(--accent-bright)">connect</b></span> account? Send us a message and we’ll get back to you, usually within one working day.</p>
+    </div>
+
+    <div class="ct-card reveal" id="ct-card" data-delay="150">
+      <!-- Netlify form: detected at deploy, submissions appear in the Netlify
+           dashboard (set up email notifications there). Submitted by AJAX so
+           we can show a branded thank-you without leaving the page. -->
+      <form class="ct-form" id="ct-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="ct-hp"><label>Don’t fill this in <input name="bot-field"></label></p>
+        <div class="row2">
+          <div class="field">
+            <label for="ct-name">Your name</label>
+            <input type="text" id="ct-name" name="name" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="ct-email">Your email</label>
+            <input type="email" id="ct-email" name="email" autocomplete="email">
+          </div>
+        </div>
+        <div class="field">
+          <label for="ct-message">How can we help?</label>
+          <textarea id="ct-message" name="message"></textarea>
+        </div>
+        <div class="ct-err" id="ct-err"></div>
+        <button type="submit" class="btn btn-primary btn-bright ct-submit" id="ct-send"><img src="nellie/icons/get-started.svg" alt=""><span>send message</span></button>
+      </form>
+
+      <div class="ct-thanks">
+        <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h2>thank you, message sent!</h2>
+        <p>We’ve got it and we’ll be in touch soon. In the meantime, your loved one is in good hands.</p>
+      </div>
+    </div>
+
+    <p class="ct-or">Prefer email? Reach us at <a href="mailto:accounts@nellieconnect.com">accounts@nellieconnect.com</a>.</p>
+  </div>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="lg" src="nellie/images/nellie-logo-dark.svg" alt="nellie">
+        <span class="powered"><img src="nellie/icons/powered-by-lozenge.svg" alt="powered by nellie connect"></span>
+      </div>
+      <div class="footer-col">
+        <a href="index.html">about</a>
+        <a href="pricing.html">prices</a>
+        <a href="how-it-works.html">how it works</a>
+        <a href="how-it-works.html">nellie<span>connect</span></a>
+      </div>
+      <div class="footer-col">
+        <a href="pricing.html#faqs">help</a>
+        <span class="soon">demo</span>
+        <span class="soon">delivery</span>
+        <a href="contact.html">support</a>
+      </div>
+      <div class="footer-col">
+        <span class="foot-head">coming soon</span>
+        <span class="soon">nellie<span>radio</span></span>
+        <span class="soon">nellie<span>tv</span></span>
+        <span class="soon">nellie<span>care</span></span>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <nav class="footer-legal-links" aria-label="Legal">
+        <a href="coming-soon.html">Terms &amp; Conditions</a>
+        <a href="coming-soon.html">Privacy Policy</a>
+        <a href="coming-soon.html">Cookies</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nellie Connect Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=57"></script>
+<script>
+(function () {
+  var form = document.getElementById('ct-form');
+  var card = document.getElementById('ct-card');
+  var err = document.getElementById('ct-err');
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.style.display = 'none';
+    var name = document.getElementById('ct-name'), email = document.getElementById('ct-email'), msg = document.getElementById('ct-message');
+    var ok = true;
+    [[name, name.value.trim() !== ''], [email, EMAIL.test(email.value.trim())], [msg, msg.value.trim() !== '']]
+      .forEach(function (p) { p[0].classList.toggle('bad', !p[1]); if (!p[1]) ok = false; });
+    if (!ok) { err.textContent = 'Please add your name, a valid email and a message.'; err.style.display = 'block'; return; }
+    var btn = document.getElementById('ct-send'); btn.disabled = true;
+    btn.querySelector('span').innerHTML = '<span class="spin"></span>sending…';
+    var data = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data })
+      .then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        card.classList.add('sent');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function () {
+        btn.disabled = false; btn.querySelector('span').textContent = 'send message';
+        err.textContent = 'Something went wrong sending that. Please try again, or email us at accounts@nellieconnect.com.';
+        err.style.display = 'block';
+      });
+  });
+})();
+</script>
+</body>
+</html>

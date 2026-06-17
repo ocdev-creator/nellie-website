@@ -764,6 +764,17 @@ h1 .w i{display:inline-block;font-style:normal}
 .footer-col a{display:block;padding:5px 0;font-weight:700;font-size:.88rem;opacity:.92;transition:opacity .25s,transform .25s}
 .footer-col a:hover{opacity:1;transform:translateX(4px)}
 .footer-col a span{color:var(--accent-bright)}
+/* "coming soon" footer items: read like the links but muted + not clickable */
+.footer-col .soon{display:block;padding:5px 0;font-weight:700;font-size:.88rem;color:rgba(255,255,255,.45);cursor:default}
+.footer-col .soon span{color:rgba(255,255,255,.45)}
+.footer-col .foot-head{display:block;padding:5px 0;font-family:var(--font-display);font-weight:800;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-bright);opacity:.85}
+/* legal + copyright strip under the columns */
+.footer-legal{margin-top:clamp(28px,4vw,44px);padding-top:20px;border-top:1px solid rgba(255,255,255,.15);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px}
+.footer-legal-links{display:flex;flex-wrap:wrap;gap:18px}
+.footer-legal-links a{color:rgba(255,255,255,.7);font-weight:600;font-size:.82rem;transition:color .2s}
+.footer-legal-links a:hover{color:#fff}
+.footer-copy{color:rgba(255,255,255,.55);font-weight:600;font-size:.8rem}
+@media (max-width:520px){.footer-legal{justify-content:center;text-align:center}}
 
 /* gentle hover-in-space for transparent product renders */
 @keyframes hoverfloat{from{transform:translateY(0)}to{transform:translateY(-14px)}}
