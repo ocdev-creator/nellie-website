@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=5">
+<link rel="stylesheet" href="assets/site-v2.css?v=6">
 <style>
 .ct-main{min-height:100vh;background:linear-gradient(180deg,#e4b8f5,#fef0fe);padding:calc(var(--header-h,76px) + clamp(20px,3vw,42px)) 0 clamp(60px,8vw,96px)}
 .ct-wrap{width:min(620px,92vw);margin:0 auto}
@@ -113,7 +113,7 @@
       </div>
     </div>
 
-    <p class="ct-or">Prefer email? Reach us at <a href="mailto:accounts@nellieconnect.com">accounts@nellieconnect.com</a>.</p>
+    <p class="ct-or">Prefer email? Reach us at <a href="mailto:support@nellieconnect.com">support@nellieconnect.com</a>.</p>
   </div>
 </main>
 
@@ -145,9 +145,9 @@
     </div>
     <div class="footer-legal">
       <nav class="footer-legal-links" aria-label="Legal">
-        <a href="coming-soon.html">Terms &amp; Conditions</a>
-        <a href="coming-soon.html">Privacy Policy</a>
-        <a href="coming-soon.html">Cookies</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookies.html">Cookies</a>
       </nav>
       <p class="footer-copy">&copy; 2026 Nellie Connect Ltd. All rights reserved.</p>
     </div>
@@ -180,7 +180,7 @@
       })
       .catch(function () {
         btn.disabled = false; btn.querySelector('span').textContent = 'send message';
-        err.textContent = 'Something went wrong sending that. Please try again, or email us at accounts@nellieconnect.com.';
+        err.textContent = 'Something went wrong sending that. Please try again, or email us at support@nellieconnect.com.';
         err.style.display = 'block';
       });
   });

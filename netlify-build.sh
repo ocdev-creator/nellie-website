@@ -13,7 +13,7 @@ mkdir -p _site
 # the public pages (the v2 redesign is now the live site) plus the
 # purchase flow (subscribe form + post-payment success page), the contact
 # page and the coming-soon placeholder (legal links point at it)
-cp index.html how-it-works.html pricing.html subscribe.html success.html contact.html coming-soon.html _site/
+cp index.html how-it-works.html pricing.html subscribe.html success.html contact.html coming-soon.html terms.html privacy.html cookies.html _site/
 
 # shared styles + script, and all imagery / icons
 cp -r assets nellie _site/
