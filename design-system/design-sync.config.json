@@ -1,0 +1,8 @@
+{
+  "pkg": "@nellie/design-system",
+  "globalName": "NellieDS",
+  "shape": "package",
+  "buildCmd": "npm run build",
+  "srcDir": "src",
+  "cssEntry": "dist/nellie.css"
+}

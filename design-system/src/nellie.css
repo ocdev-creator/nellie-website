@@ -1,0 +1,246 @@
+/* ============================================================
+   Nellie Connect design system, stylesheet.
+   The brand tokens and component classes behind the marketing
+   site, distilled into a self-contained sheet the design system
+   ships. Values are taken from the live site (assets/site-v2.css).
+   Brand: deep purple #3e0a6e ink, bright pink accent #c866e9,
+   soft lilac #e4b8f5, pale pink surfaces #fef0fe. Type Nunito
+   (display) + Nunito Sans (body). UK English, gentle and warm.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap');
+
+:root{
+  /* palette */
+  --nc-primary:#3e0a6e;          /* ink: headings + body on light */
+  --nc-primary-light:#5c1a8c;    /* secondary purple */
+  --nc-primary-soft:#e4b8f5;     /* soft lilac */
+  --nc-ui-pink:#f1d2fc;          /* very light pink surface */
+  --nc-card:#fef0fe;             /* lightest pink surface */
+  --nc-accent-1:#7e37ca;         /* deep violet */
+  --nc-accent-2:#c866e9;         /* bright pink, primary accent + highlights */
+  --nc-accent-3:#e67cf2;         /* bright orchid */
+  --nc-ink-deep:#2c0a4d;
+  --nc-hairline:#ecd3f7;
+  --nc-text:#3e0a6e;
+  --nc-text-inverse:#ffffff;
+
+  /* gradients */
+  --nc-grad-dark:linear-gradient(120deg,#3e0a6e,#7e37ca);
+  --nc-grad-medium:linear-gradient(120deg,#5c1a8c,#e67cf2);
+  --nc-grad-soft:linear-gradient(120deg,#7e37ca,#e67cf2);
+  --nc-grad-light:linear-gradient(180deg,#e4b8f5,#fef0fe);
+  --nc-grad-icon:linear-gradient(135deg,#c866e9,#7e37ca);
+  --nc-grad-footer:linear-gradient(105deg,#3d076b,#52128d 45%,#8735cb);
+
+  /* type */
+  --nc-font-display:'Nunito','Nunito Sans',sans-serif;
+  --nc-font-body:'Nunito Sans','Segoe UI',sans-serif;
+
+  /* shape + depth */
+  --nc-radius-pill:999px;
+  --nc-radius-card:28px;
+  --nc-shadow-card:0 18px 50px rgba(67,16,111,.14);
+  --nc-shadow-card-hover:0 28px 70px rgba(67,16,111,.24);
+}
+
+/* ---------------- Typography ---------------- */
+.nc-h1,.nc-h2,.nc-h3{
+  font-family:var(--nc-font-display);color:var(--nc-primary);
+  font-weight:600;line-height:1.16;margin:0;
+}
+.nc-h1{font-size:clamp(2rem,3.4vw,2.99rem)}
+.nc-h2{font-size:clamp(1.68rem,2.9vw,2.73rem)}
+.nc-h3{font-size:clamp(1.2rem,2vw,1.5rem)}
+/* highlight a word or phrase inside a heading */
+.nc-hl{color:var(--nc-accent-2)}
+
+/* Kicker: small uppercase ink caps with a short accent underline. */
+.nc-kicker{
+  display:inline-block;
+  font-family:var(--nc-font-display);
+  font-size:clamp(.74rem,2.1vw,.92rem);letter-spacing:.18em;
+  text-transform:uppercase;font-weight:600;color:var(--nc-primary);
+  border-bottom:1.5px solid var(--nc-accent-2);padding-bottom:5px;
+}
+
+/* ---------------- Buttons ---------------- */
+.nc-btn{
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:var(--nc-font-display);font-weight:700;
+  font-size:clamp(.9rem,.85vw,1.02rem);
+  padding:.72em 1.5em;border-radius:var(--nc-radius-pill);
+  position:relative;overflow:hidden;border:0;cursor:pointer;
+  color:#fff;background:var(--nc-grad-soft);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
+}
+.nc-btn svg,.nc-btn img{width:1.25em;height:1.25em}
+.nc-btn:hover{transform:translateY(-3px) scale(1.03)}
+.nc-btn:active{transform:translateY(0) scale(.98)}
+.nc-btn--primary{background:linear-gradient(120deg,#c692ec,#b06ce0);box-shadow:0 10px 24px rgba(150,80,200,.32)}
+.nc-btn--primary:hover{box-shadow:0 16px 34px rgba(150,80,200,.42)}
+.nc-btn--deep{background:linear-gradient(120deg,#9c4fe0,#7f2fd0);box-shadow:0 10px 26px rgba(110,30,180,.35)}
+.nc-btn--bright{background:#c866e9;box-shadow:0 10px 24px rgba(200,102,233,.34)}
+.nc-btn--bright:hover{box-shadow:0 16px 34px rgba(200,102,233,.44)}
+.nc-btn--grape{background:#7e37ca;box-shadow:0 10px 26px rgba(126,55,202,.36)}
+.nc-btn--grape:hover{box-shadow:0 16px 34px rgba(126,55,202,.46)}
+.nc-btn--ghost{color:var(--nc-primary);background:#fff;box-shadow:0 10px 26px rgba(67,16,111,.18)}
+.nc-btn--lg{font-size:clamp(1rem,1vw,1.12rem);padding:.85em 1.7em}
+.nc-btn--sm{font-size:.84rem;padding:.6em 1.15em}
+
+/* ---------------- Pills / chips ---------------- */
+.nc-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--nc-font-display);font-weight:600;
+  font-size:clamp(.85rem,.95vw,1.05rem);
+  padding:.6em 1.5em;border-radius:var(--nc-radius-pill);
+  color:var(--nc-primary);background:var(--nc-primary-soft);
+}
+/* soft lilac is the default; a few tones from the site */
+.nc-pill--lilac{background:var(--nc-primary-soft);color:var(--nc-primary)}
+.nc-pill--pink{background:var(--nc-ui-pink);color:var(--nc-primary)}
+.nc-pill--solid{background:var(--nc-primary-light);color:#fff;font-weight:800}
+.nc-pill--accent{background:var(--nc-accent-2);color:#fff;font-weight:800}
+/* uppercase step tag (the "step one" pill) */
+.nc-pill--tag{
+  background:#efd9fa;color:var(--nc-primary);font-weight:800;
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 14px;
+}
+/* outlined perk pill */
+.nc-pill--perk{
+  background:#fff6ff;border:1.5px solid #eedcf7;color:var(--nc-primary);
+  font-weight:700;font-size:.78rem;padding:7px 13px;
+}
+
+/* ---------------- Icon circle ---------------- */
+.nc-iconcircle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:50%;flex-shrink:0;
+  background:var(--nc-grad-icon);color:#fff;
+}
+.nc-iconcircle svg,.nc-iconcircle img{width:46%;height:46%}
+.nc-iconcircle--sm{width:38px;height:38px}
+.nc-iconcircle--lg{width:64px;height:64px}
+.nc-iconcircle--accent{background:var(--nc-accent-2)}
+.nc-iconcircle--violet{background:var(--nc-accent-1)}
+.nc-iconcircle--plum{background:var(--nc-primary-light)}
+.nc-iconcircle--lilac{background:var(--nc-primary-soft);color:var(--nc-primary)}
+.nc-iconcircle--gradient{background:var(--nc-grad-icon)}
+
+/* ---------------- Card ---------------- */
+.nc-card{
+  background:#fff;border-radius:var(--nc-radius-card);
+  box-shadow:var(--nc-shadow-card);padding:clamp(20px,2.4vw,32px);
+  color:var(--nc-primary);
+}
+.nc-card--soft{background:var(--nc-card)}
+.nc-card--flush{padding:0;overflow:hidden}
+
+/* ---------------- Tick list ---------------- */
+.nc-ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.nc-ticks li{
+  display:flex;gap:11px;align-items:flex-start;
+  padding:6px 0;font-family:var(--nc-font-body);
+  font-weight:600;font-size:clamp(1rem,1.1vw,1.12rem);
+  line-height:1.4;color:var(--nc-primary);
+}
+.nc-tick{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:2px;
+  background:var(--nc-accent-2);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.nc-tick svg{width:12px;height:12px}
+
+/* ---------------- Feature bar (the signature lozenge) ---------------- */
+.nc-featurebar{
+  position:relative;background:#fff;border-radius:999px;
+  box-shadow:var(--nc-shadow-card);
+  display:grid;grid-template-columns:repeat(var(--nc-fb-cols,4),1fr);
+  padding:clamp(14px,1.7vw,24px) clamp(20px,2.6vw,38px);
+}
+.nc-featurebar__pill{
+  position:absolute;left:clamp(16px,3vw,34px);top:0;transform:translateY(-50%);
+  background:var(--nc-primary-soft);color:var(--nc-primary);
+  font-family:var(--nc-font-display);font-weight:600;
+  font-size:clamp(.85rem,.95vw,1.12rem);
+  padding:.6em 1.5em;border-radius:var(--nc-radius-pill);
+  box-shadow:0 12px 28px rgba(123,46,198,.22);white-space:nowrap;
+}
+.nc-fb-item{
+  display:flex;align-items:center;gap:11px;
+  padding:4px clamp(8px,1.2vw,16px);
+  font-family:var(--nc-font-body);font-weight:700;
+  font-size:clamp(.86rem,.96vw,1.05rem);line-height:1.3;color:var(--nc-primary);
+}
+.nc-fb-item + .nc-fb-item{border-left:1px solid var(--nc-hairline)}
+.nc-fb-item__label{max-width:14em}
+
+/* ---------------- Photo circle (portrait with accent ring) ---------------- */
+.nc-photocircle{position:relative;width:fit-content}
+.nc-photocircle__img{
+  display:block;width:var(--nc-pc-size,300px);height:var(--nc-pc-size,300px);
+  border-radius:50%;object-fit:cover;box-shadow:var(--nc-shadow-card);
+}
+.nc-photocircle::after{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:2px solid var(--nc-accent-2);pointer-events:none;
+}
+.nc-photocircle--plain::after{display:none}
+
+/* ---------------- Step card (numbered, with photo) ---------------- */
+.nc-stepcard{
+  position:relative;background:#fff;border-radius:var(--nc-radius-card);
+  overflow:hidden;box-shadow:var(--nc-shadow-card);
+  display:flex;flex-direction:column;
+  transition:box-shadow .35s ease,transform .35s ease;
+}
+.nc-stepcard:hover{box-shadow:var(--nc-shadow-card-hover)}
+.nc-stepcard__photo{height:clamp(150px,16vw,190px);overflow:hidden}
+.nc-stepcard__photo img{width:100%;height:100%;object-fit:cover}
+.nc-stepcard__num{
+  position:absolute;top:12px;left:12px;z-index:2;
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,#9a4ae0,#7b2ec6);color:#fff;
+  font-family:var(--nc-font-display);font-weight:900;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 24px rgba(123,46,198,.45);
+}
+.nc-stepcard__body{padding:clamp(16px,2.1vw,22px);text-align:center}
+.nc-stepcard__body h3{font-family:var(--nc-font-display);font-weight:700;font-size:clamp(1.12rem,1.5vw,1.3rem);color:var(--nc-primary);margin:0}
+.nc-stepcard__body h3 b{color:var(--nc-accent-2);font-weight:700}
+.nc-stepcard__body p{margin:8px 0 0;font-family:var(--nc-font-body);font-weight:600;color:var(--nc-primary);font-size:clamp(.95rem,1.05vw,1.02rem);line-height:1.5}
+
+/* ---------------- Plan card (pricing) ---------------- */
+.nc-plancard{
+  background:#fff;border-radius:clamp(28px,3vw,40px);overflow:hidden;
+  box-shadow:var(--nc-shadow-card);display:flex;flex-direction:column;
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.nc-plancard:hover{transform:translateY(-6px);box-shadow:var(--nc-shadow-card-hover)}
+.nc-plancard__photo{height:clamp(150px,13vw,196px);overflow:hidden}
+.nc-plancard__photo img{width:100%;height:100%;object-fit:cover}
+.nc-plancard__body{padding:clamp(18px,2vw,28px);display:flex;flex-direction:column;flex:1}
+.nc-plancard__body h3{font-family:var(--nc-font-display);font-weight:800;font-size:clamp(1.15rem,1.6vw,1.42rem);color:var(--nc-primary);margin:0}
+.nc-plancard__body h3 b{color:var(--nc-primary-light)}
+.nc-plancard__body h3 span{color:var(--nc-accent-2)}
+.nc-price{
+  font-family:var(--nc-font-display);font-weight:800;color:var(--nc-primary);
+  font-size:clamp(1.6rem,2.2vw,2.1rem);line-height:1.2;margin:8px 0 14px;
+}
+.nc-price s{color:var(--nc-primary-light);font-weight:700;font-size:.58em;margin-right:8px}
+.nc-price small{font-size:.42em;font-weight:700;color:var(--nc-primary);margin-left:6px}
+.nc-perks{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+/* ---------------- Logo lockup (nellie + suffix) ---------------- */
+.nc-lockup{
+  display:inline-flex;align-items:baseline;
+  font-family:var(--nc-font-display);font-weight:800;
+  font-size:1.5rem;color:var(--nc-primary);letter-spacing:-.01em;
+}
+.nc-lockup__suffix{color:var(--nc-accent-2)}
+.nc-lockup--inverse{color:#fff}
+
+/* a couple of surface helpers used by previews */
+.nc-surface-dark{background:var(--nc-grad-footer);color:#fff}
+.nc-surface-light{background:var(--nc-grad-light)}
