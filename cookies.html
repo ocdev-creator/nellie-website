@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cookies | Nellie</title>
-<meta name="description" content="How nellie uses cookies and local storage. We keep them to the essentials, with no tracking or advertising cookies.">
+<meta name="description" content="How nellie uses cookies and local storage. We keep them to the essentials, plus privacy-friendly analytics only if you accept, and no advertising cookies.">
 <link rel="icon" href="nellie/images/nellie-logo-dark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=13">
+<link rel="stylesheet" href="assets/site-v2.css?v=14">
 </head>
 <body class="app-booted">
 
@@ -40,7 +40,7 @@
     <h1>Cookies</h1>
     <p class="legal-updated">Last updated: 17 June 2026</p>
 
-    <p>We keep cookies and similar storage to the minimum needed to run the site. We do <strong>not</strong> use tracking, analytics or advertising cookies, and we do not share anything with advertisers.</p>
+    <p>We keep cookies and similar storage to the minimum needed to run the site and, only with your consent, to understand how it is used. We do <strong>not</strong> use advertising cookies, and we never sell your information or share it with advertisers.</p>
 
     <h2>What we use, and why</h2>
 
@@ -50,11 +50,15 @@
     <h3>Payment (Stripe)</h3>
     <p>When you pay, our payment provider Stripe sets its own essential cookies to process the payment securely and help prevent fraud. You can read more in <a href="https://stripe.com/cookies-policy/legal">Stripe's cookie policy</a>.</p>
 
+    <h3>Analytics (PostHog), only if you accept</h3>
+    <p>If you accept on our cookie banner, we use PostHog, hosted in the European Union, to understand how people move through the site so we can keep making it gentler and easier. This sets a small number of cookies on your device. We load it only after you accept, we use it to improve the site and never for advertising, and you can change your mind at any time.</p>
+    <p><button type="button" class="cookie-prefs-link" data-cookie-settings>Manage cookie preferences</button></p>
+
     <h2>What we don't use</h2>
-    <p>We currently set no analytics, performance or advertising cookies. If that changes in future, we will update this page and, where the law requires it, ask for your consent first.</p>
+    <p>We do not use advertising cookies, and we do not share your information with advertisers or data brokers. Analytics cookies are only ever set if you accept them, and never to market to you elsewhere.</p>
 
     <h2>Managing cookies</h2>
-    <p>You can control or clear cookies and site data through your browser settings. Blocking essential items may stop the checkout from working properly, but you can browse the rest of the site normally.</p>
+    <p>You can accept or decline analytics using our cookie banner, and reopen your choice any time with the <button type="button" class="cookie-prefs-link" data-cookie-settings>Manage cookie preferences</button> link above. You can also control or clear cookies and site data through your browser settings. Blocking essential items may stop the checkout from working properly, but you can browse the rest of the site normally.</p>
 
     <h2>Contact</h2>
     <p>Questions about cookies? Email <a href="mailto:support@nellieconnect.com">support@nellieconnect.com</a>.</p>
@@ -100,5 +104,6 @@
 </footer>
 
 <script src="assets/site.js?v=57"></script>
+<script src="assets/analytics.js?v=1"></script>
 </body>
 </html>
