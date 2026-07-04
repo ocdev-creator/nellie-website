@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=14">
+<link rel="stylesheet" href="assets/site-v2.css?v=15">
 <style>
 /* v2 header: the nellie connect banner shot. The devices sit in the left
    half, the right half is clean pale wall, so the copy lands there with
@@ -77,10 +77,13 @@
     background:
       linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 24%),
       url('nellie/images/hiw-hero-mobile.jpg') center/cover no-repeat;
-    /* full-bleed band, breaking out of the wrap gutter, top fading into
-       the copy above */
-    margin:2px calc(-1 * clamp(20px,4vw,32px)) 18px;
+    /* full-bleed band, breaking out of the wrap gutter to full width, sitting
+       BELOW the grouped CTAs and flush with the next section (margin-bottom:0) */
+    order:2;margin:16px calc(-1 * clamp(20px,4vw,32px)) 0;
   }
+  /* keep the get-started button and the two store badges grouped together
+     beneath nellieconnect, with the image moved below them, per amends */
+  .hiw-hero .badge-row{order:1;margin-top:2px}
   .hiw-hero .hero-tint,.hiw-hero .note-1,.hiw-hero .note-2{display:none}
   /* smaller black store badges sitting under the image */
   .hiw-hero .badge-dark{height:46px;padding:0 13px;border-radius:10px;gap:8px}
@@ -193,7 +196,7 @@
             <h3>view activity insights</h3>
             <p>see how your loved one is engaging with their tablet</p>
           </div>
-          <div class="screen"><img src="nellie/images/app-5.png" alt="The nellie connect activity insights screen" loading="lazy"></div>
+          <div class="screen"><img src="nellie/images/Activity-Insights.png" alt="The nellie connect activity insights screen" loading="lazy"></div>
         </div>
         <div class="app-card reveal" data-delay="500">
           <div class="copy">
@@ -220,7 +223,7 @@
     </div>
     <div class="family-copy">
       <span class="kicker reveal">family connection</span>
-      <h2 class="reveal">keeping your loved&nbsp;ones <br class="d-br">present in <br class="d-br">everyday&nbsp;life</h2>
+      <h2 class="reveal">keeping your <br class="d-br">loved ones present <br class="d-br">in everyday life</h2>
       <p class="simple-sub reveal" data-delay="100">family and friends can all share messages, memories and updates, helping your loved one feel connected every day.</p>
     </div>
   </section>
@@ -252,7 +255,7 @@
         </div>
         <div>
           <span class="kicker reveal">designed for simplicity</span>
-          <h2 class="reveal">intentionally simple for your loved one</h2>
+          <h2 class="reveal">intentionally simple <br class="m-br">for your loved one</h2>
           <p class="simple-sub reveal" data-delay="100"><strong>nellie</strong> is designed for simplicity, is intentionally one way and is calm, predictable and easy to use.</p>
           <ul class="ticks">
             <li class="reveal r-right" data-delay="150"><img src="nellie/icons/tick-pink.svg" alt="">No confusing apps</li>
@@ -313,7 +316,7 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=57"></script>
+<script src="assets/site.js?v=58"></script>
 <script src="assets/analytics.js?v=1"></script>
 </body>
 </html>

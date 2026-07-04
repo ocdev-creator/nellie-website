@@ -97,6 +97,10 @@ main section{overflow-x:clip}
 }
 .t-center{text-align:center}
 .nowrap{white-space:nowrap}
+/* mobile-only line break: forces a heading to wrap at a chosen point on
+   phones while staying on one flow on desktop */
+.m-br{display:none}
+@media (max-width:760px){.m-br{display:inline}}
 
 /* ---------- Reveal-on-scroll primitives ----------
    Elements start shifted and transparent; the .in class (added by
@@ -176,7 +180,7 @@ main section{overflow-x:clip}
    the logo and the close cross stay visible and clickable */
 .menu-open .site-header{z-index:130;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .nav-mobile a{
-  color:#fff;font-family:var(--font-display);font-weight:800;
+  color:#fff;font-family:var(--font-display);font-weight:600;
   font-size:2rem;padding:10px 24px;
   opacity:0;transform:translateY(22px);
   transition:opacity .4s ease,transform .4s ease;
@@ -280,7 +284,7 @@ main section{overflow-x:clip}
   transform-origin:right bottom;
   will-change:transform;
 }
-.js.ok-motion .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
+/* header zoom removed per amends: the hero photo holds still */
 @keyframes kenburns{
   from{transform:scale(1)}
   to{transform:scale(1.045)}
@@ -377,7 +381,10 @@ h1 .w i{display:inline-block;font-style:normal}
    V4: one fully-rounded white pill pulled up over the photo's bottom
    edge, four items with hairline dividers, filled lavender icon
    circles, and the small gradient pill perched on its top-left. */
-.features-band{background:var(--lav-0);padding:0 0 clamp(56px,7vw,96px)}
+/* the Why section's lilac rises to meet the hero photo, so this band
+   carries the same lilac and the lozenge straddles the seam (per the
+   join mockup). The next section (.why) continues the same tone. */
+.features-band{background:linear-gradient(180deg,#eed7f9,#f4dcfb);padding:0 0 clamp(28px,3.5vw,48px)}
 /* the -64px matches the hero photo's lift so the lozenge rises with the
    desk (stays docked to it); the existing -50% keeps it straddling. The
    matching negative margin-bottom pulls the next section up by the same
@@ -422,7 +429,7 @@ h1 .w i{display:inline-block;font-style:normal}
    so it stays legible */
 .cap-ico img{filter:brightness(0) invert(1)}
 .fb-ico img{width:46%;height:46%}
-.fb-ico.fb-cal img{filter:brightness(0) saturate(100%) invert(9%) sepia(64%) saturate(3326%) hue-rotate(266deg) brightness(82%) contrast(101%)}
+/* calendar icon stays white per amends (was tinted dark on the light badge) */
 @media (max-width:980px){
   .features-bar{grid-template-columns:1fr 1fr;row-gap:18px}
   .fb-item:nth-child(odd){border-left:0}
@@ -529,7 +536,7 @@ h1 .w i{display:inline-block;font-style:normal}
      left half the band blank. Zoom and anchor right to crop the empty
      side and bring the woman, man and tablet into the band. */
   .who{
-    background-size:168% auto;background-position:right bottom;
+    background-size:200% auto;background-position:right bottom;
     padding-bottom:calc(52vw + 44px);
   }
   .who::before{
@@ -560,12 +567,18 @@ h1 .w i{display:inline-block;font-style:normal}
 .chip-1{background:#41056e}
 .chip-2{background:#5c1a8c}
 .chip-3{background:#7b2ec6}
+@media (max-width:560px){
+  /* keep the three who-for chips on one row per amends */
+  .who .chips{flex-wrap:nowrap;gap:8px;justify-content:flex-start}
+  .who .chip{padding:8px 12px;font-size:.78rem;gap:6px}
+  .who .chip img{width:14px;height:14px}
+}
 
 /* ==================== KEY FEATURES (full-bleed slider) ====================
    White heading band, then an edge-to-edge slider. Captions sit in
    each image's baked-in pale zone (.cap-left / .cap-right). The nav
    overlays the image bottom centre, per V4. */
-.features-slider{background:#fff;padding:clamp(44px,6vw,76px) 0 0}
+.features-slider{background:#fff;padding:clamp(44px,6vw,76px) 0 clamp(34px,4.5vw,60px)}
 .slider{
   position:relative;margin-top:clamp(26px,3.6vw,44px);
   max-width:1240px;margin-left:auto;margin-right:auto;
@@ -603,7 +616,7 @@ h1 .w i{display:inline-block;font-style:normal}
   background:var(--icon-grad);
   display:flex;align-items:center;justify-content:center;
 }
-.js.ok-motion .slide.on .cap-ico{animation:capfloat 4.5s ease-in-out infinite alternate}
+/* carousel icon float removed per amends */
 @keyframes capfloat{from{transform:translateY(0)}to{transform:translateY(-8px)}}
 /* thin accent rule grows in under the caption once the slide lands */
 .slide-cap::after{
@@ -748,6 +761,8 @@ h1 .w i{display:inline-block;font-style:normal}
   background:#fff;
 }
 .cta h2{max-width:24em;margin:0 auto 28px;font-weight:700}
+/* phones: hold the closing nellie line to 3 lines, not 4, per amends */
+@media (max-width:560px){.cta h2{font-size:clamp(1.4rem,6vw,1.5rem)}}
 
 /* ============================ FOOTER ============================ */
 /* V4: square corners, no column headings, pink brand suffixes */
@@ -875,7 +890,7 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .page-hero .wrap{width:100%}
 .page-hero .hero-photo{animation:none}
-.js.ok-motion .page-hero .hero-photo{animation:kenburns 26s ease-in-out infinite alternate}
+/* inner-page header zoom removed per amends: the hero photo holds still */
 /* copy on the RIGHT (how-it-works) */
 .hero-copy-right{position:relative;z-index:3;max-width:clamp(340px,26vw,460px);margin-left:auto}
 /* tablet and below: the inner heroes stack like the homepage one,
@@ -907,7 +922,7 @@ h1 .w i{display:inline-block;font-style:normal}
   .badge-row .badge-dark{flex:1 1 0;justify-content:center;padding:0 12px}
 }
 /* nellieconnect lockup */
-.nc-lockup{display:flex;align-items:center;gap:10px;margin:18px 0 6px;font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--ink)}
+.nc-lockup{display:flex;align-items:center;gap:0;margin:18px 0 6px;font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--ink)}
 .nc-lockup img{height:34px;width:auto}
 .nc-lockup span{color:var(--accent-bright)}
 
@@ -946,7 +961,7 @@ h1 .w i{display:inline-block;font-style:normal}
 }
 .app-card .screen img{width:100%;height:100%;object-fit:cover;object-position:top}
 /* hold titles to two lines and body to three so the cards stay even */
-.app-card h3{font-size:clamp(1.05rem,1.35vw,1.2rem);min-height:2.4em}
+.app-card h3{font-size:clamp(1.05rem,1.35vw,1.2rem);min-height:2.4em;font-weight:800}
 .app-card p{margin-top:4px;font-weight:600;color:#3e0a6e;font-size:clamp(.92rem,1.05vw,1rem);line-height:1.5;min-height:4.5em}
 
 /* ---------- family connection (image left, copy right) ----------
@@ -975,15 +990,20 @@ h1 .w i{display:inline-block;font-style:normal}
   display:flex;flex-direction:column;justify-content:center;
   padding:clamp(44px,6vw,84px) clamp(28px,5vw,72px) clamp(44px,6vw,84px) clamp(96px,9vw,150px);
 }
+/* keep the pre-heading underline to the text width, not the flex column
+   width (a stretched flex item made the rule run the full column) */
+.family-copy .kicker{align-self:flex-start}
 @media (max-width:900px){
   .family{grid-template-columns:1fr}
   .family-media{min-height:clamp(280px,66vw,420px)}
   /* stacked: the bubbles become an in-flow, centred row tucked under the
      photo (source order is media -> bubbles -> copy) rather than floating
      across the section seam, which read as misaligned on phones */
-  .family-bubbles{position:static;transform:none;flex-direction:row;justify-content:center;gap:clamp(14px,4vw,24px);margin:-42px auto clamp(10px,3vw,18px)}
+  .family-bubbles{position:static;transform:none;flex-direction:row;justify-content:center;gap:clamp(14px,4vw,24px);margin:-42px auto clamp(24px,6vw,36px)}
   .fbub{width:clamp(84px,21vw,112px)}
-  .family-copy{padding:0 clamp(22px,6vw,40px) clamp(36px,8vw,52px)}
+  /* centre the family-connection copy on phones per amends */
+  .family-copy{padding:0 clamp(22px,6vw,40px) clamp(36px,8vw,52px);text-align:center}
+  .family-copy .kicker{align-self:center}
   /* let the heading wrap naturally on phones (the desktop line breaks
      leave an awkward stranded middle line) */
   .d-br{display:none}
@@ -1022,13 +1042,16 @@ h1 .w i{display:inline-block;font-style:normal}
    gradient, music #c866e9, calendar #7e37ca, photos #e4b8f5 (light, so
    its white glyph is recoloured dark to stay legible) */
 .quote .q-ico{width:clamp(36px,2.9vw,48px);height:clamp(36px,2.9vw,48px)}
+.insights .quotes > div:nth-child(1) .q-ico{background:#5c1a8c}
 .insights .quotes > div:nth-child(2) .q-ico{background:#c866e9}
 .insights .quotes > div:nth-child(3) .q-ico{background:#7e37ca}
 .insights .quotes > div:nth-child(4) .q-ico{background:#e4b8f5}
-.insights .quotes > div:nth-child(4) .q-ico img{filter:brightness(0) saturate(100%) invert(9%) sepia(64%) saturate(3500%) hue-rotate(266deg) brightness(72%) contrast(104%)}
+/* photo icon stays white per amends (was tinted dark on the light badge) */
 @media (max-width:560px){
+  /* keep the insight bubbles as circles on phones per amends */
   .quotes{grid-template-columns:1fr 1fr;gap:10px}
-  .quote{border-radius:24px;aspect-ratio:auto;padding:14px}
+  .quote{border-radius:50%;aspect-ratio:1;padding:12px;font-size:clamp(.62rem,2.6vw,.8rem)}
+  .quote .q-ico{width:32px;height:32px}
 }
 .insights-photo{height:clamp(280px,38vw,520px)}
 .insights-photo img{width:100%;height:100%;object-fit:cover}
@@ -1115,13 +1138,19 @@ h1 .w i{display:inline-block;font-style:normal}
 /* ---------- FAQs accordion ---------- */
 .faqs{background:#fef0fe;padding:clamp(44px,6vw,80px) 0}
 .faqs-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:start}
-@media (max-width:900px){.faqs-grid{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .faqs-grid{grid-template-columns:1fr}
+  /* centre the FAQ intro (kicker, heading, copy, image) on phones per amends */
+  .faqs-intro{text-align:center}
+  .faqs-intro .kicker{border-bottom-color:var(--accent-soft)}
+  .faqs-intro h2{max-width:none}
+}
 /* heading held to two lines */
 .faqs-intro h2{max-width:7em}
 .faqs-intro p{margin-top:14px;font-weight:600;color:#3e0a6e;max-width:30em;font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.55}
 .faqs-intro .art{margin-top:clamp(20px,4vw,44px)}
 /* larger image, and the gentle float is removed */
-.faqs-intro .art img{max-width:min(520px,100%);animation:none}
+.faqs-intro .art img{max-width:100%;animation:none}
 .faq-item{
   background:#fff;border:1.5px solid #eedcf7;border-radius:16px;margin-bottom:9px;
   box-shadow:0 6px 16px rgba(67,16,111,.06);
@@ -1167,13 +1196,17 @@ h1 .w i{display:inline-block;font-style:normal}
      so they read clearly rather than sitting washed-out below the text */
   .photo-cta{
     --cband:clamp(230px,60vw,380px);
-    background-position:center bottom;
+    /* focal on the right (the women + tablet), so the empty room on the left
+       is cropped away, per amends */
+    background-position:right bottom;
     background-size:auto calc(var(--cband)*1.3);
     padding-bottom:var(--cband);
   }
   .photo-cta::before{
     inset:0;
-    background:linear-gradient(180deg,#fbeefe 0%,#fbeefe calc(100% - var(--cband)*1.16),rgba(251,238,254,0) calc(100% - var(--cband)*0.82));
+    /* solid wash behind the copy, then a clean edge where the image band
+       begins (no gradient over the top of the image), per amends */
+    background:linear-gradient(180deg,#fbeefe 0%,#fbeefe calc(100% - var(--cband)),rgba(251,238,254,0) calc(100% - var(--cband)));
   }
 }
 
@@ -1219,6 +1252,7 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero .wrap{order:1;margin-top:0;width:100%}
   .hero-content{max-width:none}
   .hero .hero-sub{margin:12px 0 0}
+  .hero .hero-ctas{margin-top:22px}
   /* the secondary "how it works" button stays hidden on the pricing
      hero, which still carries a .btn-deep */
   .hero-ctas .btn-deep{display:none}

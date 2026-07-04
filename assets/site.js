@@ -309,22 +309,7 @@
     sx = null;
   }, {passive: true});
 
-  // a whisper of 3D on the carousel card itself
-  if(!reduceMotion && fine){
-    var slidesCard = slidesBox;
-    var tiltRaf = null;
-    slidesCard.addEventListener('mousemove', function(e){
-      if(tiltRaf) return;
-      tiltRaf = requestAnimationFrame(function(){
-        tiltRaf = null;
-        var r = slidesCard.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        slidesCard.style.transform = 'perspective(1400px) rotateX(' + ((0.5 - py) * 2.2).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 2.8).toFixed(2) + 'deg)';
-      });
-    });
-    slidesCard.addEventListener('mouseleave', function(){ slidesCard.style.transform = ''; });
-  }
+  // (carousel perspective/tilt hover removed per amends: the card stays flat)
 
   // carousel is manual only (no autoplay): the active dot shows as a
   // solid pill rather than a sweeping progress fill

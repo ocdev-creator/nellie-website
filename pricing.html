@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=14">
+<link rel="stylesheet" href="assets/site-v2.css?v=15">
 <style>
 /* page-local: Simple-Pricing shot. The couple sit on the RIGHT and the
    photo already fades to pale on the LEFT, so the copy reads cleanly on
@@ -26,14 +26,15 @@
    photo, its top fading into the copy via a gradient layer (no mask). */
 @media (max-width:760px){
   .pricing-hero .hero-photo{
-    background:
-      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 24%),
-      url('nellie/images/Simple-Pricing.jpg') 70% center/cover no-repeat;
+    /* focal on the right (couple), no top gradient over the image per amends */
+    background:url('nellie/images/Simple-Pricing.jpg') right center/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
   }
   .pricing-hero .hero-tint{display:none}
 }
 .pricing-hero .hero-content{max-width:460px}
+/* how-it-works steps gradient runs left-to-right on pricing per amends */
+.steps{background:linear-gradient(90deg,#e4b8f5,#fef0fe)}
 </style>
 </head>
 <body>
@@ -72,8 +73,8 @@
       <div class="hero-content">
         <span class="kicker reveal">pricing</span>
         <h1 id="hero-title" class="h1-two-tone"><em>simple pricing.</em><br>no confusion.</h1>
-        <p class="hero-sub reveal" style="transition-delay:.4s;margin-bottom:0">a simple one-time tablet purchase, paired with a gentle monthly subscription that keeps the whole family connected</p>
-        <p class="hero-sub reveal" style="transition-delay:.5s;margin-top:14px">easy to use, easy to manage, and comforting for your loved one</p>
+        <p class="hero-sub reveal" style="transition-delay:.4s;margin-bottom:0">a simple one-time tablet purchase, paired with a gentle monthly subscription that keeps the whole family connected.</p>
+        <p class="hero-sub reveal" style="transition-delay:.5s;margin-top:14px">easy to use, easy to manage, and comforting for your loved one.</p>
         <div class="hero-ctas reveal" style="transition-delay:.55s">
           <a class="btn btn-primary btn-bright" href="#purchase"><img src="nellie/icons/get-started.svg" alt="">get started</a>
           <a class="btn btn-deep" href="how-it-works.html"><img src="nellie/icons/how-it-works.svg" alt="">how it works</a>
@@ -142,7 +143,7 @@
   <section class="steps">
     <div class="wrap">
       <div class="t-center"><span class="kicker reveal">how it works</span></div>
-      <h2 class="reveal" style="text-align:center">get connected in 3 simple steps</h2>
+      <h2 class="reveal" style="text-align:center">get connected in <br class="m-br">3 simple steps</h2>
       <div class="steps-grid">
         <div class="step-card tilt-card reveal r-drop" data-delay="0">
           <span class="step-num">1</span>
@@ -181,7 +182,7 @@
           <h2 class="reveal">everything you need to know</h2>
           <p class="reveal" data-delay="100">we've answered the most common questions to help you feel confident about nellie.</p>
           <div class="art reveal r-pop" data-delay="200">
-            <img src="nellie/images/faqs-image.png" alt="The nellie tablet and phone with a plant" loading="lazy">
+            <img src="nellie/images/FAQs-New.png" alt="The nellie tablet and phone with a plant" loading="lazy">
           </div>
         </div>
         <div class="faqs-list reveal r-right">
@@ -233,7 +234,7 @@
     <div class="wrap">
       <div class="copy">
         <span class="kicker reveal">designed for families</span>
-        <h2 class="reveal">bring your family closer with nellie</h2>
+        <h2 class="reveal">bring your family <br class="m-br">closer with nellie</h2>
         <p class="reveal" data-delay="100">a gentle, easy-to-use experience designed to help loved ones feel connected every day</p>
         <a class="btn btn-primary btn-bright reveal r-pop" data-delay="200" href="subscribe.html"><img src="nellie/icons/get-started.svg" alt="">buy nellie</a>
       </div>
@@ -280,7 +281,7 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=57"></script>
+<script src="assets/site.js?v=58"></script>
 <script src="assets/analytics.js?v=1"></script>
 </body>
 </html>

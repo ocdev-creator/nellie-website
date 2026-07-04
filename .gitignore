@@ -2,3 +2,7 @@
 design*.svg
 _site/
 node_modules/
+
+# macOS + image staging folder
+.DS_Store
+nellie/New Images/
