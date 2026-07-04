@@ -205,7 +205,9 @@ main section{overflow-x:clip}
   padding:.72em 1.5em;border-radius:var(--radius-pill);
   position:relative;overflow:hidden;
   transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
-  will-change:transform;
+  /* no permanent will-change: it parked every button on its own GPU layer
+     whose soft shadow dragged/jittered on scroll. The hover transform still
+     composites fine on its own; the shadow now rides with the page. */
 }
 .btn img{width:1.25em;height:1.25em}
 .btn:hover{transform:translateY(-3px) scale(1.03)}
@@ -491,7 +493,8 @@ h1 .w i{display:inline-block;font-style:normal}
   position:relative;width:min(350px,75vw);aspect-ratio:1;
   border-radius:50%;overflow:hidden;
   box-shadow:var(--card-shadow);
-  will-change:transform;
+  /* no permanent GPU layer (nothing animates it on scroll now), so its
+     shadow no longer jitters while scrolling */
 }
 .why-circle img{width:100%;height:100%;object-fit:cover;object-position:72% 50%}
 .why-circle-wrap{position:relative;width:fit-content;margin:0 auto}
@@ -740,7 +743,10 @@ h1 .w i{display:inline-block;font-style:normal}
 .step-card{
   background:#fff;border-radius:var(--radius-lg);overflow:hidden;
   box-shadow:var(--card-shadow);position:relative;
-  transform-style:preserve-3d;will-change:transform;
+  /* preserve-3d kept for the hover tilt + raised number; the permanent
+     will-change:transform is dropped so the card shadow stops dragging on
+     scroll (the hover tilt still composites on its own) */
+  transform-style:preserve-3d;
   transition:box-shadow .35s ease;
   display:flex;flex-direction:column;
 }
