@@ -259,9 +259,11 @@ main section{overflow-x:clip}
      aspect height (1229/2663), so the photo's top break aligns just
      beneath the nav and the fold lands at the straddling bar */
   min-height:max(580px,calc(var(--header-h) + 46.17vw));
-  /* the wash ends in the features-band lilac (#eed6f6) so the strip left
-     beneath the lifted photo flows into the Why join with no pale band */
-  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 32%,#f6e2fb 56%,#eed6f6 100%);
+  /* the wash ends LIGHT, matching the photo's own pale wall, so the photo's
+     bottom edge dissolves invisibly on the left (light wall -> light lilac)
+     instead of the earlier light-on-mid-lilac line. It then deepens to the
+     brand lilac lower down, in the features band. */
+  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 32%,#f6eef9 60%,#f4ebfa 100%);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
@@ -393,7 +395,9 @@ h1 .w i{display:inline-block;font-style:normal}
 /* the Why section's lilac rises to meet the hero photo, so this band
    carries the same lilac and the lozenge straddles the seam (per the
    join mockup). The next section (.why) continues the same tone. */
-.features-band{background:linear-gradient(180deg,#eed6f6,#f5dcfb);padding:0 0 clamp(28px,3.5vw,48px)}
+/* starts LIGHT (= the hero wash bottom, so the photo edge blends away) and
+   deepens to the brand lilac, which continues into the Why section */
+.features-band{background:linear-gradient(180deg,#f4ebfa,#eed6f6);padding:0 0 clamp(28px,3.5vw,48px)}
 /* the -64px matches the hero photo's lift so the lozenge rises with the
    desk (stays docked to it); the existing -50% keeps it straddling. The
    matching negative margin-bottom pulls the next section up by the same
@@ -474,9 +478,9 @@ h1 .w i{display:inline-block;font-style:normal}
 /* ============================ WHY NELLIE ============================ */
 .why{
   padding:clamp(44px,6vw,80px) 0;
-  /* continuous flow from the features band (its bottom is #f5dcfb): no radial
+  /* continuous flow from the features band (its bottom is #eed6f6): no radial
      glow (it read as a saturated horizontal band at the join) */
-  background:linear-gradient(180deg,#f5dcfb,#fbeefe);
+  background:linear-gradient(180deg,#eed6f6,#fbeefe);
   overflow:hidden;
 }
 .why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:center}
