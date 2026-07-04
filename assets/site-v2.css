@@ -286,8 +286,12 @@ main section{overflow-x:clip}
      sit in the middle band. */
   -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 184px),transparent calc(100% - 64px));
   mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 184px),transparent calc(100% - 64px));
+  /* no compositor layer: with the zoom and the scroll parallax both gone,
+     will-change:transform kept the masked photo on its own GPU layer, whose
+     sub-pixel re-raster on scroll flickered a faint shadow at the mask edge.
+     Rendering it inline (auto) keeps the fade rock-steady while scrolling. */
   transform-origin:right bottom;
-  will-change:transform;
+  will-change:auto;
 }
 /* header zoom removed per amends: the hero photo holds still */
 @keyframes kenburns{
