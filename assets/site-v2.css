@@ -282,13 +282,13 @@ main section{overflow-x:clip}
      same amount (.features-dock) so the desk still meets the lozenge and
      the whole pair sits higher, with more space opening beneath it */
   background:url('../nellie/images/hero-v4.jpg') center calc(100% - 64px)/100% auto no-repeat;
-  /* fade both edges: the top blends the wall into the wash. The bottom edge
-     dissolves at the TABLE'S FRONT EDGE (~132px up from the hero foot), so the
-     transition line sits at the same level as the table edge on the right and
-     runs level across the whole width, left and right, instead of lower down
-     through the table front. The devices sit on the visible surface above it. */
-  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 156px),transparent calc(100% - 132px));
-  mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 156px),transparent calc(100% - 132px));
+  /* the top edge blends the wall into the wash. The bottom edge is a defined
+     line at the LOZENGE'S MIDDLE (the photo's own foot, 100% - 64px, which by
+     design sits half-way up the straddling lozenge): the lozenge is the line
+     break, so the photo meets the lilac at its own vertical centre, level
+     across the whole width, with the table edge on the right meeting it there. */
+  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 90px),transparent calc(100% - 64px));
+  mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 90px),transparent calc(100% - 64px));
   /* no compositor layer: with the zoom and the scroll parallax both gone,
      will-change:transform kept the masked photo on its own GPU layer, whose
      sub-pixel re-raster on scroll flickered a faint shadow at the mask edge.
