@@ -271,11 +271,14 @@ main section{overflow-x:clip}
      at the same position), NOT a smooth ramp: a smooth gradient has no visible
      line, so the left half (which carries almost no photo, just wash) read as
      a soft fade while the right had the photo's crisp wood->lilac edge. Meeting
-     #f9e8fb and #ecd8f6 at the same calc gives the block a clean horizontal
-     start right across the width, so the left matches the photo cut on the
-     right at every viewport height. Below the line the hero is solid #ecd8f6,
+     the light wash and #ecd8f6 at the same calc gives the block a clean
+     horizontal start right across the width, so the left matches the photo cut
+     on the right at every viewport height. The above-line tone is a near-white
+     lilac (#fcf1fe), deliberately lighter than the block, so the step reads
+     with some contrast on the left where there is no photo to define it (a
+     pale-on-pale step was too faint). Below the line the hero is solid #ecd8f6,
      flush into the features band. */
-  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#f9e8fb calc(100% - 64px),#ecd8f6 calc(100% - 64px),#ecd8f6 100%);
+  background:linear-gradient(180deg,#e9cdf4,#fcf1fe 40%,#fcf1fe calc(100% - 64px),#ecd8f6 calc(100% - 64px),#ecd8f6 100%);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
