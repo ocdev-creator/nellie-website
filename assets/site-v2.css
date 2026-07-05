@@ -267,8 +267,16 @@ main section{overflow-x:clip}
   /* the wash ends LIGHT, matching the photo's own pale wall, so the photo's
      bottom edge dissolves invisibly on the left (light wall -> light lilac)
      instead of the earlier light-on-mid-lilac line. It then deepens to the
-     brand lilac lower down, in the features band. */
-  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#ecd8f6 87%,#ecd8f6 100%);
+     brand lilac lower down, in the features band.
+     The solid-block stop is calc(100% - 64px), NOT a fixed percentage: that
+     is the exact line where the photo hard-cuts on the right and where the
+     lozenge centres (features-dock sits at heroBottom-64). Using the same
+     calc means the left wash turns solid #ecd8f6 on precisely that guide at
+     every viewport height, so the block begins on one clean horizontal line
+     right across the width. A fixed 87% landed ~32px high of the photo cut,
+     leaving a strip where the left was already block while the right was
+     still photo. */
+  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#ecd8f6 calc(100% - 64px),#ecd8f6 100%);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
