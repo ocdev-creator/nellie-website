@@ -335,9 +335,14 @@ main section{overflow-x:clip}
   from{transform:scale(1)}
   to{transform:scale(1.045)}
 }
-/* gentle left wash so the copy always reads */
+/* gentle left wash so the copy always reads. It STOPS at the block line
+   (bottom:64px = calc(100%-64px)): covering the full height meant this near-white
+   wash painted over the hero's own #ecd8f6 block on the left, lightening it, so
+   the dark colour only appeared BELOW the hero at the band, a good 64px under the
+   line. Ending the tint on the line lets the block show its true dark tone right
+   up to the line, so the darker colour meets the line across the width. */
 .hero-tint{
-  position:absolute;inset:0;z-index:1;
+  position:absolute;top:0;left:0;right:0;bottom:64px;z-index:1;
   background:linear-gradient(90deg,rgba(255,240,255,.96),rgba(255,240,255,.88) 30%,rgba(255,240,255,.4) 38%,rgba(255,240,255,0) 45%);
 }
 /* below desktop the hero stacks: copy on top in fully clear space,
