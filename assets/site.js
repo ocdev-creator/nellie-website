@@ -71,6 +71,21 @@
       });
     }, {threshold: 0.18, rootMargin: '0px 0px -40px 0px'});
     reveals.forEach(function(el){ io.observe(el); });
+    // Belt-and-braces: the observer's INITIAL callback can fail to fire right
+    // after navigation (it needs a paint/scroll), which left above-the-fold
+    // reveals stuck at opacity:0 + transform on load, invisible AND on a GPU
+    // layer whose shadow drifts on scroll. On the next frame, reveal anything
+    // already in view so it settles to transform:none immediately; the observer
+    // still handles everything below the fold on scroll.
+    requestAnimationFrame(function(){
+      reveals.forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if(r.top < (window.innerHeight * 0.92) && r.bottom > 0){
+          el.classList.add('in');
+          io.unobserve(el);
+        }
+      });
+    });
   } else {
     reveals.forEach(function(el){ el.classList.add('in'); });
   }

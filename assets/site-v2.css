@@ -287,7 +287,10 @@ main section{overflow-x:clip}
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
-  perspective:1100px;
+  /* no perspective: it was only for 3D float chips (.note), which the home hero
+     does not use, and a perspective context put the hero's shadowed CTA buttons
+     on GPU layers whose shadows drifted on scroll. Dropping it de-promotes them.
+     (how-it-works uses .page-hero, not .hero, so its float chips are unaffected.) */
 }
 /* the block's top edge as ONE clean line across the FULL width, on the same
    guide the photo cuts and the lozenge centres (bottom:64px = calc(100%-64px)).
@@ -445,7 +448,14 @@ h1 .w i{display:inline-block;font-style:normal}
    desk (stays docked to it); the existing -50% keeps it straddling. The
    matching negative margin-bottom pulls the next section up by the same
    64px so the lift doesn't open an oversized gap below the lozenge. */
-.features-dock{transform:translateY(calc(-50% - 64px));margin-bottom:-64px}
+/* lift the straddling lozenge with position, NOT transform. A permanent
+   transform put this card (and its dark-purple box-shadow) on its own GPU
+   layer, which desynced from the page on scroll: the shadow appeared to shift
+   behind the pills. position:relative + top lifts it identically with no layer,
+   so the shadow scrolls locked to the content. (Mobile already did this.) The
+   top value is ~ half the dock height + 64, matching the old -50%-64 ride-up;
+   the dock is a stable single row on desktop so a fixed value tracks it. */
+.features-dock{position:relative;top:-124px;margin-bottom:-64px}
 .features-bar{
   position:relative;
   background:#fff;border-radius:999px;   /* perfect lozenge, not a rounded rectangle */
@@ -455,7 +465,11 @@ h1 .w i{display:inline-block;font-style:normal}
   z-index:5;
 }
 .fb-pill{
-  position:absolute;left:clamp(16px,3vw,34px);top:0;transform:translateY(-50%);
+  /* centred on the bar's top edge with a negative top, NOT transform: this
+     lozenge carries a purple shadow, and a transform put it on a GPU layer whose
+     shadow drifted on scroll. top:-24px (~half its ~49px height) sits it the same
+     place with no layer, so the shadow stays locked to the page. */
+  position:absolute;left:clamp(16px,3vw,34px);top:-24px;
   background:#e4b8f5;
   color:#3e0a6e;font-family:var(--font-display);font-weight:600;
   font-size:clamp(.85rem,.95vw,1.12rem);
@@ -659,12 +673,20 @@ h1 .w i{display:inline-block;font-style:normal}
 .js.ok-motion .slide:nth-child(even).on img{transform-origin:68% 58%}
 @keyframes slidedrift{from{transform:scale(1.06)}to{transform:scale(1)}}
 .slide-cap{
-  position:absolute;top:50%;transform:translateY(-50%);
+  /* vertically centred with top/bottom:0 + margin:auto, NOT translateY(-50%):
+     a permanent transform kept the caption (and its shadow) on a GPU layer that
+     drifted on scroll. margin-auto centring lets the settled caption be
+     transform:none, so it de-promotes; the slide-in below animates a small
+     translateY that resolves to none. */
+  position:absolute;top:0;bottom:0;height:max-content;margin-block:auto;
   max-width:min(26ch,40%);
   font-family:var(--font-display);font-weight:700;color:var(--display);
   font-size:clamp(1rem,1.9vw,1.6rem);line-height:1.35;
-  background:rgba(255,246,255,.78);
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  /* solid-ish fill, NO backdrop-filter: the blur re-rendered every frame on
+     scroll and, with this caption's shadow, flickered a shifting shadow. A
+     higher-opacity fill keeps the caption legible over the slide with no
+     per-frame cost. */
+  background:rgba(255,246,255,.94);
   border:1px solid rgba(255,255,255,.65);
   padding:clamp(16px,2vw,28px) clamp(18px,2.2vw,30px);
   border-radius:22px;
@@ -689,8 +711,8 @@ h1 .w i{display:inline-block;font-style:normal}
 .cap-left .slide-cap{left:clamp(20px,7vw,110px)}
 .cap-right .slide-cap{right:clamp(20px,7vw,110px)}
 /* caption text slides up as its slide becomes active */
-.js.ok-motion .slide .slide-cap{opacity:0;transform:translateY(calc(-50% + 18px));transition:opacity .7s ease .25s,transform .7s ease .25s}
-.js.ok-motion .slide.on .slide-cap{opacity:1;transform:translateY(-50%)}
+.js.ok-motion .slide .slide-cap{opacity:0;transform:translateY(18px);transition:opacity .7s ease .25s,transform .7s ease .25s}
+.js.ok-motion .slide.on .slide-cap{opacity:1;transform:none}
 @media (max-width:760px){
   .slides{height:66vw;min-height:250px}
   .slide-cap{max-width:62%;padding:12px 16px;font-size:.95rem}
@@ -800,7 +822,9 @@ h1 .w i{display:inline-block;font-style:normal}
   font-family:var(--font-display);font-weight:900;font-size:1.05rem;
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 10px 24px rgba(123,46,198,.45);
-  transform:translateZ(40px);
+  /* no translateZ: the 3D push put this shadowed badge on a compositor layer
+     whose shadow drifted on scroll, and the badge is placed by top/left so the
+     3D added nothing but the layer. */
 }
 .step-card .body{padding:clamp(16px,2.1vw,22px);text-align:center;flex:1}
 .step-card .body h3{font-size:clamp(1.12rem,1.5vw,1.3rem);font-weight:700}
@@ -1280,7 +1304,7 @@ h1 .w i{display:inline-block;font-style:normal}
    Below desktop the half-height ride-up would bury the photo and the
    CTAs, so the bar flows after the hero with a slight overlap. */
 @media (max-width:1020px){
-  .features-dock{transform:translateY(-26px)}
+  .features-dock{top:-26px}   /* position-based (see base rule), not transform */
   /* stacked hero: copy sits at the top, not biased above centre */
   .hero .wrap{margin-top:4svh}
 }
