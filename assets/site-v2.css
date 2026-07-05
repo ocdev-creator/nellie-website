@@ -265,7 +265,7 @@ main section{overflow-x:clip}
      bottom edge dissolves invisibly on the left (light wall -> light lilac)
      instead of the earlier light-on-mid-lilac line. It then deepens to the
      brand lilac lower down, in the features band. */
-  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 32%,#f6eef9 60%,#f4ebfa 100%);
+  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#ecd8f6 87%,#ecd8f6 100%);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
@@ -289,8 +289,8 @@ main section{overflow-x:clip}
      design sits half-way up the straddling lozenge): the lozenge is the line
      break, so the photo meets the lilac at its own vertical centre, level
      across the whole width, with the table edge on the right meeting it there. */
-  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 90px),transparent calc(100% - 64px));
-  mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 90px),transparent calc(100% - 64px));
+  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 70px),transparent calc(100% - 64px));
+  mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 70px),transparent calc(100% - 64px));
   /* no compositor layer: with the zoom and the scroll parallax both gone,
      will-change:transform kept the masked photo on its own GPU layer, whose
      sub-pixel re-raster on scroll flickered a faint shadow at the mask edge.
@@ -400,7 +400,7 @@ h1 .w i{display:inline-block;font-style:normal}
    join mockup). The next section (.why) continues the same tone. */
 /* starts LIGHT (= the hero wash bottom, so the photo edge blends away) and
    deepens to the brand lilac, which continues into the Why section */
-.features-band{background:linear-gradient(180deg,#f4ebfa,#eed6f6);padding:0 0 clamp(28px,3.5vw,48px)}
+.features-band{background:#ecd8f6;padding:0 0 clamp(28px,3.5vw,48px)}
 /* the -64px matches the hero photo's lift so the lozenge rises with the
    desk (stays docked to it); the existing -50% keeps it straddling. The
    matching negative margin-bottom pulls the next section up by the same
@@ -483,7 +483,7 @@ h1 .w i{display:inline-block;font-style:normal}
   padding:clamp(44px,6vw,80px) 0;
   /* continuous flow from the features band (its bottom is #eed6f6): no radial
      glow (it read as a saturated horizontal band at the join) */
-  background:linear-gradient(180deg,#eed6f6,#fbeefe);
+  background:linear-gradient(180deg,#ecd8f6,#fbeefe);
   overflow:hidden;
 }
 .why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:center}
