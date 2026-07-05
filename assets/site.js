@@ -60,34 +60,42 @@
 
   /* ---------- Reveal on scroll ---------- */
   var reveals = document.querySelectorAll('.reveal');
+  // Reveal a single element: fade/move it in (.in), then once it has SETTLED add
+  // .sh, which returns its box-shadow. A shadow is held off during the reveal
+  // because animating opacity/transform composites the element and the compositor
+  // renders its soft shadow as a HARD offset copy for the length of the animation
+  // (visible on scroll-down only, since reveals fire as elements enter view). By
+  // the time .sh lands the card is static and de-composited, so the shadow is soft
+  // and locked. 1300ms clears the slowest reveal variant + its data-delay.
+  function reveal(el){
+    var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+    setTimeout(function(){ el.classList.add('in'); }, delay);
+    setTimeout(function(){ el.classList.add('sh'); }, delay + 1300);
+  }
   if('IntersectionObserver' in window && !reduceMotion){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(!e.isIntersecting) return;
-        var el = e.target;
-        var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
-        setTimeout(function(){ el.classList.add('in'); }, delay);
-        io.unobserve(el);
+        reveal(e.target);
+        io.unobserve(e.target);
       });
     }, {threshold: 0.18, rootMargin: '0px 0px -40px 0px'});
     reveals.forEach(function(el){ io.observe(el); });
     // Belt-and-braces: the observer's INITIAL callback can fail to fire right
     // after navigation (it needs a paint/scroll), which left above-the-fold
-    // reveals stuck at opacity:0 + transform on load, invisible AND on a GPU
-    // layer whose shadow drifts on scroll. On the next frame, reveal anything
-    // already in view so it settles to transform:none immediately; the observer
-    // still handles everything below the fold on scroll.
+    // reveals stuck at opacity:0 + transform on load. On the next frame, reveal
+    // anything already in view; the observer handles the rest on scroll.
     requestAnimationFrame(function(){
       reveals.forEach(function(el){
         var r = el.getBoundingClientRect();
         if(r.top < (window.innerHeight * 0.92) && r.bottom > 0){
-          el.classList.add('in');
+          reveal(el);
           io.unobserve(el);
         }
       });
     });
   } else {
-    reveals.forEach(function(el){ el.classList.add('in'); });
+    reveals.forEach(function(el){ el.classList.add('in'); el.classList.add('sh'); });
   }
 
   /* ---------- Count-up stat (the 8 million line) ---------- */
