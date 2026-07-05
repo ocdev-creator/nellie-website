@@ -318,7 +318,7 @@ main section{overflow-x:clip}
   /* lifted off the floor; the features lozenge below is lifted by the
      same amount (.features-dock) so the desk still meets the lozenge and
      the whole pair sits higher, with more space opening beneath it */
-  background:url('../nellie/images/hero-v4.jpg') center calc(100% - 64px)/100% auto no-repeat;
+  background:url('../nellie/images/hero-v4.webp') center calc(100% - 64px)/100% auto no-repeat;
   /* the top edge blends the wall into the wash. The bottom edge is a defined
      line at the LOZENGE'S MIDDLE (the photo's own foot, 100% - 64px, which by
      design sits half-way up the straddling lozenge): the lozenge is the line
@@ -589,7 +589,7 @@ h1 .w i{display:inline-block;font-style:normal}
   padding:clamp(56px,7vw,96px) 0;
   min-height:clamp(420px,44vw,620px);
   display:flex;align-items:center;
-  background:url('../nellie/images/Who-is-nellie-for.jpg') right center/cover no-repeat;
+  background:url('../nellie/images/Who-is-nellie-for.webp') right center/cover no-repeat;
   background-color:#fef0fe;
   overflow:hidden;
 }
@@ -1271,7 +1271,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .photo-cta{
   position:relative;overflow:hidden;
   padding:clamp(60px,8vw,110px) 0;
-  background:url('../nellie/images/Pricing-Bring_Family_Closer.jpg') 72% center/cover no-repeat;
+  background:url('../nellie/images/Pricing-Bring_Family_Closer.webp') 72% center/cover no-repeat;
 }
 .photo-cta::before{
   content:'';position:absolute;inset:0;
@@ -1357,7 +1357,7 @@ h1 .w i{display:inline-block;font-style:normal}
        handle fully in frame on the right */
     background:
       linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 22%),
-      url('../nellie/images/hero-v4.jpg') 72% 56%/cover no-repeat;
+      url('../nellie/images/hero-v4.webp') 72% 56%/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
     margin-top:-8px;
     animation:none;transform:none;will-change:auto;
