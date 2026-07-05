@@ -111,23 +111,13 @@
   });
   navMobile.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 
-  /* ---------- Header hide-on-scroll-down, show-on-scroll-up ---------- */
-  var header = document.getElementById('site-header');
-  var lastY = 0;
-  window.addEventListener('scroll', function(){
-    var y = window.scrollY;
-    var dy = y - lastY;
-    // ignore sub-6px jitter so the bar doesn't flicker; never hide
-    // while the mobile menu is open or near the top of the page
-    if(Math.abs(dy) > 6){
-      if(dy > 0 && y > 160 && !document.body.classList.contains('menu-open')){
-        header.classList.add('hidden-up');
-      } else if(dy < 0){
-        header.classList.remove('hidden-up');
-      }
-      lastY = y;
-    }
-  }, {passive: true});
+  /* ---------- Header is STATIC (no hide-on-scroll) ----------
+     The header used to slide up on scroll-down and back in on scroll-up. Even
+     with its drop shadow removed, a fixed bar that moves on scroll is the last
+     thing changing on scroll site-wide, and it read as motion/a shadow sweeping
+     over the content. It is now pinned and never moves: nothing about the header
+     changes on scroll, so there is no scroll motion or shadow to catch the eye.
+     (No scroll listener here on purpose.) */
 
   /* ---------- Scroll parallax (hero photo, why circle) ----------
      Elements with data-parallax shift by factor * distance-from-
