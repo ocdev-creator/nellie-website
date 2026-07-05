@@ -264,19 +264,18 @@ main section{overflow-x:clip}
      aspect height (1229/2663), so the photo's top break aligns just
      beneath the nav and the fold lands at the straddling bar */
   min-height:max(580px,calc(var(--header-h) + 46.17vw));
-  /* the wash ends LIGHT, matching the photo's own pale wall, so the photo's
-     bottom edge dissolves invisibly on the left (light wall -> light lilac)
-     instead of the earlier light-on-mid-lilac line. It then deepens to the
-     brand lilac lower down, in the features band.
-     The solid-block stop is calc(100% - 64px), NOT a fixed percentage: that
-     is the exact line where the photo hard-cuts on the right and where the
-     lozenge centres (features-dock sits at heroBottom-64). Using the same
-     calc means the left wash turns solid #ecd8f6 on precisely that guide at
-     every viewport height, so the block begins on one clean horizontal line
-     right across the width. A fixed 87% landed ~32px high of the photo cut,
-     leaving a strip where the left was already block while the right was
-     still photo. */
-  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#ecd8f6 calc(100% - 64px),#ecd8f6 100%);
+  /* the wash stays LIGHT down the whole hero, then HARD-STEPS to the solid
+     block colour on one line. That line is calc(100% - 64px): the exact guide
+     where the photo hard-cuts on the right and where the lozenge centres
+     (features-dock sits at heroBottom-64). The step is a hard edge (two stops
+     at the same position), NOT a smooth ramp: a smooth gradient has no visible
+     line, so the left half (which carries almost no photo, just wash) read as
+     a soft fade while the right had the photo's crisp wood->lilac edge. Meeting
+     #f9e8fb and #ecd8f6 at the same calc gives the block a clean horizontal
+     start right across the width, so the left matches the photo cut on the
+     right at every viewport height. Below the line the hero is solid #ecd8f6,
+     flush into the features band. */
+  background:linear-gradient(180deg,#e9cdf4,#f9e8fb 34%,#f9e8fb calc(100% - 64px),#ecd8f6 calc(100% - 64px),#ecd8f6 100%);
   display:flex;align-items:center;
   padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
