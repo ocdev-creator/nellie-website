@@ -127,9 +127,12 @@ main section{overflow-x:clip}
 .site-header{
   position:fixed;top:0;left:0;right:0;z-index:100;
   color:#fff;
-  background:linear-gradient(105deg,rgba(61,7,107,.92),rgba(82,18,141,.92) 45%,rgba(135,53,203,.92));
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  /* solid, no backdrop-filter: the blur re-rendered the content behind the
+     fixed header every frame while scrolling, and combined with the header's
+     box-shadow it flashed a shadow band along the header's bottom edge on
+     scroll. At 92% opacity the blur was barely visible anyway, so the header
+     is now a clean solid gradient (matching the footer) with no per-frame cost. */
+  background:linear-gradient(105deg,#3d076b,#52128d 45%,#8735cb);
   box-shadow:0 7px 24px rgba(58,10,96,.2);
   transition:transform .4s ease,box-shadow .4s ease;
 }
