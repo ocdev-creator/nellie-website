@@ -289,8 +289,8 @@ main section{overflow-x:clip}
      design sits half-way up the straddling lozenge): the lozenge is the line
      break, so the photo meets the lilac at its own vertical centre, level
      across the whole width, with the table edge on the right meeting it there. */
-  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 70px),transparent calc(100% - 64px));
-  mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 70px),transparent calc(100% - 64px));
+  -webkit-mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 64px),transparent calc(100% - 64px));
+  mask-image:linear-gradient(180deg,transparent 76px,#000 165px,#000 calc(100% - 64px),transparent calc(100% - 64px));
   /* no compositor layer: with the zoom and the scroll parallax both gone,
      will-change:transform kept the masked photo on its own GPU layer, whose
      sub-pixel re-raster on scroll flickered a faint shadow at the mask edge.
