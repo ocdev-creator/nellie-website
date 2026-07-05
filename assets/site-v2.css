@@ -133,8 +133,13 @@ main section{overflow-x:clip}
      scroll. At 92% opacity the blur was barely visible anyway, so the header
      is now a clean solid gradient (matching the footer) with no per-frame cost. */
   background:linear-gradient(105deg,#3d076b,#52128d 45%,#8735cb);
-  box-shadow:0 7px 24px rgba(58,10,96,.2);
-  transition:transform .4s ease,box-shadow .4s ease;
+  /* NO drop shadow. The header auto-hides on scroll (transform: translateY),
+     and any drop shadow on a fixed element that slides in/out SWEEPS across the
+     content on every scroll-up, which read as a shadow "appearing/glitching" on
+     scroll, site-wide. The bold purple gradient separates cleanly from the pale
+     content on its own, so the shadow is dropped entirely. Only transform is
+     transitioned now (no box-shadow to animate). */
+  transition:transform .4s ease;
 }
 .site-header.hidden-up{transform:translateY(-100%)}
 .header-inner{
@@ -284,6 +289,20 @@ main section{overflow-x:clip}
   overflow:hidden;
   perspective:1100px;
 }
+/* the block's top edge as ONE clean line across the FULL width, on the same
+   guide the photo cuts and the lozenge centres (bottom:64px = calc(100%-64px)).
+   The right side gets this line for free from the photo's wood->lilac cut; the
+   left is pale-lilac-on-pale-lilac and colour alone can't make it read, so a
+   soft grounding shadow defines it: the scene "sits on" the block and casts a
+   gentle shadow onto it, giving the left the same visible straight edge as the
+   right. It is a STATIC shadow on an in-flow layer (scrolls with the page), so
+   it never sweeps or glitches like the old fixed-header shadow did. */
+.hero::after{
+  content:'';position:absolute;left:0;right:0;bottom:64px;height:1px;z-index:1;
+  pointer-events:none;
+  background:rgba(96,42,150,.16);
+  box-shadow:0 7px 20px -1px rgba(96,42,150,.17);
+}
 .hero-photo{
   position:absolute;inset:0;z-index:0;
   /* natural aspect, pinned to the photo's bottom edge: at normal
@@ -375,13 +394,16 @@ h1 .w i{display:inline-block;font-style:normal}
 .float-layer{position:absolute;inset:0;z-index:2;pointer-events:none;transform-style:preserve-3d}
 .note{
   position:absolute;display:flex;gap:10px;align-items:center;
-  background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  /* solid white, NO backdrop-filter and NO will-change: the blur re-rendered
+     the content behind this shadowed floating chip every frame while scrolling,
+     and the permanent GPU layer let its big soft shadow drag, both flickering a
+     shadow on scroll. Solid fill + inline rendering keep it rock-steady. */
+  background:#fff;
   border:1px solid rgba(255,255,255,.8);
   border-radius:18px;padding:10px 16px;
   box-shadow:0 14px 38px rgba(67,16,111,.22);
   font-size:.86rem;font-weight:700;color:var(--ink);
   white-space:nowrap;
-  will-change:transform;
 }
 .note-inner{display:flex;gap:10px;align-items:center;transition:opacity .35s ease,transform .35s ease}
 .note.swapping .note-inner{opacity:0;transform:translateY(10px) rotateX(55deg)}
