@@ -39,6 +39,10 @@ cp index.html how-it-works.html pricing.html subscribe.html success.html \
 # shared styles + script, and all imagery / icons
 cp -r assets nellie _site/
 
+# web app manifest (referenced from every page's <head>) for the
+# Add-to-Home-Screen / installable icon
+cp site.webmanifest _site/
+
 if [ "$SITE_MODE" = "market" ]; then
   echo "SITE_MODE=market -> building the gated register-interest variant"
 
