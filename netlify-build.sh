@@ -34,7 +34,7 @@ mkdir -p _site
 # and the coming-soon placeholder (legal links point at it)
 cp index.html how-it-works.html pricing.html subscribe.html success.html \
    register.html contact.html coming-soon.html terms.html privacy.html \
-   cookies.html _site/
+   cookies.html dementia.html photo-reminiscence-dementia.html _site/
 
 # shared styles + script, and all imagery / icons
 cp -r assets nellie _site/
