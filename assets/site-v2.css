@@ -56,6 +56,10 @@
   --font-display:'Nunito','Nunito Sans',sans-serif;
   --font-body:'Nunito Sans','Segoe UI',sans-serif;
   --header-h:76px;
+  /* top safe-area inset (iOS notch / status bar). 0 on devices without one, so
+     it is a no-op off iOS. Added to the fixed header (its purple fills the inset)
+     and to every content offset that clears the header. */
+  --safe-top:env(safe-area-inset-top, 0px);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -92,7 +96,7 @@ h3{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:600}
 .wrap{max-width:1152px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
 section{position:relative}
 /* anchored jumps (#faqs, #about...) land clear of the fixed header */
-section[id],footer[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
+section[id],footer[id]{scroll-margin-top:calc(var(--safe-top) + var(--header-h) + 12px)}
 /* horizontal overflow from animation pre-states stays contained */
 main section{overflow-x:clip}
 ::selection{background:#caa0e8;color:#2c0a4d}
@@ -148,6 +152,9 @@ main section{overflow-x:clip}
 .site-header{
   position:fixed;top:0;left:0;right:0;z-index:100;
   color:#fff;
+  /* the purple fills the iOS top safe-area (notch/status bar) so it never cuts
+     to white above the nav; the bar's own content sits below the inset. 0 off iOS. */
+  padding-top:var(--safe-top);
   /* solid, no backdrop-filter: the blur re-rendered the content behind the
      fixed header every frame while scrolling, and combined with the header's
      box-shadow it flashed a shadow band along the header's bottom edge on
@@ -289,7 +296,7 @@ main section{overflow-x:clip}
   /* the hero locks to the photo: header height plus the image's
      aspect height (1229/2663), so the photo's top break aligns just
      beneath the nav and the fold lands at the straddling bar */
-  min-height:max(580px,calc(var(--header-h) + 46.17vw));
+  min-height:max(580px,calc(var(--safe-top) + var(--header-h) + 46.17vw));
   /* the wash stays LIGHT down the whole hero, then HARD-STEPS to the solid
      block colour on one line. That line is calc(100% - 64px): the exact guide
      where the photo hard-cuts on the right and where the lozenge centres
@@ -306,7 +313,7 @@ main section{overflow-x:clip}
      flush into the features band. */
   background:linear-gradient(180deg,#e9cdf4,#fcf1fe 40%,#fcf1fe calc(100% - 64px),#ecd8f6 calc(100% - 64px),#ecd8f6 100%);
   display:flex;align-items:center;
-  padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
+  padding:calc(var(--safe-top) + var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(70px,7vw,104px);
   overflow:hidden;
   /* no perspective: it was only for 3D float chips (.note), which the home hero
      does not use, and a perspective context put the hero's shadowed CTA buttons
@@ -880,6 +887,8 @@ h1 .w i{display:inline-block;font-style:normal}
 .site-footer{
   background:var(--footer-grad);color:#fff;
   padding:clamp(44px,6vw,64px) 0;
+  /* keep footer content above the iOS home indicator (viewport-fit=cover) */
+  padding-bottom:calc(clamp(44px,6vw,64px) + env(safe-area-inset-bottom, 0px));
 }
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
 @media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr}}
@@ -912,7 +921,7 @@ h1 .w i{display:inline-block;font-style:normal}
 @media (max-width:520px){.footer-legal{justify-content:center;text-align:center}.footer-company{text-align:center}}
 
 /* ---------- legal pages (terms / privacy / cookies) ---------- */
-.legal-main{background:#fff;padding:calc(var(--header-h,76px) + clamp(26px,4vw,48px)) 0 clamp(56px,8vw,88px)}
+.legal-main{background:#fff;padding:calc(var(--safe-top) + var(--header-h,76px) + clamp(26px,4vw,48px)) 0 clamp(56px,8vw,88px)}
 .legal-wrap{width:min(760px,92vw);margin:0 auto}
 .legal-wrap .kicker{margin-bottom:6px}
 .legal-wrap h1{font-size:clamp(2rem,4vw,2.8rem)}
@@ -941,6 +950,8 @@ h1 .w i{display:inline-block;font-style:normal}
   position:fixed;left:0;right:0;bottom:0;z-index:200;
   display:flex;justify-content:center;
   padding:clamp(12px,2vw,20px);pointer-events:none;
+  /* clear the iOS home indicator (viewport-fit=cover reaches the screen edge) */
+  padding-bottom:calc(clamp(12px,2vw,20px) + env(safe-area-inset-bottom, 0px));
   transform:translateY(130%);
   transition:transform .45s cubic-bezier(.22,1,.36,1);
 }
@@ -1000,7 +1011,7 @@ h1 .w i{display:inline-block;font-style:normal}
 .page-hero{
   min-height:max(620px,100svh);
   display:flex;align-items:center;
-  padding:calc(var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(56px,6vw,88px);
+  padding:calc(var(--safe-top) + var(--header-h) + clamp(14px,2.6vh,34px)) 0 clamp(56px,6vw,88px);
   overflow:hidden;
 }
 .page-hero .wrap{width:100%}
@@ -1370,7 +1381,7 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero{
     display:flex;flex-direction:column;align-items:stretch;
     min-height:0;overflow:visible;
-    padding:calc(var(--header-h) + 14px) 0 0;
+    padding:calc(var(--safe-top) + var(--header-h) + 14px) 0 0;
   }
   .hero .wrap{order:1;margin-top:0;width:100%}
   /* mobile: copy CENTRE-aligned (heading, sub, button) above the image */
@@ -1428,7 +1439,7 @@ h1 .w i{display:inline-block;font-style:normal}
   .page-hero{
     display:flex;flex-direction:column;align-items:stretch;
     min-height:0;overflow:visible;
-    padding:calc(var(--header-h) + 14px) 0 0;
+    padding:calc(var(--safe-top) + var(--header-h) + 14px) 0 0;
   }
   .page-hero .wrap{order:1;margin-top:0;width:100%}
   .page-hero .hero-copy-right,
