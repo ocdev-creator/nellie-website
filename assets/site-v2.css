@@ -619,18 +619,20 @@ h1 .w i{display:inline-block;font-style:normal}
   background:linear-gradient(90deg,#e4b8f5 8%,rgba(228,184,245,0) 64%);
 }
 @media (max-width:900px){
-  /* stacked: copy on a solid wash, the photo as a clear band at the
-     section's foot. The source frame is wide with the people on the
-     right third and empty cafe on the left, so a full-width squeeze
-     left half the band blank. Zoom and anchor right to crop the empty
-     side and bring the woman, man and tablet into the band. */
+  /* stacked: copy on a solid wash, then a dedicated MOBILE image as a full-width
+     band at the section's foot (a portrait composition, shown whole at 100%
+     width, no zoom-crop). padding-bottom reserves the band's height (82vw for
+     the 1080x889 image) PLUS a gap, so the simple/familiar/comforting chips sit
+     clear of the image and never overlap it. The wash covers the copy area and
+     fades out just above the image. */
   .who{
-    background-size:200% auto;background-position:right bottom;
-    padding-bottom:calc(52vw + 44px);
+    background-image:url('../nellie/images/who-is-nellie-for-mobile.webp');
+    background-size:100% auto;background-position:center bottom;
+    padding-bottom:calc(82vw + 48px);
   }
   .who::before{
-    top:0;left:0;right:0;bottom:auto;height:calc(100% - 46vw);
-    background:linear-gradient(180deg,#fbeefe,#fbeefe 78%,rgba(251,238,254,0));
+    top:0;left:0;right:0;bottom:auto;height:calc(100% - 82vw - 24px);
+    background:linear-gradient(180deg,#fbeefe,#fbeefe 84%,rgba(251,238,254,0));
   }
 }
 .who .wrap{position:relative;width:100%}
@@ -1356,9 +1358,11 @@ h1 .w i{display:inline-block;font-style:normal}
     padding:calc(var(--header-h) + 14px) 0 0;
   }
   .hero .wrap{order:1;margin-top:0;width:100%}
-  .hero-content{max-width:none}
-  .hero .hero-sub{margin:12px 0 0}
-  .hero .hero-ctas{margin-top:22px}
+  /* mobile: copy CENTRE-aligned (heading, sub, button) above the image */
+  .hero-content{max-width:none;text-align:center}
+  .hero h1{max-width:none}
+  .hero .hero-sub{margin:12px auto 0;max-width:none}
+  .hero .hero-ctas{margin:22px auto 0;justify-content:center}
   /* the secondary "how it works" button stays hidden on the pricing
      hero, which still carries a .btn-deep */
   .hero-ctas .btn-deep{display:none}
@@ -1367,13 +1371,14 @@ h1 .w i{display:inline-block;font-style:normal}
   .hero .hero-photo,
   .js.ok-motion .hero .hero-photo{
     order:2;position:relative;inset:auto;
-    width:100%;height:auto;aspect-ratio:1.28;
-    /* framed right-of-centre so the device is never clipped: the taller
-       crop trims the towel/bowl on the LEFT, keeping the tablet + its
-       handle fully in frame on the right */
+    width:100%;height:auto;aspect-ratio:1080/749;
+    /* dedicated MOBILE hero image (a portrait composition with no baked-in text
+       gradient - the heading sits above it). aspect-ratio matches the image so
+       cover shows the whole scene; a short top fade blends its pale top into
+       the copy above. */
     background:
-      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 22%),
-      url('../nellie/images/hero-v4.webp') 72% 56%/cover no-repeat;
+      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.6) 7%,rgba(251,238,254,0) 20%),
+      url('../nellie/images/homepage-header-mobile.webp') center bottom/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
     margin-top:-8px;
     animation:none;transform:none;will-change:auto;
