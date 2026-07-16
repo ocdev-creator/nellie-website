@@ -1251,15 +1251,17 @@ h1 .w i{display:inline-block;font-style:normal}
 /* ---------- FAQs accordion ---------- */
 .faqs{background:#fef0fe;padding:clamp(44px,6vw,80px) 0}
 .faqs-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:start}
+/* heading held to two lines (desktop). Declared BEFORE the mobile block so the
+   mobile max-width:none actually wins by source order (it did not before, which
+   left the heading a narrow, left-biased block on phones). */
+.faqs-intro h2{max-width:7em}
 @media (max-width:900px){
   .faqs-grid{grid-template-columns:1fr}
   /* centre the FAQ intro (kicker, heading, copy, image) on phones per amends */
   .faqs-intro{text-align:center}
   .faqs-intro .kicker{border-bottom-color:var(--accent-soft)}
-  .faqs-intro h2{max-width:none}
+  .faqs-intro h2{max-width:none;margin-left:auto;margin-right:auto}
 }
-/* heading held to two lines */
-.faqs-intro h2{max-width:7em}
 .faqs-intro p{margin-top:14px;font-weight:600;color:#3e0a6e;max-width:30em;font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.55}
 .faqs-intro .art{margin-top:clamp(20px,4vw,44px)}
 /* larger image, and the gentle float is removed */
@@ -1304,23 +1306,24 @@ h1 .w i{display:inline-block;font-style:normal}
 .photo-cta .copy{max-width:420px}
 .photo-cta .copy p{margin:14px 0 24px;font-weight:600;color:#3e0a6e;font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.55}
 @media (max-width:760px){
-  /* same integrated treatment as the heroes: the women rise up under the
-     copy in a reserved foot zone, only a thin strip fading into the wash
-     so they read clearly rather than sitting washed-out below the text */
+  /* mobile (per amends): the IMAGE comes FIRST (a full-width band at the top,
+     dedicated mobile composition), with the copy CENTRE-aligned beneath it.
+     The image is 1080x664 (0.615 h/w), so its band is 61.5vw tall. */
   .photo-cta{
-    --cband:clamp(230px,60vw,380px);
-    /* focal on the right (the women + tablet), so the empty room on the left
-       is cropped away, per amends */
-    background-position:right bottom;
-    background-size:auto calc(var(--cband)*1.3);
-    padding-bottom:var(--cband);
+    background-image:url('../nellie/images/pricing-bring_family_closer-mobile.webp');
+    background-position:center top;
+    background-size:100% auto;
+    background-repeat:no-repeat;
+    padding-top:calc(61.5vw + 30px);
+    padding-bottom:clamp(40px,9vw,64px);
+    text-align:center;
   }
   .photo-cta::before{
     inset:0;
-    /* solid wash behind the copy, then a clean edge where the image band
-       begins (no gradient over the top of the image), per amends */
-    background:linear-gradient(180deg,#fbeefe 0%,#fbeefe calc(100% - var(--cband)),rgba(251,238,254,0) calc(100% - var(--cband)));
+    /* transparent over the top image, solid wash below it behind the copy */
+    background:linear-gradient(180deg,rgba(251,238,254,0) calc(61.5vw - 8px),#fbeefe calc(61.5vw + 6px));
   }
+  .photo-cta .copy{max-width:none;margin:0 auto}
 }
 
 /* ---------- responsive bar flow ----------

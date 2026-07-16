@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=36">
+<link rel="stylesheet" href="assets/site-v2.css?v=38">
 <style>
 /* page-local: Simple-Pricing shot. The couple sit on the RIGHT and the
    photo already fades to pale on the LEFT, so the copy reads cleanly on
@@ -25,10 +25,16 @@
 /* phones: immersive overlay (layout in site.css). Full-bleed couple
    photo, its top fading into the copy via a gradient layer (no mask). */
 @media (max-width:760px){
+  /* mobile: dedicated mobile pricing image shown whole; copy and the
+     get-started button CENTRE-aligned, and the button lifted clear of the
+     image so it never touches or overlaps it (per amends) */
+  .pricing-hero .hero-content{text-align:center}
+  .pricing-hero .hero-ctas{justify-content:center}
   .pricing-hero .hero-photo{
-    /* focal on the right (couple), no top gradient over the image per amends */
-    background:url('nellie/images/Simple-Pricing.webp') right center/cover no-repeat;
+    aspect-ratio:1080/711;
+    background:url('nellie/images/simple-pricing-mobile.webp') center bottom/cover no-repeat;
     -webkit-mask-image:none;mask-image:none;
+    margin-top:24px;
   }
   .pricing-hero .hero-tint{display:none}
 }
