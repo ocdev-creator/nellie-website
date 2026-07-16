@@ -36,7 +36,8 @@ cp index.html how-it-works.html pricing.html subscribe.html success.html \
    register.html contact.html coming-soon.html terms.html privacy.html \
    cookies.html dementia.html photo-reminiscence-dementia.html \
    elderly-parent-loneliness.html signs-of-loneliness-elderly-parents.html \
-   simple-tablet-for-elderly-parents.html guides.html _site/
+   simple-tablet-for-elderly-parents.html guides.html \
+   care-home-stay-connected.html activities-for-dementia-at-home.html _site/
 
 # shared styles + script, and all imagery / icons
 cp -r assets nellie _site/
