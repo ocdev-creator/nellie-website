@@ -11,7 +11,13 @@
 // can finalise the account afterwards.
 //
 // The Stripe secret key lives only in this function's env, never the browser.
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// Require the SDK at module load, but DON'T construct the client here.
+// Constructing with no key throws immediately ("Neither apiKey nor
+// config.authenticator provided"), which on the gated market build (no
+// Stripe key) crashed the function with a 502 before the SITE_MODE guard
+// below could run. Construction is deferred into the handler, after the
+// guard, so market mode returns a clean 403 and never touches Stripe.
+const Stripe = require('stripe');
 const { json, parseBody } = require('./_nellie');
 
 exports.handler = async (event) => {
@@ -49,6 +55,9 @@ exports.handler = async (event) => {
     gift_code: String(gift_code || ''),
     existing_person_id: String(existing_person_id || ''),
   };
+
+  // Construct the Stripe client now (never in market mode, gated above).
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
   try {
     const session = await stripe.checkout.sessions.create({
