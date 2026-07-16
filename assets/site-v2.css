@@ -63,6 +63,13 @@
    hash restores land instantly in the right place */
 html.smooth{scroll-behavior:smooth}
 html,body{overflow-x:clip}
+/* deep brand purple on the root canvas so the area BEHIND/above the fixed nav
+   never shows white on mobile: the browser's top inset (notch / status-bar) and
+   any rubber-band overscroll at the top reveal this instead of the white canvas,
+   matching the purple header. Paired with the <meta name="theme-color">. The
+   lavender body paints over it for the page itself; the dark footer blends with
+   it at the bottom. */
+html{background:#3d076b}
 body{
   font-family:var(--font-body);
   color:var(--ink);
