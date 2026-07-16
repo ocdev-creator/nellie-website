@@ -1,0 +1,10 @@
+# Nellie (nellieconnect.co.uk)
+User-agent: *
+Allow: /
+
+# Redirect stubs and the placeholder are not useful to index
+Disallow: /subscribe.html
+Disallow: /success.html
+Disallow: /coming-soon.html
+
+Sitemap: https://nellieconnect.co.uk/sitemap.xml
