@@ -22,9 +22,16 @@
   var PUBLIC_HOSTS = ['nellieconnect.co.uk', 'www.nellieconnect.co.uk'];
   if (PUBLIC_HOSTS.indexOf(location.hostname) === -1) return;
 
+  // Plausible tracker + queue stub (the exact snippet from the Nellie
+  // Plausible dashboard). The script id is tied to this site in Plausible,
+  // so no data-domain attribute is needed.
+  window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments); };
+  plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
+
   var s = document.createElement('script');
-  s.defer = true;
-  s.setAttribute('data-domain', 'nellieconnect.co.uk');
-  s.src = 'https://plausible.io/js/script.js';
+  s.async = true;
+  s.src = 'https://plausible.io/js/pa-gWWhy9jwaXHVMxr58WOpd.js';
   document.head.appendChild(s);
+
+  plausible.init();
 })();
