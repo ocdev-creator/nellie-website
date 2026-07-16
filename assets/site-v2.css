@@ -165,8 +165,12 @@ main section{overflow-x:clip}
      fixed header every frame while scrolling, and combined with the header's
      box-shadow it flashed a shadow band along the header's bottom edge on
      scroll. At 92% opacity the blur was barely visible anyway, so the header
-     is now a clean solid gradient (matching the footer) with no per-frame cost. */
-  background:linear-gradient(105deg,#3d076b,#52128d 45%,#8735cb);
+     is now a clean flat colour with no per-frame cost. */
+  /* Flat #3d076b, NOT a gradient: it matches the iOS safe-area / status-bar
+     strip, the page background and the theme-color exactly, so the bar reads as
+     one continuous purple up into the notch. The old 105deg gradient clashed
+     with that solid strip along the top edge on iOS. */
+  background:#3d076b;
   /* NO drop shadow. The header auto-hides on scroll (transform: translateY),
      and any drop shadow on a fixed element that slides in/out SWEEPS across the
      content on every scroll-up, which read as a shadow "appearing/glitching" on
