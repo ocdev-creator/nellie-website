@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..900;1,6..12,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site-v2.css?v=34">
+<link rel="stylesheet" href="assets/site-v2.css?v=36">
 <style>
 /* v2 header: the nellie connect banner shot. The devices sit in the left
    half, the right half is clean pale wall, so the copy lands there with
@@ -72,11 +72,15 @@
 @media (max-width:760px){
   /* hide the desktop background photo; use the inline block instead */
   .hiw-hero .hero-photo{display:none}
+  /* mobile: copy CENTRE-aligned (heading, text, button + badges) */
+  .hiw-hero .hero-copy-right{text-align:center}
+  .hiw-hero .nc-lockup{justify-content:center}
+  .hiw-hero .store-badges{align-items:center}
   .hiw-inline-photo{
-    display:block;align-self:stretch;aspect-ratio:1.5;
+    display:block;align-self:stretch;aspect-ratio:1080/656;
     background:
-      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 8%,rgba(251,238,254,0) 24%),
-      url('nellie/images/hiw-hero-mobile.webp') center/cover no-repeat;
+      linear-gradient(180deg,#fbeefe 0%,rgba(251,238,254,.7) 7%,rgba(251,238,254,0) 22%),
+      url('nellie/images/nellie-connect-header-mobile.webp') center/cover no-repeat;
     /* full-bleed band, breaking out of the wrap gutter to full width, sitting
        BELOW the grouped CTAs and flush with the next section (margin-bottom:0) */
     order:2;margin:16px calc(-1 * clamp(20px,4vw,32px)) 0;

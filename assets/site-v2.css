@@ -1167,7 +1167,12 @@ h1 .w i{display:inline-block;font-style:normal}
 /* ---------- intentionally simple (tablet cutout + ticks) ---------- */
 .simple{background:var(--lav-0);padding:clamp(44px,6vw,80px) 0}
 .simple-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,64px);align-items:center}
-@media (max-width:900px){.simple-grid{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .simple-grid{grid-template-columns:1fr}
+  /* stacked: text FIRST, the tablet image beneath it (per amends). The image
+     is DOM-first for the desktop left column, so order:2 drops it below. */
+  .simple-grid .cutout{order:2}
+}
 .simple-grid .cutout{will-change:auto}
 /* the tablet no longer floats (animation removed per the v2 brief) */
 .simple .cutout img{animation:none!important;transform:none!important}
