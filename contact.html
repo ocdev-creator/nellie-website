@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#3d076b">
+<meta name="google-site-verification" content="5Vnt59iXUGrLzMwfd40bPWgVJxR-oibe8vX9miXZinc">
 <title>Contact | Nellie</title>
 <meta name="description" content="Get in touch with the nellie team, we're happy to help with anything about nellie or nellie connect.">
 <link rel="icon" type="image/png" sizes="32x32" href="nellie/images/favicon-32.png">
@@ -195,6 +196,8 @@
       .then(function (r) {
         if (!r.ok) throw new Error('bad status');
         card.classList.add('sent');
+        // Plausible conversion goal (add a "Contact" Custom event goal in Plausible).
+        if (window.plausible) plausible('Contact');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       })
       .catch(function () {
