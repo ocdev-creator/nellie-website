@@ -1466,3 +1466,19 @@ h1 .w i{display:inline-block;font-style:normal}
   }
   .page-hero .hero-tint{display:none}
 }
+
+/* ====================== PRE-LAUNCH / MARKET MODE ======================
+   The public "register your interest" build sets SITE_MODE=market, which
+   makes netlify-build.sh stamp <html data-mode="market"> on every page.
+   The pre-launch note is shipped hidden in the source (pricing.html) and
+   only revealed here, so the full ordering site (the password-protected
+   dev build) never shows it. */
+.prelaunch-note{display:none}
+html[data-mode="market"] .prelaunch-note{
+  display:block;max-width:44em;margin:clamp(24px,3.4vw,38px) auto 0;text-align:center;
+  font-family:var(--font-display);font-weight:700;color:#6b2e9e;
+  font-size:clamp(1rem,1.5vw,1.14rem);line-height:1.5;
+  background:#fff;border:1.5px solid #ecd9fb;border-radius:18px;
+  padding:clamp(16px,2.4vw,22px) clamp(20px,3.4vw,30px);
+  box-shadow:0 14px 34px rgba(67,16,111,.1);
+}

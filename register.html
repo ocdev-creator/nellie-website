@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#3d076b">
-<title>Contact | Nellie</title>
-<meta name="description" content="Get in touch with the nellie team, we're happy to help with anything about nellie or nellie connect.">
+<title>Register your interest | Nellie</title>
+<meta name="description" content="Nellie is launching soon. Register your interest and we'll let you know the moment it's ready, no payment needed yet.">
 <link rel="icon" href="nellie/images/nellie-logo-dark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
 .ct-card{background:#fff;border-radius:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(67,16,111,.16);padding:clamp(24px,3.6vw,40px)}
 .field{margin-bottom:16px}
 .field label{display:block;font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:.92rem;margin-bottom:6px}
+.reg-opt{font-weight:600;color:#8a6aa8;font-size:.82rem}
 .field input,.field textarea{
   width:100%;font-family:var(--font-body);font-size:1rem;color:var(--ink);
   background:#fcf7ff;border:1.5px solid #ead9f7;border-radius:12px;padding:12px 14px;
@@ -58,7 +59,7 @@
       <a href="how-it-works.html">how it works</a>
       <a href="pricing.html">pricing</a>
       <a href="pricing.html#faqs">FAQs</a>
-      <a href="contact.html" class="active">contact</a>
+      <a href="contact.html">contact</a>
     </nav>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -77,17 +78,19 @@
 <main class="ct-main">
   <div class="ct-wrap">
     <div class="ct-head">
-      <span class="kicker reveal">contact</span>
-      <h1 class="reveal">we’re here to help</h1>
-      <p class="reveal" data-delay="100">Questions about nellie, an order or your <span class="nowrap">nellie<b style="color:var(--accent-bright)">connect</b></span> account?<br>Send us a message and we’ll get back to you, usually within one working day.</p>
+      <span class="kicker reveal">register your interest</span>
+      <h1 class="reveal">be first to meet nellie</h1>
+      <p class="reveal" data-delay="100"><span class="nowrap">nellie<b style="color:var(--accent-bright)">connect</b></span> is almost ready. Leave your details and we’ll let you know the moment it launches.<br>No payment needed yet, just the good news when it’s here.</p>
     </div>
 
     <div class="ct-card reveal" id="ct-card" data-delay="150">
       <!-- Netlify form: detected at deploy, submissions appear in the Netlify
            dashboard (set up email notifications there). Submitted by AJAX so
-           we can show a branded thank-you without leaving the page. -->
-      <form class="ct-form" id="ct-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
+           we can show a branded thank-you without leaving the page. This is the
+           gated, pre-launch capture that REPLACES the checkout on the public
+           market build (no order can be placed, see netlify-build.sh). -->
+      <form class="ct-form" id="ct-form" name="register" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="register">
         <p class="ct-hp"><label>Don’t fill this in <input name="bot-field"></label></p>
         <div class="row2">
           <div class="field">
@@ -100,21 +103,21 @@
           </div>
         </div>
         <div class="field">
-          <label for="ct-message">How can we help?</label>
-          <textarea id="ct-message" name="message"></textarea>
+          <label for="ct-who">Who is nellie for? <span class="reg-opt">(optional)</span></label>
+          <textarea id="ct-who" name="who_its_for" style="min-height:88px" placeholder="Tell us a little about your loved one, for example a parent or grandparent living on their own."></textarea>
         </div>
         <div class="ct-err" id="ct-err"></div>
-        <button type="submit" class="btn btn-primary btn-bright ct-submit" id="ct-send"><img src="nellie/icons/get-started.svg" alt=""><span>send message</span></button>
+        <button type="submit" class="btn btn-primary btn-bright ct-submit" id="ct-send"><img src="nellie/icons/get-started.svg" alt=""><span>register my interest</span></button>
       </form>
 
       <div class="ct-thanks">
         <div class="su-tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
-        <h2>thank you, message sent!</h2>
-        <p>We’ve got it and we’ll be in touch soon. In the meantime, your loved one is in good hands.</p>
+        <h2>thank you, you’re on the list!</h2>
+        <p>We’ve got your details and we’ll be in touch the moment nellie is ready. In the meantime, feel free to explore how nellie works.</p>
       </div>
     </div>
 
-    <p class="ct-or">Prefer email? Reach us at <a href="mailto:hello@nellieconnect.com">hello@nellieconnect.com</a>.</p>
+    <p class="ct-or">Questions in the meantime? Email us at <a href="mailto:hello@nellieconnect.com">hello@nellieconnect.com</a>.</p>
   </div>
 </main>
 
@@ -166,13 +169,15 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     err.style.display = 'none';
-    var name = document.getElementById('ct-name'), email = document.getElementById('ct-email'), msg = document.getElementById('ct-message');
+    // Only name + email are required, "who is nellie for" is optional so the
+    // form stays low-friction and captures the most sign-ups.
+    var name = document.getElementById('ct-name'), email = document.getElementById('ct-email');
     var ok = true;
-    [[name, name.value.trim() !== ''], [email, EMAIL.test(email.value.trim())], [msg, msg.value.trim() !== '']]
+    [[name, name.value.trim() !== ''], [email, EMAIL.test(email.value.trim())]]
       .forEach(function (p) { p[0].classList.toggle('bad', !p[1]); if (!p[1]) ok = false; });
-    if (!ok) { err.textContent = 'Please add your name, a valid email and a message.'; err.style.display = 'block'; return; }
+    if (!ok) { err.textContent = 'Please add your name and a valid email.'; err.style.display = 'block'; return; }
     var btn = document.getElementById('ct-send'); btn.disabled = true;
-    btn.querySelector('span').innerHTML = '<span class="spin"></span>sending…';
+    btn.querySelector('span').innerHTML = '<span class="spin"></span>registering…';
     var data = new URLSearchParams(new FormData(form)).toString();
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data })
       .then(function (r) {
@@ -181,7 +186,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       })
       .catch(function () {
-        btn.disabled = false; btn.querySelector('span').textContent = 'send message';
+        btn.disabled = false; btn.querySelector('span').textContent = 'register my interest';
         err.textContent = 'Something went wrong sending that. Please try again, or email us at hello@nellieconnect.com.';
         err.style.display = 'block';
       });

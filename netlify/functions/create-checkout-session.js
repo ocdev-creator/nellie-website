@@ -15,6 +15,14 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { json, parseBody } = require('./_nellie');
 
 exports.handler = async (event) => {
+  // Hard gate for the pre-launch "register your interest" site. The public
+  // market build sets SITE_MODE=market (see netlify-build.sh), and no order
+  // may be placed there. This is the server-side belt-and-braces behind the
+  // front-end CTA rewrite: even a stale client, a typed subscribe URL or a
+  // direct POST cannot create a Stripe Checkout session while in market mode.
+  if (process.env.SITE_MODE === 'market') {
+    return json(403, { error: 'Ordering is not open yet. Please register your interest at /register.html and we will be in touch at launch.' });
+  }
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
   const body = parseBody(event);
   if (!body) return json(400, { error: 'Bad JSON' });
