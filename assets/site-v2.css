@@ -77,7 +77,13 @@ html{background:#3d076b}
 body{
   font-family:var(--font-body);
   color:var(--ink);
-  background:var(--lav-1);
+  /* iOS Safari tints the top safe-area (status bar / notch) from the BODY's
+     background, ignoring the fixed header painted over it. So the body carries a
+     purple base with the lavender page laid over everything BELOW the safe-area
+     inset: the top strip (behind the header) is purple -> the status bar reads
+     purple, the visible page stays lavender. Off iOS --safe-top is 0, so the
+     lavender covers 100% and purple never shows (page unchanged). */
+  background:linear-gradient(var(--lav-1),var(--lav-1)) left var(--safe-top)/100% calc(100% - var(--safe-top)) no-repeat, #3d076b;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
