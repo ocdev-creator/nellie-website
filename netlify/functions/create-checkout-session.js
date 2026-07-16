@@ -1,8 +1,7 @@
 // Creates the Stripe Checkout Session for a purchase.
 //
 // One session, two line items: the one-off £199 tablet + the £24.99/mo
-// subscription. Because there is NO trial (the "2 months free" is a
-// Nellie bonus, not a Stripe trial), the one-off tablet line item is
+// subscription. There is no Stripe trial, so the one-off tablet line item is
 // billed TODAY on the first invoice rather than deferred to a trial-end
 // invoice - so we ship a paid-for tablet, not an unpaid one.
 //
